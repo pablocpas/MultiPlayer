@@ -93,6 +93,12 @@ ApplicationWindow {
     }
 
     Button {
+        text: "Recortar video"
+        anchors.centerIn: parent
+        onClicked: videoHandler.trim_video(video0.propiedad, rangeSlider.first.value, rangeSlider.second.value)
+    }
+
+    Button {
         text: "Seleccionar Video 2"
         anchors.bottom: parent.bottom
         anchors.right: parent.right
