@@ -11,21 +11,16 @@ ApplicationWindow {
     title: qsTr("Reproductor de Video")
 
     FileDialog {
-        id: fileDialogVideo0
+        id: fileDialogs
         title: "Seleccione un vídeo"
         nameFilters: ["Video files (*.mp4 *.avi *.mov)"]
-        onAccepted: {
-            video0.propiedad = selectedFile
-        }
-    }
+        property int videoIndex: 0
 
-    FileDialog {
-        id: fileDialogVideo1
-        title: "Seleccione un vídeo"
-        nameFilters: ["Video files (*.mp4 *.avi *.mov)"]
         onAccepted: {
-            video1.propiedad = selectedFile
+            if (videoIndex === 0) video0.propiedad = selectedFile
+            else if (videoIndex === 1) video1.propiedad = selectedFile
         }
+
     }
 
     // Primer VideoPlayer
@@ -58,13 +53,21 @@ ApplicationWindow {
         text: "Seleccionar Video 1"
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        onClicked: fileDialogVideo0.open()
+        onClicked:{
+            fileDialogs.videoIndex = 0
+            fileDialogs.open()
+        }
     }
 
     Button {
         text: "Seleccionar Video 2"
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        onClicked: fileDialogVideo1.open()
+        onClicked:{
+            fileDialogs.videoIndex = 1
+            fileDialogs.open()
+        }
     }
+
+    
 }
