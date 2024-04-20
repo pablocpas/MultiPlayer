@@ -1,9 +1,10 @@
-import QtQuick
+// Copyright (C) 2021 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
+
+import QtQuick 6.5
 import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Dialogs
-import "." // Importa el directorio actual para acceder a VideoPlayer.qml
-
 ApplicationWindow {
     visible: true
     width: 640
@@ -23,28 +24,9 @@ ApplicationWindow {
 
     }
 
-    // Primer VideoPlayer
-    VideoPlayer {
-        id: video0
-        width: parent.width / 2
-        height: parent.height
-        anchors.left: parent.left
 
-        onDurationChanged: {
-            // Manejar la nueva duración
-            rangeSlider.to = video0.duration / 1000 // Actualiza 'to' en segundos
-            rangeSlider.first.value = video0.duration
-            rangeSlider.second.value = video0.duration / 1000
-        }
-    }
 
-    // Segundo VideoPlayer
-    VideoPlayer {
-        id: video1
-        width: parent.width / 2
-        height: parent.height
-        anchors.right: parent.right
-    }
+
 
     Button {
         text: "Reproducir/Pausa"
@@ -59,8 +41,10 @@ ApplicationWindow {
         // RangeSlider para seleccionar el rango de tiempo del vídeo
     RangeSlider {
         id: rangeSlider
-        width: parent.width - 20
+        width: video0.width
         height: 40
+
+        x: video0.x
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -78,7 +62,43 @@ ApplicationWindow {
         // Actualiza la posición del vídeo cuando se mueve el segundo handle
         second.onMoved: {
             video0.seek(second.value * 1000) // Multiplica por 1000 para convertir segundos a milisegundos
+            video0.finalTime = second.value * 1000; // Actualiza el tiempo final
+            video0.seek(first.value * 1000) // Mueve el vídeo al tiempo inicial
         }
+
+    }
+
+    Grid {
+        id: grid
+        width: parent.width
+        height: parent.height
+
+        columns:2
+        spacing: 10
+
+        // Primer VideoPlayer
+        VideoPlayer {
+            id: video0
+            width: parent.width / 2
+            height: parent.height
+            anchors.left: parent.left
+
+            onDurationChanged: {
+                // Manejar la nueva duración
+                rangeSlider.to = video0.duration / 1000 // Actualiza 'to' en segundos
+                rangeSlider.first.value = video0.duration
+                rangeSlider.second.value = video0.duration / 1000
+            }
+        }
+
+        // Segundo VideoPlayer
+        VideoPlayer {
+            id: video1
+            width: parent.width / 2
+            height: parent.height
+            anchors.right: parent.right
+        }
+
 
     }
 
@@ -107,5 +127,5 @@ ApplicationWindow {
             fileDialogs.open()
         }
     }
-
 }
+
