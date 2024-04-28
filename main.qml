@@ -110,8 +110,8 @@ ApplicationWindow {
 
                 onDurationChanged: {
                     // Manejar la nueva duración
+                    rangeSlider.first.value = 0
                     rangeSlider.to = video0.duration / 1000 // Actualiza 'to' en segundos
-                    rangeSlider.first.value = video0.duration
                     rangeSlider.second.value = video0.duration / 1000
                 }
 
@@ -151,6 +151,7 @@ ApplicationWindow {
                 // Actualiza la posición del vídeo cuando se mueve el primer handle
                 first.onMoved: {
                     video0.seek(first.value * 1000) // Multiplica por 1000 para convertir segundos a milisegundos
+                    video0.initialTime = first.value * 1000; // Actualiza el tiempo inicial
                 }
 
                 // Actualiza la posición del vídeo cuando se mueve el segundo handle
@@ -202,7 +203,7 @@ ApplicationWindow {
                     onDurationChanged: {
                     // Manejar la nueva duración
                     rangeSlider2.to = video1.duration / 1000 // Actualiza 'to' en segundos
-                    rangeSlider2.first.value = video1.duration
+                    rangeSlider2.first.value = 0
                     rangeSlider2.second.value = video1.duration / 1000
                 }
             }

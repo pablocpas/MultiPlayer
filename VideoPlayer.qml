@@ -7,6 +7,7 @@ Item {
     property string propiedad: "" // Propiedad para la ruta del vídeo
     readonly property int duration: mediaPlayer.duration
     property int finalTime: 0 // Nuevo: tiempo final de reproducción
+    property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
 
     MediaPlayer {
         id: mediaPlayer
@@ -15,8 +16,13 @@ Item {
 
         onPositionChanged: {
             if (mediaPlayer.position >= finalTime) {
-                mediaPlayer.stop();
+                mediaPlayer.position = initialTime;
+                
             }
+        }
+
+        onDurationChanged: {
+            finalTime = mediaPlayer.duration - 1000;
         }
     }
 
