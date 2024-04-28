@@ -228,16 +228,20 @@ ApplicationWindow {
 
     }
 
-
-
-
-
-
     Button {
 
         text: "Recortar video"
         anchors.centerIn: parent
         onClicked: videoHandler.trim_video(video0.propiedad, rangeSlider.first.value, rangeSlider.second.value)
+    }
+
+    Button {
+        text: "Fusion"
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: 46
+        anchors.horizontalCenterOffset: -1
+        onClicked: videoHandler.fusion_video(video0.propiedad, video1.propiedad)
+
     }
 
 
