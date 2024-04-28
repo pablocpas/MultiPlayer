@@ -27,6 +27,7 @@ Item {
 
     function play() {
         mediaPlayer.play();
+        console.log("Reproduciendo: " + propiedad);
     }
 
     function stop() {

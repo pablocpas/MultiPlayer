@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
 
 import QtQuick 6.5
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Layouts
@@ -156,7 +156,6 @@ ApplicationWindow {
 
         Rectangle{
 
-            Layout.column: 1
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "#161616"
@@ -165,7 +164,10 @@ ApplicationWindow {
 
             VideoPlayer {
                 id: video1
+                z: 4
 
+                height: parent.height
+                width: parent.width
 
             }
 
@@ -181,10 +183,38 @@ ApplicationWindow {
                     fileDialogs.open()
                 }
             }
+
+
+            RangeSlider {
+                id: rangeSlider2
+                width: video1.width
+                height: 40
+
+                x: video1.x
+                anchors.topMargin: 20
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                from: 0
+                to: 100000 // La duración del video debe ser en segundos
+
+                first.value: 0
+                second.value: video1.duration / 1000
+
+                // Actualiza la posición del vídeo cuando se mueve el primer handle
+                first.onMoved: {
+                    video1.seek(first.value * 1000) // Multiplica por 1000 para convertir segundos a milisegundos
+                }
+
+                // Actualiza la posición del vídeo cuando se mueve el segundo handle
+                second.onMoved: {
+                    video1.seek(second.value * 1000 - 1000) // Multiplica por 1000 para convertir segundos a milisegundos
+
+                    video1.finalTime = second.value * 1000; // Actualiza el tiempo final
+                    video1.seek(first.value * 1000) // Mueve el vídeo al tiempo inicial
+                }
+
+            }
         }
-
-
-
 
 
 
