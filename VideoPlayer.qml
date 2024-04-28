@@ -26,8 +26,14 @@ Item {
     }
 
     function play() {
-        mediaPlayer.play();
-        console.log("Reproduciendo: " + propiedad);
+
+        // Hace play si esta parado y pause si está reproduciendo
+        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) {
+            mediaPlayer.pause();
+        } else {
+            mediaPlayer.play();
+        }
+
     }
 
     function stop() {
