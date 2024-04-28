@@ -2,6 +2,7 @@ import sys
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
+from pytube import YouTube
 from moviepy.editor import VideoFileClip, clips_array
 import numpy as np
 import urllib.parse

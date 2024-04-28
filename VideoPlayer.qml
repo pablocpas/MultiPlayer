@@ -40,6 +40,10 @@ Item {
         mediaPlayer.stop();
     }
 
+    function pause() {
+        mediaPlayer.pause();
+    }
+
     function seek(position) {
         mediaPlayer.position = position;
     }

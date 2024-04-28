@@ -20,8 +20,17 @@ ApplicationWindow {
         property int videoIndex: 0
 
         onAccepted: {
-            if (videoIndex === 0) video0.propiedad = selectedFile
-            else if (videoIndex === 1) video1.propiedad = selectedFile
+            if (videoIndex === 0){
+                video0.propiedad = selectedFile
+                video0.pause()
+                video0.seek(0)
+            } 
+
+            else if (videoIndex === 1){
+                video1.propiedad = selectedFile
+                video1.pause()
+                video1.seek(0)
+            }
         }
 
     }
@@ -79,6 +88,8 @@ ApplicationWindow {
 
                     if (drop.urls.length > 0) {
                         video0.propiedad = drop.urls[0].toString().replace("file:///", "")
+                        video0.pause()
+                        video0.seek(0)
                     }
                 }
 
@@ -119,6 +130,9 @@ ApplicationWindow {
                 }
             }
 
+
+
+
             RangeSlider {
                 id: rangeSlider
                 width: video0.width
@@ -141,10 +155,7 @@ ApplicationWindow {
 
                 // Actualiza la posición del vídeo cuando se mueve el segundo handle
                 second.onMoved: {
-                    video0.seek(second.value * 1000 - 1000) // Multiplica por 1000 para convertir segundos a milisegundos
-
                     video0.finalTime = second.value * 1000; // Actualiza el tiempo final
-                    video0.seek(first.value * 1000) // Mueve el vídeo al tiempo inicial
                 }
 
             }
@@ -161,6 +172,24 @@ ApplicationWindow {
             color: "#161616"
             radius: 10
 
+            DropArea {
+                id: dropArea2
+                anchors.fill: parent
+
+                onEntered: {
+                    drag.accept (Qt.LinkAction);
+                }
+                onDropped: {
+                    console.log(drop.urls)
+
+                    if (drop.urls.length > 0) {
+                        video1.propiedad = drop.urls[0].toString().replace("file:///", "")
+                        video1.pause()
+                        video1.seek(0)
+                    }
+                }
+
+            }
 
             VideoPlayer {
                 id: video1
@@ -178,16 +207,40 @@ ApplicationWindow {
                 }
             }
 
-            Button {
-                text: "Seleccionar Video 2"
+            Column{
+                height: parent.height
+                width: parent.width
+                Button {
+                    id: selectButton2
+                    text: "Seleccionar Video 2"
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
 
 
-                onClicked:{
-                    fileDialogs.videoIndex = 1
-                    fileDialogs.open()
+                    onClicked:{
+                        fileDialogs.videoIndex = 1
+                        fileDialogs.open()
+                    }
+                }
+
+                Button {
+                    id: downloadYoutubeButton
+
+                    text: "Descargar Video de YouTube"
+
+                    onClicked: {
+                        videoHandler.downloadFromYouTube(urlTextField.text, videoIndex)
+                    }
+                }
+
+                TextField {
+                    id: urlTextField
+                    placeholderText: "Introduce URL de YouTube aquí"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: downloadYoutubeButton.top
+                    anchors.bottomMargin: 10
+                    width: parent.width * 0.8
                 }
             }
 
@@ -214,10 +267,7 @@ ApplicationWindow {
 
                 // Actualiza la posición del vídeo cuando se mueve el segundo handle
                 second.onMoved: {
-                    video1.seek(second.value * 1000 - 1000) // Multiplica por 1000 para convertir segundos a milisegundos
-
                     video1.finalTime = second.value * 1000; // Actualiza el tiempo final
-                    video1.seek(first.value * 1000) // Mueve el vídeo al tiempo inicial
                 }
 
             }
