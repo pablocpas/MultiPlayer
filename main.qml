@@ -169,6 +169,13 @@ ApplicationWindow {
                 height: parent.height
                 width: parent.width
 
+
+                    onDurationChanged: {
+                    // Manejar la nueva duración
+                    rangeSlider2.to = video1.duration / 1000 // Actualiza 'to' en segundos
+                    rangeSlider2.first.value = video1.duration
+                    rangeSlider2.second.value = video1.duration / 1000
+                }
             }
 
             Button {
