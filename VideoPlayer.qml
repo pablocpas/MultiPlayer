@@ -54,4 +54,12 @@ Item {
         mediaPlayer.position = position;
     }
 
+    function nextFrame() {
+        mediaPlayer.position += 1000 / mediaPlayer.metaData.value(17);
+    }
+
+    function previousFrame() {
+        mediaPlayer.position -= 1000 / mediaPlayer.metaData.value(17);
+    }
+
 }

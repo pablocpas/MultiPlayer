@@ -13,6 +13,31 @@ ApplicationWindow {
     height: 480
     title: qsTr("Reproductor de Video")
 
+    Shortcut{
+        sequence: "."
+        onActivated: {
+            video0.nextFrame()
+            video1.nextFrame()
+        }
+    }
+
+    Shortcut{
+        sequence: ","
+        onActivated: {
+            video0.previousFrame()
+            video1.previousFrame()
+        }
+    }
+
+    Shortcut{
+        sequence: "Space"
+        onActivated: {
+            video0.play()
+            video1.play()
+        }
+    }
+
+
     FileDialog {
         id: fileDialogs
         title: "Seleccione un vídeo"
@@ -62,6 +87,17 @@ ApplicationWindow {
         height: parent.height * 0.9
         anchors.top: toolBar.bottom
         anchors.bottom: playButton.top
+
+        focus: true
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_A) {
+                console.log("Tecla 'A' presionada");
+                video0.seek(5000)
+                video1.seek(5000)
+            }
+            event.accepted = true;
+        }
 
         columnSpacing: 10
 
@@ -172,6 +208,7 @@ ApplicationWindow {
             Layout.fillWidth: true
             color: "#161616"
             radius: 10
+            focus: true
 
             DropArea {
                 id: dropArea2
@@ -272,6 +309,9 @@ ApplicationWindow {
                 }
 
             }
+        
+
+        
         }
 
 
@@ -294,6 +334,8 @@ ApplicationWindow {
         onClicked: videoHandler.fusion_video(video0.propiedad, video1.propiedad)
 
     }
+
+    
 
 
 }
