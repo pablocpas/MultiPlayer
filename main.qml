@@ -65,17 +65,6 @@ ApplicationWindow {
         anchors.top: toolBar.bottom
         anchors.bottom: playButton.top
 
-        focus: true
-
-        Keys.onPressed: {
-            if (event.key === Qt.Key_A) {
-                console.log("Tecla 'A' presionada");
-                video0.seek(5000)
-                video1.seek(5000)
-            }
-            event.accepted = true;
-        }
-
         columnSpacing: 10
 
         columns:2
