@@ -13,30 +13,7 @@ ApplicationWindow {
     height: 480
     title: qsTr("Reproductor de Video")
 
-    Shortcut{
-        sequence: "."
-        onActivated: {
-            video0.nextFrame()
-            video1.nextFrame()
-        }
-    }
-
-    Shortcut{
-        sequence: ","
-        onActivated: {
-            video0.previousFrame()
-            video1.previousFrame()
-        }
-    }
-
-    Shortcut{
-        sequence: "Space"
-        onActivated: {
-            video0.play()
-            video1.play()
-        }
-    }
-
+    Shortcuts{}
 
     FileDialog {
         id: fileDialogs
