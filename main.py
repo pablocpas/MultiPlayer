@@ -76,7 +76,7 @@ class VideoHandler(QObject):
             final_clip.write_videofile("resultado.mp4", codec='libx264')
 
 
-            print(f"Vídeos fusionados guardados como {"resultado.mp4"}")
+            print(f"Vídeos fusionados guardados como resultado.mp4")
 
         except Exception as e:
             print(f"Error al procesar los vídeos: {e}")

@@ -121,7 +121,7 @@ ApplicationWindow {
             }
 
             Button {
-                text: "Select video"
+                text: "Seleccionar Video 1"
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
@@ -228,24 +228,6 @@ ApplicationWindow {
                     }
                 }
 
-                Button {
-                    id: downloadYoutubeButton
-
-                    text: "Descargar Video de YouTube"
-
-                    onClicked: {
-                        videoHandler.downloadFromYouTube(urlTextField.text, videoIndex)
-                    }
-                }
-
-                TextField {
-                    id: urlTextField
-                    placeholderText: "Introduce URL de YouTube aquí"
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: downloadYoutubeButton.top
-                    anchors.bottomMargin: 10
-                    width: parent.width * 0.8
-                }
             }
 
 
