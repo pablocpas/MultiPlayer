@@ -13,6 +13,49 @@ ApplicationWindow {
     height: 480
     title: qsTr("Reproductor de Video")
 
+    Download{
+        id: progressWindow
+    }
+
+    Dialog {
+        id: segmentDialog
+        title: "Editar Segmentos del Vídeo"
+        modal: true
+        visible: false
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextArea {
+            id:textArea
+            placeholderText: qsTr("Ingrese los segmentos en el formato 'mm:ss - Descripción' \n Ejemplo:\n00:00 - Inicio del video\n00:10 - Final del video\n00:20 - Créditos finales\n")
+        }
+
+        onAccepted: {
+            videoHandler.updateSegments(textArea.text)
+            console.log("Segmentos guardados")
+        }
+
+    }
+
+    Dialog {
+        id: youtubeDialog
+        title: "Introduce la URL de Youtube"
+        modal: true
+        visible: false
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextField {
+            id: textURL
+            placeholderText: qsTr("https://www.youtube.com/watch?v=XXXXXXXXX")
+        }
+
+        onAccepted: {
+            videoHandler.download_youtube_video(textURL.text, "C:/Users/Pablo/Downloads/video4.mp4")
+            progressWindow.visible = true;
+            console.log("Video descargado")
+        }
+
+    }
+
     Shortcuts{}
 
     FileDialog {
@@ -49,12 +92,34 @@ ApplicationWindow {
         }
     }
 
+    Button {
+        text: "Siguiente Segmento"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: playButton.top
+        anchors.bottomMargin: 10
+        onClicked: {
+            videoHandler.playNextSegment(video0)
+        }
+    }
+
     ToolBar {
         id: toolBar
         x: 0
         y: 0
         width: parent.width
         height: 30
+
+
+        
+        Button {
+            text: "Editar segmentos"
+            onClicked: segmentDialog.open()
+        }
+
+        Button {
+            text: "Abrir video youtube"
+            onClicked: youtubeDialog.open()
+        }
 
     }
 
@@ -115,6 +180,10 @@ ApplicationWindow {
                     rangeSlider.first.value = 0
                     rangeSlider.to = video0.duration / 1000 // Actualiza 'to' en segundos
                     rangeSlider.second.value = video0.duration / 1000
+                }
+
+                Component.onCompleted: {
+                    videoHandler.registerVideoPlayer(video0)
                 }
 
 

@@ -2,14 +2,41 @@ import sys
 from PySide6.QtCore import QObject, Slot
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer
 from pytube import YouTube
 from moviepy.editor import VideoFileClip, clips_array
 import numpy as np
 import urllib.parse
 
 class VideoHandler(QObject):
+    progressUpdated = Signal(int)  # Añadir esta línea
     def __init__(self):
         super().__init__()
+        self.thread = None
+        self.worker = None
+        self._video_players = {}
+
+    @Slot(QObject)
+    def registerVideoPlayer(self, video_player):
+        self._video_players[0] = video_player
+        print("Reproductor de video registrado")
+        print(self._video_players[0])
+
+
+    @Slot(str, str)
+    def download_youtube_video(self, url, output_path):
+        self.thread = QThread()
+        self.worker = DownloadWorker(url, output_path)
+        self.worker.moveToThread(self.thread)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.progress.connect(self.update_progress)
+        self.thread.started.connect(self.worker.run)
+        self.thread.start()
+
+    @Slot(int)
+    def update_progress(self, value):
+        # Emite una señal propia que pueda ser manejada por QML
+        self.progressUpdated.emit(value)
 
     @Slot(str, float, float)
     def trim_video(self, filepath, start, end):
@@ -80,6 +107,71 @@ class VideoHandler(QObject):
 
         except Exception as e:
             print(f"Error al procesar los vídeos: {e}")
+
+
+    @Slot(str)
+    def updateSegments(self, segment_text):
+        self.segments = self.parse_segments(segment_text)
+        self._video_players[0].play()
+        print("Segmentos actualizados:", self.segments)
+
+    def parse_segments(self, segment_text):
+        segments = {}
+        lines = segment_text.split('\n')
+        for line in lines:
+            if line.strip():
+                time_str, description = map(str.strip, line.split('-', 1))
+                segments[self.convert_time_to_seconds(time_str)] = description
+        return segments
+
+    def convert_time_to_seconds(self, time_str):
+        minutes, seconds = map(int, time_str.split(':'))
+        return minutes * 60 + seconds
+    
+    @Slot()
+    def play_next_segment(self, video_player):
+        if self.current_segment_index < len(self.segments):
+            start, end = self.segments[self.current_segment_index]
+            video_player.play_segment(start, end)
+            self.current_segment_index += 1
+        else:
+            print("No hay más segmentos para reproducir")
+
+    def play_segment(self, video_player, start, end):
+        video_player.seek(start)
+        video_player.play()
+        QTimer.singleShot((end - start) * 1000, video_player.pause)  # Detiene la reproducción después del segmento
+
+
+
+
+class DownloadWorker(QObject):
+    finished = Signal()
+    progress = Signal(int)
+
+    def __init__(self, url, output_path):
+        super().__init__()
+        self.url = url
+        self.output_path = output_path
+
+    @Slot()
+    def run(self):
+        try:
+            yt = YouTube(self.url, on_progress_callback=self.progress_callback)
+            video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
+            if video:
+                video.download(output_path=self.output_path)
+            self.finished.emit()
+        except Exception as e:
+            print(f"Failed to download video: {e}")
+            self.finished.emit()
+
+    def progress_callback(self, stream, chunk, bytes_remaining):
+        total_size = stream.filesize
+        bytes_downloaded = total_size - bytes_remaining
+        percentage = int((bytes_downloaded / total_size) * 100)
+        self.progress.emit(percentage)
+
 
 
 
