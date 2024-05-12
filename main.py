@@ -9,6 +9,7 @@ import numpy as np
 import urllib.parse
 
 class VideoHandler(QObject):
+    finished = Signal()  # Definir esta señal en VideoHandler también
     progressUpdated = Signal(int)  # Añadir esta línea
     def __init__(self):
         super().__init__()
@@ -29,13 +30,19 @@ class VideoHandler(QObject):
         self.worker = DownloadWorker(url, output_path)
         self.worker.moveToThread(self.thread)
         self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.on_download_finished)  # Conectar la señal finished a un nuevo slot
         self.worker.progress.connect(self.update_progress)
         self.thread.started.connect(self.worker.run)
         self.thread.start()
 
+    @Slot()
+    def on_download_finished(self):
+        self.finished.emit()
+
     @Slot(int)
     def update_progress(self, value):
         # Emite una señal propia que pueda ser manejada por QML
+        print("Progress updating to: ", value)  # Diagnóstico: Imprimir en consola de Python
         self.progressUpdated.emit(value)
 
     @Slot(str, float, float)

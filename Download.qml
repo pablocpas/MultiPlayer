@@ -16,7 +16,7 @@ Window {
         value: 0
 
         function updateProgress(value) {
-            progressBar.value = value
+            progressBar.value = value / 100
         }
     }
 
@@ -31,6 +31,18 @@ Window {
 
     Connections {
         target: videoHandler
-        onProgressUpdated: progressBar.updateProgress(progressBar.value)
-    }
+        function onProgressUpdated(progress) {
+            console.log("Progress received: " + progress);
+            progressBar.updateProgress(progress);
+        }
+
+        function onFinished(file_path) {
+            console.log("aaaaaaaeeeee")
+            
+            progressWindow.close();  // Cerrar la ventana cuando la descarga finaliza
+        }
+}
+
+
+
 }
