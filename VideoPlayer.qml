@@ -4,7 +4,7 @@ import QtQuick
 import QtMultimedia
 
 Item {
-    property string propiedad: "" // Propiedad para la ruta del vídeo
+    property string ruta: "" // ruta para la ruta del vídeo
     readonly property int duration: mediaPlayer.duration
     property int finalTime: 0 // Nuevo: tiempo final de reproducción
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
@@ -12,7 +12,7 @@ Item {
 
     MediaPlayer {
         id: mediaPlayer
-        source: propiedad
+        source: ruta
         videoOutput: videoOut
 
         onPositionChanged: {

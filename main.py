@@ -19,14 +19,12 @@ class VideoHandler(QObject):
         self.thread = None
         self.worker = None
         self._video_players = {}
-        self._next_id = 0  # Contador para asignar ID únicos a los video players
 
 
-    @Slot(QObject)
-    def registerVideoPlayer(self, video_player):
-        player_id = self._next_id
+    @Slot(QObject, int)
+    def registerVideoPlayer(self, video_player, player_id):
         self._video_players[player_id] = video_player
-        self._next_id += 1
+        print(f"Video player {player_id} registered")
 
 
     @Slot(str, str, int)
