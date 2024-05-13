@@ -23,6 +23,7 @@ ApplicationWindow {
         modal: true
         visible: false
         standardButtons: Dialog.Ok | Dialog.Cancel
+        anchors.centerIn: parent
 
         TextArea {
             id:textArea
@@ -42,6 +43,7 @@ ApplicationWindow {
         modal: true
         visible: false
         standardButtons: Dialog.Ok | Dialog.Cancel
+        anchors.centerIn: parent
 
         TextField {
             id: textURL
@@ -69,12 +71,14 @@ ApplicationWindow {
                 video0.propiedad = selectedFile
                 video0.pause()
                 video0.seek(0)
+                video0.videoLoaded = true
             } 
 
             else if (videoIndex === 1){
                 video1.propiedad = selectedFile
                 video1.pause()
                 video1.seek(0)
+                video1.videoLoaded = true
             }
         }
 
@@ -140,195 +144,231 @@ ApplicationWindow {
             Layout.fillWidth: true
             color: "#161616"
             radius: 10
-
             border.width: 1
 
             DropArea {
-                id: dropArea
+                id: dropArea1
                 anchors.fill: parent
+                keys: ["text/uri-list"]  // Aceptar solo arrastres que incluyan URIs
 
                 onEntered: {
-                    drag.accept (Qt.LinkAction);
+                    dragIcon1.visible = true;
                 }
-                onDropped: {
-                    console.log(drop.urls)
 
+                onExited: {
+                    dragIcon1.visible = false;
+                    console.log("Drag exited");
+                }
+
+                onPositionChanged: {
+                    if (containsDrag) {
+                        drag.accept(Qt.LinkAction);
+                    }
+                }
+
+                onDropped: {
+                    console.log("Dropped with URLs: " + drop.urls)
                     if (drop.urls.length > 0) {
                         video0.propiedad = drop.urls[0].toString().replace("file:///", "")
                         video0.pause()
                         video0.seek(0)
+                        video0.videoLoaded = true
                     }
                 }
-
             }
 
+
+            Image {
+                //color #a3a3a3
+
+                id: dragIcon1
+                source: "./images/drag_drop_icon.png"
+                width: 128  // Establece un ancho fijo
+                height: 128  // Establece un alto fijo
+                visible: !video0.videoLoaded
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: buttonLayout.top
+                    bottomMargin: 5  // Ajusta la separación a tus necesidades
+                }
+            }
+
+            Text {
+                text: "Arrastre un vídeo aquí"
+                color: "#a3a3a3"
+                font.pixelSize: 12
+                visible: !video0.videoLoaded
+                anchors { bottom: dragIcon1.top; horizontalCenter: dragIcon1.horizontalCenter }
+            }
 
             // Primer VideoPlayer
             VideoPlayer {
                 id: video0
                 z: 4
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-
-                height: parent.height
-                width: parent.width
-
+                anchors.fill: parent
                 Layout.column: 0
-
                 onDurationChanged: {
-                    // Manejar la nueva duración
                     rangeSlider.first.value = 0
-                    rangeSlider.to = video0.duration / 1000 // Actualiza 'to' en segundos
+                    rangeSlider.to = video0.duration / 1000 // En segundos
                     rangeSlider.second.value = video0.duration / 1000
                 }
-
                 Component.onCompleted: {
                     videoHandler.registerVideoPlayer(video0)
                 }
-
-
             }
 
-            Button {
-                text: "Seleccionar Video 1"
+            ColumnLayout {
+                id: buttonLayout
+                anchors.verticalCenterOffset: 63
+                anchors.horizontalCenterOffset: 1
+                anchors.centerIn: parent
+                spacing: 10 // Espacio entre los botones
 
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
+                Button {
+                    text: "Seleccionar Video 1"
+                    visible: !video0.videoLoaded
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        fileDialogs.videoIndex = 0
+                        fileDialogs.open()
+                    }
+                }
 
-                onClicked:{
-                    fileDialogs.videoIndex = 0
-                    fileDialogs.open()
+                Button {
+                    text: "Descargar desde Youtube"
+                    visible: !video0.videoLoaded
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: youtubeDialog.open()
+
                 }
             }
-
-
-
 
             RangeSlider {
                 id: rangeSlider
                 width: video0.width
                 height: 40
-
                 x: video0.x
                 anchors.topMargin: 20
                 anchors.horizontalCenter: parent.horizontalCenter
-
                 from: 0
-                to: 100000 // La duración del video debe ser en segundos
-
+                to: 100000 // La duración del video en segundos
                 first.value: 0
                 second.value: video0.duration / 1000
-
-                // Actualiza la posición del vídeo cuando se mueve el primer handle
                 first.onMoved: {
-                    video0.seek(first.value * 1000) // Multiplica por 1000 para convertir segundos a milisegundos
-                    video0.initialTime = first.value * 1000; // Actualiza el tiempo inicial
+                    video0.seek(first.value * 1000) // Convierte segundos a milisegundos
+                    video0.initialTime = first.value * 1000; // Tiempo inicial
                 }
-
-                // Actualiza la posición del vídeo cuando se mueve el segundo handle
                 second.onMoved: {
-                    video0.finalTime = second.value * 1000; // Actualiza el tiempo final
+                    video0.finalTime = second.value * 1000; // Tiempo final
                 }
-
             }
         }
 
 
 
+
         // Segundo VideoPlayer
 
-        Rectangle{
-
+                // Segundo VideoPlayer con su entorno
+        Rectangle {
+            id: rectangle2
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "#161616"
             radius: 10
-            focus: true
+            border.width: 1
 
             DropArea {
                 id: dropArea2
                 anchors.fill: parent
-
-                onEntered: {
-                    drag.accept (Qt.LinkAction);
-                }
+                onEntered: { drag.accept(Qt.LinkAction); }
                 onDropped: {
                     console.log(drop.urls)
-
                     if (drop.urls.length > 0) {
                         video1.propiedad = drop.urls[0].toString().replace("file:///", "")
                         video1.pause()
                         video1.seek(0)
+                        video1.videoLoaded = true
                     }
                 }
+            }
 
+            Image {
+                //color #a3a3a3
+
+                id: dragIcon2
+                source: "./images/drag_drop_icon.png"
+                width: 128  // Establece un ancho fijo
+                height: 128  // Establece un alto fijo
+                visible: !video1.videoLoaded
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: buttonLayout2.top
+                    bottomMargin: 5  // Ajusta la separación a tus necesidades
+                }
+            }
+
+            Text {
+                text: "Arrastre un vídeo aquí"
+                color: "#a3a3a3"
+                font.pixelSize: 12
+                visible: !video1.videoLoaded
+                anchors { bottom: dragIcon2.top; horizontalCenter: dragIcon2.horizontalCenter }
             }
 
             VideoPlayer {
                 id: video1
                 z: 4
-
-                height: parent.height
-                width: parent.width
-
-
-                    onDurationChanged: {
-                    // Manejar la nueva duración
-                    rangeSlider2.to = video1.duration / 1000 // Actualiza 'to' en segundos
+                anchors.fill: parent
+                Layout.column: 1
+                onDurationChanged: {
+                    rangeSlider2.to = video1.duration / 1000
                     rangeSlider2.first.value = 0
                     rangeSlider2.second.value = video1.duration / 1000
                 }
             }
 
-            Column{
-                height: parent.height
-                width: parent.width
+            ColumnLayout {
+                id: buttonLayout2
+                anchors.verticalCenterOffset: 63
+                anchors.horizontalCenterOffset: 1
+                anchors.centerIn: parent
+                spacing: 10
+
                 Button {
-                    id: selectButton2
                     text: "Seleccionar Video 2"
+                    Layout.alignment: Qt.AlignHCenter
+                    visible: !video1.videoLoaded
 
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-
-
-                    onClicked:{
+                    onClicked: {
                         fileDialogs.videoIndex = 1
                         fileDialogs.open()
                     }
                 }
 
-            }
+                Button {
+                    visible: !video1.videoLoaded
+                    text: "Descargar desde Youtube"
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: youtubeDialog.open()
 
+                }
+            }
 
             RangeSlider {
                 id: rangeSlider2
                 width: video1.width
                 height: 40
-
                 x: video1.x
                 anchors.topMargin: 20
                 anchors.horizontalCenter: parent.horizontalCenter
-
                 from: 0
-                to: 100000 // La duración del video debe ser en segundos
-
+                to: 100000
                 first.value: 0
                 second.value: video1.duration / 1000
-
-                // Actualiza la posición del vídeo cuando se mueve el primer handle
-                first.onMoved: {
-                    video1.seek(first.value * 1000) // Multiplica por 1000 para convertir segundos a milisegundos
-                }
-
-                // Actualiza la posición del vídeo cuando se mueve el segundo handle
-                second.onMoved: {
-                    video1.finalTime = second.value * 1000; // Actualiza el tiempo final
-                }
-
+                first.onMoved: { video1.seek(first.value * 1000) }
+                second.onMoved: { video1.finalTime = second.value * 1000; }
             }
-        
-
-        
         }
 
 

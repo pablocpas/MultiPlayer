@@ -8,6 +8,7 @@ Item {
     readonly property int duration: mediaPlayer.duration
     property int finalTime: 0 // Nuevo: tiempo final de reproducción
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
+    property bool videoLoaded: false
 
     MediaPlayer {
         id: mediaPlayer
