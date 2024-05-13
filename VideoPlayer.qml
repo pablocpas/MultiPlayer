@@ -31,6 +31,13 @@ Item {
         anchors.fill: parent
     }
 
+    function setPath(path) {
+        console.log("Cambiando la ruta del vídeo a: " + path);
+        //relative source
+        mediaPlayer.source = "./" + path;
+        mediaPlayer.play();
+    }
+
     function play() {
 
         // Hace play si esta parado y pause si está reproduciendo

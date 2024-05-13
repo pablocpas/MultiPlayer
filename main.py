@@ -7,6 +7,9 @@ from pytube import YouTube
 from moviepy.editor import VideoFileClip, clips_array
 import numpy as np
 import urllib.parse
+import os
+from datetime import datetime
+
 
 class VideoHandler(QObject):
     finished = Signal()  # Definir esta señal en VideoHandler también
@@ -16,27 +19,34 @@ class VideoHandler(QObject):
         self.thread = None
         self.worker = None
         self._video_players = {}
+        self._next_id = 0  # Contador para asignar ID únicos a los video players
+
 
     @Slot(QObject)
     def registerVideoPlayer(self, video_player):
-        self._video_players[0] = video_player
-        print("Reproductor de video registrado")
-        print(self._video_players[0])
+        player_id = self._next_id
+        self._video_players[player_id] = video_player
+        self._next_id += 1
 
 
-    @Slot(str, str)
-    def download_youtube_video(self, url, output_path):
+    @Slot(str, str, int)
+    def download_youtube_video(self, url, output_path, video_id):
+        # Generar un nombre de archivo único con timestamp
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        filename = f"video_{video_id}_{timestamp}.mp4"
+        
         self.thread = QThread()
-        self.worker = DownloadWorker(url, output_path)
+        self.worker = DownloadWorker(url, output_path, filename)
         self.worker.moveToThread(self.thread)
         self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.on_download_finished)  # Conectar la señal finished a un nuevo slot
+        self.worker.finished.connect(lambda path, vid=video_id: self.on_download_finished(vid, path))
         self.worker.progress.connect(self.update_progress)
         self.thread.started.connect(self.worker.run)
         self.thread.start()
 
     @Slot()
-    def on_download_finished(self):
+    def on_download_finished(self, video_id, path):
+        self._video_players[video_id].setPath(path)
         self.finished.emit()
 
     @Slot(int)
@@ -151,15 +161,15 @@ class VideoHandler(QObject):
 
 
 
-
 class DownloadWorker(QObject):
-    finished = Signal()
-    progress = Signal(int)
+    finished = Signal(str)  # Emite la ruta completa del archivo descargado
+    progress = Signal(int)  # Emite el progreso de la descarga
 
-    def __init__(self, url, output_path):
+    def __init__(self, url, output_path, filename):
         super().__init__()
         self.url = url
-        self.output_path = output_path
+        self.output_path = output_path  # Definir output_path como un atributo
+        self.filename = filename  # Definir filename como un atributo
 
     @Slot()
     def run(self):
@@ -167,11 +177,15 @@ class DownloadWorker(QObject):
             yt = YouTube(self.url, on_progress_callback=self.progress_callback)
             video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
             if video:
-                video.download(output_path=self.output_path)
-            self.finished.emit()
+                video.download(output_path=self.output_path, filename=self.filename)
+                full_path = os.path.join(self.output_path, self.filename)
+                print(f"Video downloaded to {full_path}")
+                self.finished.emit(full_path)
+            else:
+                raise Exception("No suitable video found")
         except Exception as e:
             print(f"Failed to download video: {e}")
-            self.finished.emit()
+            self.finished.emit(None)
 
     def progress_callback(self, stream, chunk, bytes_remaining):
         total_size = stream.filesize

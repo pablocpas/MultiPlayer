@@ -49,7 +49,7 @@ ApplicationWindow {
         }
 
         onAccepted: {
-            videoHandler.download_youtube_video(textURL.text, "C:/Users/Pablo/Downloads/video4.mp4")
+            videoHandler.download_youtube_video(textURL.text, "./downloaded_videos", 0)
             progressWindow.visible = true;
             console.log("Video descargado")
         }
