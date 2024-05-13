@@ -44,88 +44,88 @@ ApplicationWindow {
 
 
 
-    Button {
-        id:playButton
-        text: "Reproducir/Pausa"
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: {
-            video0.play()
-            video1.play()
-        }
-    }
 
-    Button {
-        text: "Siguiente Segmento"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: playButton.top
-        anchors.bottomMargin: 10
-        onClicked: {
-            videoHandler.playNextSegment(video0)
-        }
-    }
-
-    ToolBar {
-        id: toolBar
-        x: 0
-        y: 0
-        width: parent.width
-        height: 30
-
-
-        
-        Button {
-            text: "Editar segmentos"
-            onClicked: segmentDialog.open()
-        }
-
-        Button {
-            text: "Abrir video youtube"
-            onClicked: youtubeDialog.open()
-        }
-
-    }
-
-    GridLayout {
-        id: grid
+    ColumnLayout{
         anchors.fill: parent
-        columns: 2
-        rowSpacing: 10
-        columnSpacing: 10
 
-        Repeater {
-            model: numberOfPlayers  // El modelo del Repeater es el número de VideoPlayers
-            delegate: VideoPlayerComponent {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                playerIndex: index  // Cada componente conoce su índice
-                Component.onCompleted: {
-                    videoHandler.registerVideoPlayer(this, index)
+        ToolBar {
+            id: toolBar
+            x: 0
+            y: 0
+            width: parent.width
+            height: 30
+
+
+            Row{
+                Button {
+                    text: "2 Players"
+                    onClicked: numberOfPlayers = 2
+                }
+                Button {
+                    text: "3 Players"
+                    onClicked: numberOfPlayers = 3
+                }
+                Button {
+                    text: "4 Players"
+                    onClicked: numberOfPlayers = 4
                 }
             }
+
+        }
+
+    
+        GridLayout {
+            id: grid
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            columns: 2
+            rowSpacing: 10
+            columnSpacing: 10
+            Layout.preferredHeight: parent.height - 60 // Ajustar según sea necesario
+
+            Repeater {
+                model: numberOfPlayers  // El modelo del Repeater es el número de VideoPlayers
+                delegate: VideoPlayerComponent {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    playerIndex: index  // Cada componente conoce su índice
+                    Component.onCompleted: {
+                        videoHandler.registerVideoPlayer(this, index)
+                    }
+                }
+            }
+
+
+        }
+
+        ToolBar {
+            id: toolBar2
+            width: parent.width
+
+            height: 30
+
+            Row{
+                
+                Button {
+                    id:playButton
+                    text: "Reproducir/Pausa"
+                    onClicked: {
+                        video0.play()
+                        video1.play()
+                    }
+                }
+
+                Button {
+                    text: "Siguiente Segmento"
+                    onClicked: {
+                        videoHandler.playNextSegment(video0)
+                    }
+                }
+            }
+            
         }
 
 
-    }
-
-    Row {  // Fila para los botones que controlan el número de VideoPlayers
-        spacing: 10
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 20
-
-        Button {
-            text: "2 Players"
-            onClicked: numberOfPlayers = 2
-        }
-        Button {
-            text: "3 Players"
-            onClicked: numberOfPlayers = 3
-        }
-        Button {
-            text: "4 Players"
-            onClicked: numberOfPlayers = 4
-        }
     }
 
     Button {
