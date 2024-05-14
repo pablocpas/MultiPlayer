@@ -18,7 +18,6 @@ Window {
     ColumnLayout {
         anchors.fill: parent
         spacing: 10
-        padding: 10
 
         Text {
             text: "Editar Segmentos del Vídeo"

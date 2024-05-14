@@ -8,6 +8,13 @@ Item {
     property alias videoSource: videoPlayer.ruta
     property bool videoLoaded: false
     property int playerIndex: 0  // Para identificar el índice del reproductor
+    property var segments: []
+    
+    SegmentEditor {
+        id: segmentEditor
+        visible: false
+
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -19,6 +26,7 @@ Item {
         radius: 10
         border.width: 1
         border.color: "#2b2b2b"
+        property var segments: []
 
 
         DropArea {
@@ -101,6 +109,16 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 visible: !videoLoaded
                 onClicked: youtubeDialog.open()
+            }
+
+            Button {
+                text: "Editar Segmentos"
+                Layout.alignment: Qt.AlignHCenter
+                visible: videoLoaded
+                onClicked: {
+                    segmentEditor.segments = segments
+                    segmentEditor.visible = true
+                }
             }
         }
     }
