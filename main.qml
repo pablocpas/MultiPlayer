@@ -66,21 +66,24 @@ ApplicationWindow {
                 border.width: 1
                 border.color: "#2b2b2b"
             }
-
-            RowLayout{
+                RowLayout{
                 anchors.horizontalCenter: parent.horizontalCenter
-                Button {
-                    text: "2 Players"
+                ToolButton {
+                    icon.source: "./images/split2.svg"
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 2
                 }
-                Button {
-                    text: "3 Players"
+                ToolButton {
+                    icon.source: "./images/split3.svg"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     onClicked: numberOfPlayers = 3
                 }
-                Button {
-                    text: "4 Players"
+                ToolButton {
+                    icon.source: "./images/split4.svg"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     onClicked: numberOfPlayers = 4
                 }
             }
