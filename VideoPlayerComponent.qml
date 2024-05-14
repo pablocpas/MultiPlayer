@@ -13,9 +13,13 @@ Item {
         anchors.fill: parent
         Layout.fillHeight: true
         Layout.fillWidth: true
+        anchors.leftMargin: 16
+        anchors.rightMargin: 16
         color: "#161616"
         radius: 10
         border.width: 1
+        border.color: "#2b2b2b"
+
 
         DropArea {
             anchors.fill: parent
@@ -78,16 +82,22 @@ Item {
             Button {
                 text: "Seleccionar Video " + (playerIndex)
                 visible: !videoLoaded
+                //font.family: "Helvetica"
+
+                //background: Rectangle {
+                //    color: "#0078d4"
+                //    radius: 3
+                //}
 
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     fileDialog.open()
-                    console.log("Seleccionar video " + playerIndex + 1)
+                    console.log("Seleccionar video ")
                 }
             }
 
             Button {
-                text: "Descargar desde Youtube"
+                text: "Youtube URL"
                 Layout.alignment: Qt.AlignHCenter
                 visible: !videoLoaded
                 onClicked: youtubeDialog.open()

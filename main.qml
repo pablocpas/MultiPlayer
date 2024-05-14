@@ -47,18 +47,28 @@ ApplicationWindow {
 
     ColumnLayout{
         anchors.fill: parent
+        spacing: 15
 
         ToolBar {
             id: toolBar
             x: 0
             y: 0
-            width: parent.width
+            Layout.fillWidth: true
             height: 30
 
+            background: Rectangle {
+                implicitHeight: 40
+                color: "#161616"
+                border.width: 1
+                border.color: "#2b2b2b"
+            }
 
-            Row{
+            RowLayout{
+                anchors.horizontalCenter: parent.horizontalCenter
                 Button {
                     text: "2 Players"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     onClicked: numberOfPlayers = 2
                 }
                 Button {
@@ -101,11 +111,19 @@ ApplicationWindow {
         ToolBar {
             id: toolBar2
             width: parent.width
-
+            Layout.fillWidth: true
             height: 30
 
-            Row{
-                
+            background: Rectangle {
+                implicitHeight: 40
+                color: "#161616"
+                border.width: 1
+                border.color: "#2b2b2b"
+            }
+
+            RowLayout{
+                anchors.horizontalCenter: parent.horizontalCenter
+
                 Button {
                     id:playButton
                     text: "Reproducir/Pausa"
