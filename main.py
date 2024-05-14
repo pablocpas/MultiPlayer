@@ -45,6 +45,8 @@ class VideoHandler(QObject):
     @Slot()
     def on_download_finished(self, video_id, path):
         self._video_players[video_id].setPath(path)
+        self._video_players[video_id].pause()
+        self._video_players[video_id].seek(0)
         self.finished.emit()
 
     @Slot(int)

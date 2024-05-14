@@ -21,8 +21,7 @@ Item {
     Shortcut{
         sequence: "Space"
         onActivated: {
-            video0.play()
-            video1.play()
+            playAll()
         }
     }
 }

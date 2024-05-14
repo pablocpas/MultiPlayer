@@ -7,12 +7,16 @@ import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Layouts
 ApplicationWindow {
+    id: mainWindow
     visible: true
     color: "#1f1f1f"
     width: 1024
     height: 720
     title: qsTr("Reproductor de Video")
-    property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
+    property var videoPlayers: []
+    property int numberOfPlayers: 4  // Propiedad para controlar el número de VideoPlayers
+
+    signal playAll()
 
     Download{
         id: progressWindow
@@ -128,8 +132,7 @@ ApplicationWindow {
                     id:playButton
                     text: "Reproducir/Pausa"
                     onClicked: {
-                        video0.play()
-                        video1.play()
+                        mainWindow.playAll()                    
                     }
                 }
 
@@ -161,8 +164,5 @@ ApplicationWindow {
         onClicked: videoHandler.fusion_video(video0.propiedad, video1.propiedad)
 
     }
-
-    
-
 
 }

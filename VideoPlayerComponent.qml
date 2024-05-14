@@ -145,4 +145,23 @@ Item {
             videoPlayer.setPath(path)
             videoPlayer.videoLoaded = true
         }
+
+        function play() {
+            videoPlayer.play()
+        }
+
+        function pause() {
+            videoPlayer.pause()
+        }
+
+        function seek(position) {
+            videoPlayer.seek(position)
+        }
+
+        Connections {
+        target: mainWindow
+        onPlayAll: {
+            videoPlayer.play()
+        }
+    }
 }
