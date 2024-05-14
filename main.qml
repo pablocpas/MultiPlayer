@@ -70,18 +70,24 @@ ApplicationWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
                 ToolButton {
                     icon.source: "./images/split2.svg"
+                    checkable: true
+                    autoExclusive: true
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 2
                 }
                 ToolButton {
                     icon.source: "./images/split3.svg"
+                    checkable: true
+                    autoExclusive: true
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 3
                 }
                 ToolButton {
                     icon.source: "./images/split4.svg"
+                    checkable: true
+                    autoExclusive: true
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 4
