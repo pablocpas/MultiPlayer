@@ -15,6 +15,7 @@ ApplicationWindow {
     property int numberOfPlayers: 4  // Propiedad para controlar el número de VideoPlayers
 
     signal playAll()
+    signal playNextSegment()
 
     Download{
         id: progressWindow
@@ -137,7 +138,7 @@ ApplicationWindow {
                 Button {
                     text: "Siguiente Segmento"
                     onClicked: {
-                        videoHandler.playNextSegment(video0)
+                        mainWindow.playNextSegment()
                     }
                 }
             }

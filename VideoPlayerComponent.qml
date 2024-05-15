@@ -10,6 +10,8 @@ Item {
     property bool videoLoaded: false
     property int playerIndex: 0
     property var segments: []
+    property int currentSegmentIndex: -1
+    property string currentSegmentName: ""
 
     SegmentEditor {
         id: segmentEditor
@@ -109,6 +111,18 @@ Item {
         }
     }
 
+    Text {
+        id: segmentName
+        text: videoPlayerComponent.currentSegmentName
+        color: "white"
+        font.pixelSize: 16
+        anchors {
+            top: parent.top
+            left: parent.left
+            margins: 10
+        }
+    }
+
     Dialog {
         id: youtubeDialog
         title: "Introduce la URL de Youtube"
@@ -160,9 +174,25 @@ Item {
     }
 
     function handleSegmentsUpdated(newSegments) {
-        console.log("handleSegmentsUpdated called with: ", newSegments)  // Agregado para depuración
+        console.log("handleSegmentsUpdated called with: ", newSegments)
         videoPlayerComponent.segments = newSegments
+        console.log("Updated segments: ", videoPlayerComponent.segments)
         videoHandler.updateSegments(playerIndex, newSegments)
+    }
+
+    function playNextSegment() {
+        console.log("Playing next segment, current segments length: ", videoPlayerComponent.segments.length)
+        if (videoPlayerComponent.segments.length > 0) {
+            currentSegmentIndex = (currentSegmentIndex + 1) % videoPlayerComponent.segments.length
+            let segment = videoPlayerComponent.segments[currentSegmentIndex]
+            let timestamp = segment.timestamp.split(":")
+            let miliseconds = parseInt(timestamp[0]) * 60 + parseInt(timestamp[1]) * 1000
+            currentSegmentName = segment.description
+            console.log("Playing segment: ", segment)
+            videoPlayer.seek(miliseconds)
+        } else {
+            console.log("No hay segmentos definidos.")
+        }
     }
 
     Connections {
@@ -170,10 +200,13 @@ Item {
         function onPlayAll() {
             videoPlayer.play()
         }
+        function onPlayNextSegment() {
+            playNextSegment()
+        }
     }
 
     Component.onCompleted: {
         segmentEditor.segmentsUpdated.connect(handleSegmentsUpdated)
+        console.log("Component completed, initial segments: ", videoPlayerComponent.segments)
     }
-
 }
