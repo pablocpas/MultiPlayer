@@ -9,6 +9,7 @@ Item {
     property int finalTime: 0 // Nuevo: tiempo final de reproducción
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
     property bool videoLoaded: false
+    property int position: mediaPlayer.position
 
     MediaPlayer {
         id: mediaPlayer

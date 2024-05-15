@@ -12,6 +12,8 @@ Item {
     property var segments: []
     property int currentSegmentIndex: -1
     property string currentSegmentName: ""
+    property int segmentStartTime: 0
+    property int segmentEndTime: 0
 
     SegmentEditor {
         id: segmentEditor
@@ -49,6 +51,11 @@ Item {
             anchors.fill: parent
             onDurationChanged: {
                 // Handle duration change
+            }
+            onPositionChanged: {
+                if (videoPlayer.position >= segmentEndTime) {
+                    videoPlayer.pause()
+                }
             }
         }
 
@@ -109,9 +116,8 @@ Item {
                 }
             }
         }
-    }
-
-    Text {
+    
+        Text {
         id: segmentName
         text: videoPlayerComponent.currentSegmentName
         color: "white"
@@ -122,6 +128,9 @@ Item {
             margins: 10
         }
     }
+    }
+
+
 
     Dialog {
         id: youtubeDialog
@@ -186,10 +195,19 @@ Item {
             currentSegmentIndex = (currentSegmentIndex + 1) % videoPlayerComponent.segments.length
             let segment = videoPlayerComponent.segments[currentSegmentIndex]
             let timestamp = segment.timestamp.split(":")
-            let miliseconds = parseInt(timestamp[0]) * 60 + parseInt(timestamp[1]) * 1000
+            let seconds = parseInt(timestamp[0]) * 60 + parseInt(timestamp[1]) * 1000
             currentSegmentName = segment.description
+            segmentStartTime = seconds
             console.log("Playing segment: ", segment)
-            videoPlayer.seek(miliseconds)
+
+            let nextSegment = videoPlayerComponent.segments[(currentSegmentIndex + 1) % videoPlayerComponent.segments.length]
+            let nextTimestamp = nextSegment.timestamp.split(":")
+            let nextSeconds = parseInt(nextTimestamp[0]) * 60 + parseInt(nextTimestamp[1]) * 1000
+            console.log("Next segment starts at: ", nextSeconds)
+            segmentEndTime = nextSeconds
+
+            videoPlayer.seek(segmentStartTime)
+            videoPlayer.play()
         } else {
             console.log("No hay segmentos definidos.")
         }
