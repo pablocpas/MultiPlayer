@@ -17,7 +17,7 @@ ApplicationWindow {
     signal playAll()
     signal playNextSegment()
 
-    Download{
+    Download {
         id: progressWindow
     }
 
@@ -30,7 +30,7 @@ ApplicationWindow {
         anchors.centerIn: parent
 
         TextArea {
-            id:textArea
+            id: textArea
             placeholderText: qsTr("Ingrese los segmentos en el formato 'mm:ss - Descripción' \n Ejemplo:\n00:00 - Inicio del video\n00:10 - Final del video\n00:20 - Créditos finales\n")
         }
 
@@ -38,12 +38,11 @@ ApplicationWindow {
             videoHandler.updateSegments(textArea.text)
             console.log("Segmentos guardados")
         }
-
     }
 
-    Shortcuts{}
+    Shortcuts {}
 
-    ColumnLayout{
+    ColumnLayout {
         anchors.fill: parent
         spacing: 15
 
@@ -52,39 +51,83 @@ ApplicationWindow {
             x: 0
             y: 0
             Layout.fillWidth: true
-            height: 30
+            height: 45  // Ajustar la altura de la barra de herramientas
 
             background: Rectangle {
-                implicitHeight: 40
+                implicitHeight: 50  // Ajustar la altura implícita del fondo
                 color: "#161616"
                 border.width: 1
                 border.color: "#2b2b2b"
             }
-            RowLayout{
+            RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
+
+                ButtonGroup {
+                    id: toolButtonGroup
+                }
+
                 ToolButton {
+                    id: toolButton2
                     icon.source: "./images/split2.svg"
                     checkable: true
                     autoExclusive: true
+                    ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 2
+
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+
+                    onCheckedChanged: {
+                        icon.source = checked ? "./images/split2_clicked.svg" : "./images/split2.svg"
+                    }
                 }
                 ToolButton {
+                    id: toolButton3
                     icon.source: "./images/split3.svg"
                     checkable: true
                     autoExclusive: true
+                    ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 3
+
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+
+                    onCheckedChanged: {
+                        icon.source = checked ? "./images/split3_clicked.svg" : "./images/split3.svg"
+                    }
                 }
                 ToolButton {
+                    id: toolButton4
                     icon.source: "./images/split4.svg"
                     checkable: true
                     autoExclusive: true
+                    ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     onClicked: numberOfPlayers = 4
+
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+
+                    onCheckedChanged: {
+                        icon.source = checked ? "./images/split4_clicked.svg" : "./images/split4.svg"
+                    }
                 }
             }
         }
@@ -124,14 +167,14 @@ ApplicationWindow {
                 border.color: "#2b2b2b"
             }
 
-            RowLayout{
+            RowLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Button {
-                    id:playButton
+                    id: playButton
                     text: "Reproducir/Pausa"
                     onClicked: {
-                        mainWindow.playAll()                    
+                        mainWindow.playAll()
                     }
                 }
 
