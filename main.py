@@ -1,9 +1,9 @@
 import sys
-from PySide6.QtCore import QObject, Slot
+import re
+from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
-from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer
-from pytube import YouTube
+import yt_dlp
 from moviepy.editor import VideoFileClip, clips_array
 import numpy as np
 import urllib.parse
@@ -188,25 +188,39 @@ class DownloadWorker(QObject):
 
     @Slot()
     def run(self):
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': os.path.join(self.output_path, self.filename),
+            'progress_hooks': [self.progress_hook],
+            'noprogress': False,
+            'nocolor': True  # Desactivar color
+        }
+
         try:
-            yt = YouTube(self.url, on_progress_callback=self.progress_callback)
-            video = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
-            if video:
-                video.download(output_path=self.output_path, filename=self.filename)
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([self.url])
                 full_path = os.path.join(self.output_path, self.filename)
                 print(f"Video downloaded to {full_path}")
                 self.finished.emit(full_path)
-            else:
-                raise Exception("No suitable video found")
         except Exception as e:
             print(f"Failed to download video: {e}")
             self.finished.emit(None)
 
-    def progress_callback(self, stream, chunk, bytes_remaining):
-        total_size = stream.filesize
-        bytes_downloaded = total_size - bytes_remaining
-        percentage = int((bytes_downloaded / total_size) * 100)
-        self.progress.emit(percentage)
+    def progress_hook(self, d):
+        if d['status'] == 'downloading':
+            percentage_str = d['_percent_str'].strip()
+            # Limpiar caracteres ANSI del string del porcentaje
+            percentage_str = re.sub(r'\x1b\[[0-9;]*m', '', percentage_str)
+            try:
+                print(f"Clean percentage string: {percentage_str}")  # Diagnóstico: Imprimir el string limpio del porcentaje
+                percentage = float(percentage_str.replace('%', ''))
+                print(f"Calculated percentage: {percentage}")  # Diagnóstico: Imprimir el porcentaje calculado
+                self.progress.emit(int(percentage))
+            except ValueError as e:
+                print(f"ValueError: {e}")  # Diagnóstico: Imprimir cualquier error de conversión
+        elif d['status'] == 'finished':
+            self.finished.emit(d['filename'])
+
 
 if __name__ == "__main__":
     # Crea una aplicación GUI
