@@ -14,18 +14,19 @@ from datetime import datetime
 class VideoHandler(QObject):
     finished = Signal()  # Definir esta señal en VideoHandler también
     progressUpdated = Signal(int)  # Añadir esta línea
+    
     def __init__(self):
         super().__init__()
         self.thread = None
         self.worker = None
         self._video_players = {}
-
+        self.segments = {}
 
     @Slot(QObject, int)
     def registerVideoPlayer(self, video_player, player_id):
         self._video_players[player_id] = video_player
+        self.segments[player_id] = []  # Initialize an empty list for segments for this player
         print(f"Video player {player_id} registered")
-
 
     @Slot(str, str, int)
     def download_youtube_video(self, url, output_path, video_id):
@@ -84,9 +85,8 @@ class VideoHandler(QObject):
         except Exception as e:
             print(f"Error al procesar el video: {e}")
 
-    
     def resize_clip(self, clip, height):
-    # Esta función ajusta el tamaño de los frames usando numpy
+        # Esta función ajusta el tamaño de los frames usando numpy
         def resize_frame(frame):
             from PIL import Image
             # Convertir el array de numpy a una imagen PIL
@@ -114,52 +114,67 @@ class VideoHandler(QObject):
 
             clip2_resized = self.resize_clip(clip2, clip1.h)
 
-            
             final_clip = clips_array([[clip1, clip2_resized]])
             
             final_clip.write_videofile("resultado.mp4", codec='libx264')
-
 
             print(f"Vídeos fusionados guardados como resultado.mp4")
 
         except Exception as e:
             print(f"Error al procesar los vídeos: {e}")
 
+    @Slot(int, list)
+    def updateSegments(self, player_id, segments):
+        self.segments[player_id] = self.parse_segments(segments)
+        print(f"Segmentos actualizados para el reproductor {player_id}: {self.segments[player_id]}")
+        self.save_segments_to_file(player_id)
 
-    @Slot(str)
-    def updateSegments(self, segment_text):
-        self.segments = self.parse_segments(segment_text)
-        self._video_players[0].play()
-        print("Segmentos actualizados:", self.segments)
+    def parse_segments(self, segments):
+        parsed_segments = []
+        for segment in segments:
+            # Asegúrate de que segment es un QObject y tiene las propiedades esperadas
+            if isinstance(segment, QObject) and hasattr(segment, 'property'):
+                time_str = segment.property('timestamp')
+                description = segment.property('description')
+                if time_str and description:
+                    parsed_segments.append((self.convert_time_to_seconds(time_str), description))
+                else:
+                    print("Segment missing required properties")
+            else:
+                print("Invalid segment object")
+        return parsed_segments
 
-    def parse_segments(self, segment_text):
-        segments = {}
-        lines = segment_text.split('\n')
-        for line in lines:
-            if line.strip():
-                time_str, description = map(str.strip, line.split('-', 1))
-                segments[self.convert_time_to_seconds(time_str)] = description
-        return segments
 
     def convert_time_to_seconds(self, time_str):
         minutes, seconds = map(int, time_str.split(':'))
         return minutes * 60 + seconds
-    
-    @Slot()
-    def play_next_segment(self, video_player):
-        if self.current_segment_index < len(self.segments):
-            start, end = self.segments[self.current_segment_index]
-            video_player.play_segment(start, end)
-            self.current_segment_index += 1
-        else:
-            print("No hay más segmentos para reproducir")
 
-    def play_segment(self, video_player, start, end):
+    def save_segments_to_file(self, player_id):
+        segments = self.segments.get(player_id, [])
+        with open(f'segments_{player_id}.txt', 'w') as f:
+            for start, description in segments:
+                minutes, seconds = divmod(start, 60)
+                time_str = f"{minutes:02}:{seconds:02}"
+                f.write(f"{time_str} - {description}\n")
+        print(f"Segmentos guardados en segments_{player_id}.txt")
+
+    @Slot(int)
+    def play_next_segment(self, player_id):
+        if player_id in self._video_players and player_id in self.segments:
+            segments = self.segments[player_id]
+            if segments:
+                start, description = segments.pop(0)  # Get the first segment
+                video_player = self._video_players[player_id]
+                self.play_segment(video_player, start)
+            else:
+                print(f"No hay más segmentos para reproducir para el reproductor {player_id}")
+        else:
+            print(f"Reproductor {player_id} no encontrado o sin segmentos")
+
+    def play_segment(self, video_player, start):
         video_player.seek(start)
         video_player.play()
-        QTimer.singleShot((end - start) * 1000, video_player.pause)  # Detiene la reproducción después del segmento
-
-
+        QTimer.singleShot(5000, video_player.pause)  # Pausar después de 5 segundos como ejemplo
 
 class DownloadWorker(QObject):
     finished = Signal(str)  # Emite la ruta completa del archivo descargado
@@ -192,10 +207,6 @@ class DownloadWorker(QObject):
         bytes_downloaded = total_size - bytes_remaining
         percentage = int((bytes_downloaded / total_size) * 100)
         self.progress.emit(percentage)
-
-
-
-
 
 if __name__ == "__main__":
     # Crea una aplicación GUI

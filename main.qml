@@ -1,11 +1,9 @@
-// Copyright (C) 2021 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
-
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Layouts
+
 ApplicationWindow {
     id: mainWindow
     visible: true
@@ -42,12 +40,7 @@ ApplicationWindow {
 
     }
 
-
-
     Shortcuts{}
-
-
-
 
     ColumnLayout{
         anchors.fill: parent
@@ -66,7 +59,7 @@ ApplicationWindow {
                 border.width: 1
                 border.color: "#2b2b2b"
             }
-                RowLayout{
+            RowLayout{
                 anchors.horizontalCenter: parent.horizontalCenter
                 ToolButton {
                     icon.source: "./images/split2.svg"
@@ -93,10 +86,8 @@ ApplicationWindow {
                     onClicked: numberOfPlayers = 4
                 }
             }
-
         }
 
-    
         GridLayout {
             id: grid
             Layout.fillWidth: true
@@ -117,8 +108,6 @@ ApplicationWindow {
                     }
                 }
             }
-
-
         }
 
         ToolBar {
@@ -152,14 +141,10 @@ ApplicationWindow {
                     }
                 }
             }
-            
         }
-
-
     }
 
     Button {
-
         text: "Recortar video"
         anchors.centerIn: parent
         onClicked: videoHandler.trim_video(video0.propiedad, rangeSlider.first.value, rangeSlider.second.value)
@@ -171,7 +156,5 @@ ApplicationWindow {
         anchors.verticalCenterOffset: 46
         anchors.horizontalCenterOffset: -1
         onClicked: videoHandler.fusion_video(video0.propiedad, video1.propiedad)
-
     }
-
 }

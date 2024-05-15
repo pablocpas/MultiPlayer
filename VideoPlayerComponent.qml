@@ -5,15 +5,16 @@ import QtQuick.Dialogs
 import QtQuick.Layouts
 
 Item {
+    id: videoPlayerComponent
     property alias videoSource: videoPlayer.ruta
     property bool videoLoaded: false
-    property int playerIndex: 0  // Para identificar el índice del reproductor
+    property int playerIndex: 0
     property var segments: []
-    
+
     SegmentEditor {
         id: segmentEditor
         visible: false
-
+        segments: videoPlayerComponent.segments
     }
 
     Rectangle {
@@ -26,20 +27,10 @@ Item {
         radius: 10
         border.width: 1
         border.color: "#2b2b2b"
-        property var segments: []
-
 
         DropArea {
             anchors.fill: parent
             keys: ["text/uri-list"]
-
-            //onEntered: {
-            //    dragIcon.visible = true;
-            //}
-
-            //onExited: {
-            //    dragIcon.visible = false;
-            //}
 
             onDropped: {
                 if (drop.urls.length > 0) {
@@ -67,9 +58,9 @@ Item {
             visible: !videoLoaded
             anchors.centerIn: parent
             anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: buttonLayout.top
-                    bottomMargin: 5  // Ajusta la separación a tus necesidades
+                horizontalCenter: parent.horizontalCenter
+                bottom: buttonLayout.top
+                bottomMargin: 5
             }
         }
 
@@ -78,7 +69,10 @@ Item {
             color: "#a3a3a3"
             font.pixelSize: 12
             visible: !videoLoaded
-                anchors { bottom: dragIcon.top; horizontalCenter: dragIcon.horizontalCenter }
+            anchors {
+                bottom: dragIcon.top
+                horizontalCenter: dragIcon.horizontalCenter
+            }
         }
 
         ColumnLayout {
@@ -90,17 +84,9 @@ Item {
             Button {
                 text: "Seleccionar Video " + (playerIndex)
                 visible: !videoLoaded
-                //font.family: "Helvetica"
-
-                //background: Rectangle {
-                //    color: "#0078d4"
-                //    radius: 3
-                //}
-
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
                     fileDialog.open()
-                    console.log("Seleccionar video ")
                 }
             }
 
@@ -123,7 +109,7 @@ Item {
         }
     }
 
-        Dialog {
+    Dialog {
         id: youtubeDialog
         title: "Introduce la URL de Youtube"
         modal: true
@@ -138,48 +124,56 @@ Item {
 
         onAccepted: {
             videoHandler.download_youtube_video(textURL.text, "./downloaded_videos", playerIndex)
-            progressWindow.visible = true;
+            progressWindow.visible = true
             videoLoaded = true
-            console.log("Video descargado")
         }
-
     }
 
-            FileDialog {
-            id: fileDialog
-            title: "Seleccione un vídeo"
-            nameFilters: ["Video files (*.mp4 *.avi *.mov)"]
+    FileDialog {
+        id: fileDialog
+        title: "Seleccione un vídeo"
+        nameFilters: ["Video files (*.mp4 *.avi *.mov)"]
 
-            onAccepted: {
-                videoPlayer.ruta = selectedFile
-                videoPlayer.pause()
-                videoPlayer.seek(0)
-                videoLoaded = true
-
-            }
-        }
-
-        function setPath(path) {
-            videoPlayer.setPath(path)
-            videoPlayer.videoLoaded = true
-        }
-
-        function play() {
-            videoPlayer.play()
-        }
-
-        function pause() {
+        onAccepted: {
+            videoPlayer.ruta = selectedFile
             videoPlayer.pause()
+            videoPlayer.seek(0)
+            videoLoaded = true
         }
+    }
 
-        function seek(position) {
-            videoPlayer.seek(position)
-        }
+    function setPath(path) {
+        videoPlayer.setPath(path)
+        videoLoaded = true
+    }
 
-        Connections {
+    function play() {
+        videoPlayer.play()
+    }
+
+    function pause() {
+        videoPlayer.pause()
+    }
+
+    function seek(position) {
+        videoPlayer.seek(position)
+    }
+
+    function handleSegmentsUpdated(newSegments) {
+        console.log("handleSegmentsUpdated called with: ", newSegments)  // Agregado para depuración
+        videoPlayerComponent.segments = newSegments
+        videoHandler.updateSegments(playerIndex, newSegments)
+    }
+
+    Connections {
         target: mainWindow
-        onPlayAll: {
+        function onPlayAll() {
             videoPlayer.play()
         }
     }
+
+    Component.onCompleted: {
+        segmentEditor.segmentsUpdated.connect(handleSegmentsUpdated)
+    }
+
 }

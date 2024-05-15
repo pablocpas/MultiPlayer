@@ -1,8 +1,6 @@
-// SegmentEditor.qml
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
-import QtQuick.Dialogs
 
 Window {
     id: segmentEditor
@@ -38,12 +36,28 @@ Window {
                 RowLayout {
                     spacing: 10
                     TextField {
+                        id: timestampField
                         text: model.timestamp
                         Layout.fillWidth: true
+                        inputMask: "99:99"  // Input mask to ensure format 00:00
+                        validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]$/ }  // Validator to enforce proper time format
+
+                        onTextChanged: {
+                            if (timestampField.text !== model.timestamp) {
+                                segmentListModel.setProperty(index, "timestamp", timestampField.text)
+                            }
+                        }
                     }
                     TextField {
+                        id: descriptionField
                         text: model.description
                         Layout.fillWidth: true
+
+                        onTextChanged: {
+                            if (descriptionField.text !== model.description) {
+                                segmentListModel.setProperty(index, "description", descriptionField.text)
+                            }
+                        }
                     }
                     Button {
                         text: "Eliminar"
@@ -65,26 +79,33 @@ Window {
             Button {
                 text: "Guardar"
                 onClicked: {
-                    let segmentsArray = []
-                    for (let i = 0; i < segmentListModel.count; i++) {
-                        segmentsArray.push(segmentListModel.get(i))
-                    }
-                    segmentEditor.segments = segmentsArray
-                    segmentEditor.segmentsUpdated(segmentsArray)
-                    segmentEditor.close()
+                    saveSegments()
                 }
             }
             Button {
                 text: "Cancelar"
-                onClicked: segmentEditor.close()
+                onClicked: segmentEditor.visible = false
             }
         }
     }
 
     Component.onCompleted: {
         segmentListModel.clear()
-        for (let i = 0; i < segments.length; i++) {
-            segmentListModel.append(segments[i])
+        if (segments) {
+            for (let i = 0; i < segments.length; i++) {
+                segmentListModel.append(segments[i])
+            }
         }
+    }
+
+    function saveSegments() {
+        let segmentsArray = []
+        for (let i = 0; i < segmentListModel.count; i++) {
+            segmentsArray.push(segmentListModel.get(i))
+        }
+        console.log("Saving segments:", segmentsArray) // Agregado para depuración
+        segmentEditor.segments = segmentsArray
+        segmentEditor.segmentsUpdated(segmentsArray)
+        segmentEditor.visible = false
     }
 }
