@@ -8,6 +8,8 @@ Window {
     width: 1000
     height: 600
     title: "Editar Segmentos"
+    
+
     visible: false
 
     property var segments: []
@@ -38,7 +40,6 @@ Window {
                     id: segmentListModel
                 }
                 delegate: Item {
-                    width: parent.width
                     height: 40
                     RowLayout {
                         spacing: 10
@@ -68,6 +69,7 @@ Window {
                             }
                         }
                         Button {
+
                             text: "Eliminar"
                             onClicked: segmentListModel.remove(index)
                         }

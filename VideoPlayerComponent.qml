@@ -53,9 +53,10 @@ Item {
                 // Handle duration change
             }
             onPositionChanged: {
-                if (videoPlayer.position >= segmentEndTime) {
+                if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
                     videoPlayer.pause()
                 }
+
             }
         }
 
@@ -218,11 +219,13 @@ Item {
     Connections {
         target: mainWindow
         function onPlayAll() {
-            console.log("Playing all segments")
             videoPlayer.play()
         }
         function onPlayNextSegment() {
             playNextSegment()
+        }
+        function onPauseAll() {
+            videoPlayer.pause()
         }
     }
 

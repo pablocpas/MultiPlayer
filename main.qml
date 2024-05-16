@@ -15,6 +15,8 @@ ApplicationWindow {
     property int numberOfPlayers: 4  // Propiedad para controlar el número de VideoPlayers
 
     signal playAll()
+    signal pauseAll()
+
     signal playNextSegment()
 
     Download {
@@ -158,10 +160,10 @@ ApplicationWindow {
             id: toolBar2
             width: parent.width
             Layout.fillWidth: true
-            height: 30
+            height: 45
 
             background: Rectangle {
-                implicitHeight: 40
+                implicitHeight: 50
                 color: "#161616"
                 border.width: 1
                 border.color: "#2b2b2b"
@@ -171,10 +173,31 @@ ApplicationWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Button {
+                    icon.source: "./images/play.svg"
+                    checkable: true
+
                     id: playButton
-                    text: "Reproducir/Pausa"
                     onClicked: {
-                        mainWindow.playAll()
+                        if (playButton.checked) {
+                            playAll()
+                        } else {
+                            pauseAll()
+                        }
+                    }
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+                    
+                    onCheckedChanged: {
+                        icon.source = checked ? "./images/play.svg" : "./images/pause.svg"
                     }
                 }
 

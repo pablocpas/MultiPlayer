@@ -44,12 +44,7 @@ Item {
 
     function play() {
 
-        // Hace play si esta parado y pause si está reproduciendo
-        if (mediaPlayer.playbackState === MediaPlayer.PlayingState) {
-            mediaPlayer.pause();
-        } else {
-            mediaPlayer.play();
-        }
+        mediaPlayer.play();
 
     }
 
@@ -59,6 +54,7 @@ Item {
 
     function pause() {
         mediaPlayer.pause();
+        console.log("pausaddoooo")
     }
 
     function seek(position) {
