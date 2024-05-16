@@ -113,6 +113,8 @@ Item {
                 onClicked: {
                     segmentEditor.segments = segments
                     segmentEditor.visible = true
+                    segmentEditor.videoPath = videoPlayer.ruta
+                    console.log("path: ", segmentEditor.videoPath)
                 }
             }
         }
@@ -216,6 +218,7 @@ Item {
     Connections {
         target: mainWindow
         function onPlayAll() {
+            console.log("Playing all segments")
             videoPlayer.play()
         }
         function onPlayNextSegment() {

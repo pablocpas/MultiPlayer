@@ -5,7 +5,7 @@ import QtMultimedia
 
 Item {
     property string ruta: "" // ruta para la ruta del vídeo
-    readonly property int duration: mediaPlayer.duration
+    property int duration: mediaPlayer.duration
     property int finalTime: 0 // Nuevo: tiempo final de reproducción
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
     property bool videoLoaded: false
@@ -25,6 +25,8 @@ Item {
 
         onDurationChanged: {
             finalTime = mediaPlayer.duration - 1000;
+            console.log(finalTime)
+            duration = finalTime
         }
     }
 
@@ -36,7 +38,7 @@ Item {
     function setPath(path) {
         console.log("Cambiando la ruta del vídeo a: " + path);
         //relative source
-        mediaPlayer.source = "./" + path;
+        mediaPlayer.source =  path;
         mediaPlayer.play();
     }
 
