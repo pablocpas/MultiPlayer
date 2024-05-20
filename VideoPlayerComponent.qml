@@ -1,3 +1,5 @@
+// VideoPlayerComponent.qml
+
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Window
@@ -14,6 +16,8 @@ Item {
     property string currentSegmentName: ""
     property int segmentStartTime: 0
     property int segmentEndTime: 0
+
+    signal readyToPlay()
 
     SegmentEditor {
         id: segmentEditor
@@ -56,7 +60,6 @@ Item {
                 if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
                     videoPlayer.pause()
                 }
-
             }
         }
 
@@ -119,21 +122,19 @@ Item {
                 }
             }
         }
-    
+
         Text {
-        id: segmentName
-        text: videoPlayerComponent.currentSegmentName
-        color: "white"
-        font.pixelSize: 16
-        anchors {
-            top: parent.top
-            left: parent.left
-            margins: 10
+            id: segmentName
+            text: videoPlayerComponent.currentSegmentName
+            color: "white"
+            font.pixelSize: 16
+            anchors {
+                top: parent.top
+                left: parent.left
+                margins: 10
+            }
         }
     }
-    }
-
-
 
     Dialog {
         id: youtubeDialog
@@ -174,11 +175,27 @@ Item {
     }
 
     function play() {
-        //Si es el último segmento seguir reproduciendo
-        if(currentSegmentIndex == videoPlayerComponent.segments.length - 1) {
-            videoPlayer.play()
+        // Si no hay segmentos definidos, se reproduce el video completo
+        if (videoPlayerComponent.segments.length === 0) {
+            videoPlayer.play();
+            readyToPlay();
         } else {
-            playNextSegment()
+            console.log("video player position: ", videoPlayer.position);
+            console.log("segment end time: ", segmentEndTime);
+
+            // Verificar si la posición actual del video es menor que el tiempo de finalización del segmento actual
+            if (videoPlayer.position < segmentEndTime) {
+                videoPlayer.play();
+                readyToPlay();
+            } else {
+                // Si es el último segmento, reproducir hasta el final del video
+                if (currentSegmentIndex === videoPlayerComponent.segments.length - 1) {
+                    videoPlayer.play();
+                    readyToPlay();
+                } else {
+                    videoPlayer.pause();
+                }
+            }
         }
     }
 
@@ -223,13 +240,13 @@ Item {
     Connections {
         target: mainWindow
         function onPlayAll() {
-            videoPlayer.play()
+            videoPlayerComponent.play()
         }
         function onPlayNextSegment() {
             playNextSegment()
         }
         function onPauseAll() {
-            videoPlayer.pause()
+            videoPlayerComponent.pause()
         }
     }
 
