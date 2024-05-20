@@ -174,7 +174,12 @@ Item {
     }
 
     function play() {
-        videoPlayer.play()
+        //Si es el último segmento seguir reproduciendo
+        if(currentSegmentIndex == videoPlayerComponent.segments.length - 1) {
+            videoPlayer.play()
+        } else {
+            playNextSegment()
+        }
     }
 
     function pause() {
@@ -210,7 +215,6 @@ Item {
             segmentEndTime = nextSeconds
 
             videoPlayer.seek(segmentStartTime)
-            videoPlayer.play()
         } else {
             console.log("No hay segmentos definidos.")
         }

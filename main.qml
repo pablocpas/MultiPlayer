@@ -12,7 +12,7 @@ ApplicationWindow {
     height: 720
     title: qsTr("Reproductor de Video")
     property var videoPlayers: []
-    property int numberOfPlayers: 4  // Propiedad para controlar el número de VideoPlayers
+    property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
 
     signal playAll()
     signal pauseAll()
@@ -131,6 +131,21 @@ ApplicationWindow {
                         icon.source = checked ? "./images/split4_clicked.svg" : "./images/split4.svg"
                     }
                 }
+
+                Component.onCompleted: {
+                    // Set the initial checked state based on numberOfPlayers
+                    switch (numberOfPlayers) {
+                        case 2:
+                            toolButton2.checked = true;
+                            break;
+                        case 3:
+                            toolButton3.checked = true;
+                            break;
+                        case 4:
+                            toolButton4.checked = true;
+                            break;
+                    }
+                }
             }
         }
 
@@ -173,6 +188,25 @@ ApplicationWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Button {
+                    icon.source: "./images/anterior.svg"
+                    
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+                    
+                    onClicked: {
+                        mainWindow.playNextSegment()
+                    }
+                }
+
+                Button {
                     icon.source: "./images/play.svg"
                     checkable: true
 
@@ -188,7 +222,6 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
 
-                    
                     background: Rectangle {
                         opacity: 0
                     }
@@ -197,12 +230,24 @@ ApplicationWindow {
                     icon.color: "transparent"
                     
                     onCheckedChanged: {
-                        icon.source = checked ? "./images/play.svg" : "./images/pause.svg"
+                        icon.source = checked ? "./images/pause.svg" : "./images/play.svg"
                     }
                 }
 
                 Button {
-                    text: "Siguiente Segmento"
+                    icon.source: "./images/siguiente.svg"
+                    
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
+                    
                     onClicked: {
                         mainWindow.playNextSegment()
                     }

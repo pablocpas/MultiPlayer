@@ -10,16 +10,17 @@ Item {
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
     property bool videoLoaded: false
     property int position: mediaPlayer.position
+    property real playbackRate: 1.0 // Nuevo: tasa de reproducción
 
     MediaPlayer {
         id: mediaPlayer
         source: ruta
         videoOutput: videoOut
+        playbackRate: playbackRate
 
         onPositionChanged: {
             if (mediaPlayer.position >= finalTime) {
                 mediaPlayer.position = initialTime;
-                
             }
         }
 
@@ -37,15 +38,12 @@ Item {
 
     function setPath(path) {
         console.log("Cambiando la ruta del vídeo a: " + path);
-        //relative source
-        mediaPlayer.source =  path;
+        mediaPlayer.source = path;
         mediaPlayer.play();
     }
 
     function play() {
-
         mediaPlayer.play();
-
     }
 
     function stop() {
@@ -54,7 +52,7 @@ Item {
 
     function pause() {
         mediaPlayer.pause();
-        console.log("pausaddoooo")
+        console.log("pausado")
     }
 
     function seek(position) {
@@ -69,4 +67,28 @@ Item {
         mediaPlayer.position -= 1000 / mediaPlayer.metaData.value(17);
     }
 
+    function setPlaybackRate(rate) { // Nuevo: función para cambiar la velocidad de reproducción
+        playbackRate = rate;
+    }
+
+    // Opcional: Métodos para cambiar a velocidades específicas
+    function playNormalSpeed() {
+        setPlaybackRate(1.0);
+    }
+
+    function playHalfSpeed() {
+        setPlaybackRate(0.5);
+    }
+
+    function playQuarterSpeed() {
+        setPlaybackRate(0.25);
+    }
+
+    function playOneAndHalfSpeed() {
+        setPlaybackRate(1.5);
+    }
+
+    function playDoubleSpeed() {
+        setPlaybackRate(2.0);
+    }
 }
