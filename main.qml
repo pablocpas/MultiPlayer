@@ -18,11 +18,14 @@ ApplicationWindow {
     property bool hasVideo: false // Propiedad para verificar si hay un video añadido
 
     property VideoPlayerComponent longestVideoPlayer: null
+    property double speed: 1
 
     signal playAll()
     signal pauseAll()
     signal playNextSegment()
     signal seekAll(int value)
+
+    signal speedChange(double speed)
 
     Download {
         id: progressWindow
@@ -192,6 +195,13 @@ ApplicationWindow {
                 anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
 
+
+                Rectangle {
+                    id: rectangleeeee
+                    width: 140
+
+                }
+
                 Button {
                     icon.source: "./images/anterior.svg"
                     Layout.fillHeight: true
@@ -248,6 +258,20 @@ ApplicationWindow {
                         mainWindow.playNextSegment()
                     }
                 }
+
+                ComboBox {
+                    id: speedSelector
+                    width: 100
+                    model: ["0.25x", "0.5x", "0.75x", "1x", "1.25x", "1.5x", "1.75x", "2x"]
+                    Layout.alignment: Qt.AlignCenter
+                    currentIndex: 3
+                    onActivated: {
+                        speed = currentText.split("x")[0]
+                        speedChange(speed);
+                        console.log("Speed changed to " + speed);
+                    }
+                    enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+                }
             }
         }
     }
@@ -255,7 +279,6 @@ ApplicationWindow {
     Button {
         text: "Recortar video"
         anchors.centerIn: parent
-        
     }
 
     Button {

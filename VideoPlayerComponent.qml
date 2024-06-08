@@ -258,6 +258,9 @@ Item {
         function onSeekAll(position) {
             seek(position)
         }
+        function onSpeedChange(value) {
+            videoPlayer.setPlaybackRate(value)
+        }
     }
 
     Component.onCompleted: {

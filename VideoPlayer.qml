@@ -75,7 +75,7 @@ Item {
     }
 
     function setPlaybackRate(rate) { // Nuevo: función para cambiar la velocidad de reproducción
-        playbackRate = rate;
+        mediaPlayer.playbackRate = rate;
     }
 
     // Opcional: Métodos para cambiar a velocidades específicas
