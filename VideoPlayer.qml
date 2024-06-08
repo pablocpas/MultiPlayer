@@ -20,7 +20,7 @@ Item {
 
         onPositionChanged: {
             if (mediaPlayer.position >= finalTime) {
-                mediaPlayer.position = initialTime;
+                    mediaPlayer.stop();
             }
         }
 
@@ -56,7 +56,14 @@ Item {
     }
 
     function seek(position) {
-        mediaPlayer.position = position;
+        //si la posición se va fuera del rango, se detiene el video
+        if (position < 0 || position > mediaPlayer.duration) {
+            mediaPlayer.stop();
+        }else{
+            mediaPlayer.pause()
+            mediaPlayer.position = position;
+        
+        }
     }
 
     function nextFrame() {
