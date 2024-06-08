@@ -80,6 +80,7 @@ ApplicationWindow {
                         icon.source = checked ? "./images/split2_clicked.svg" : "./images/split2.svg"
                     }
                 }
+
                 ToolButton {
                     id: toolButton3
                     icon.source: "./images/split3.svg"
@@ -101,6 +102,7 @@ ApplicationWindow {
                         icon.source = checked ? "./images/split3_clicked.svg" : "./images/split3.svg"
                     }
                 }
+
                 ToolButton {
                     id: toolButton4
                     icon.source: "./images/split4.svg"
@@ -156,9 +158,7 @@ ApplicationWindow {
                     playerIndex: index
                     Component.onCompleted: {
                         videoHandler.registerVideoPlayer(this, index)
-
                     }
-
                 }
             }
         }
@@ -175,6 +175,7 @@ ApplicationWindow {
                 border.width: 1
                 border.color: "#2b2b2b"
             }
+
             ColumnLayout {
                 width: parent.width
 
@@ -197,15 +198,19 @@ ApplicationWindow {
                 anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
 
-
                 Rectangle {
                     id: rectangleeeee
                     width: 140
-
                 }
 
                 Button {
-                    text: isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"
+                    icon.source: "./images/screen-full.svg"
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.width: 36
+                    icon.height: 36
+                    icon.color: "transparent"
                     onClicked: {
                         if (isFullScreen) {
                             mainWindow.visibility = Window.Windowed
@@ -214,8 +219,8 @@ ApplicationWindow {
                             mainWindow.visibility = Window.FullScreen
                             isFullScreen = true
                         }
-        }
-    }
+                    }
+                }
 
                 Button {
                     icon.source: "./images/anterior.svg"
