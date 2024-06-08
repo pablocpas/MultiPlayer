@@ -17,6 +17,8 @@ ApplicationWindow {
     property int maxSegmentDuration: 0 // Duración máxima del segmento
     property bool hasVideo: false // Propiedad para verificar si hay un video añadido
 
+    property bool isFullScreen: false
+
     property VideoPlayerComponent longestVideoPlayer: null
     property double speed: 1
 
@@ -201,6 +203,19 @@ ApplicationWindow {
                     width: 140
 
                 }
+
+                Button {
+                    text: isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"
+                    onClicked: {
+                        if (isFullScreen) {
+                            mainWindow.visibility = Window.Windowed
+                            isFullScreen = false
+                        } else {
+                            mainWindow.visibility = Window.FullScreen
+                            isFullScreen = true
+                        }
+        }
+    }
 
                 Button {
                     icon.source: "./images/anterior.svg"
