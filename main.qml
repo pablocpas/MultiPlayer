@@ -153,6 +153,7 @@ ApplicationWindow {
                         videoHandler.registerVideoPlayer(this, index)
 
                     }
+
                 }
             }
         }
@@ -176,13 +177,12 @@ ApplicationWindow {
                     id: progressSlider
                     from: 0
                     to: mainWindow.maxSegmentDuration
-                    value: 0
+                    value: mainWindow.longestVideoPlayer.position
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
                     enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
-                    onValueChanged: {
+                    onMoved: {
                         seekAll(progressSlider.value)
-                        console.log("Slider value:", progressSlider.value)
                     }
                 }
             }
