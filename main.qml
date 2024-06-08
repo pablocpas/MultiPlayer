@@ -16,6 +16,8 @@ ApplicationWindow {
     property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
     property int maxSegmentDuration: 0 // Duración máxima del segmento
 
+    property VideoPlayerComponent longestVideoPlayer: null
+
     signal playAll()
     signal pauseAll()
     signal playNextSegment()
@@ -23,25 +25,6 @@ ApplicationWindow {
 
     Download {
         id: progressWindow
-    }
-
-    Dialog {
-        id: segmentDialog
-        title: "Editar Segmentos del Vídeo"
-        modal: true
-        visible: false
-        standardButtons: Dialog.Ok | Dialog.Cancel
-        anchors.centerIn: parent
-
-        TextArea {
-            id: textArea
-            placeholderText: qsTr("Ingrese los segmentos en el formato 'mm:ss - Descripción' \n Ejemplo:\n00:00 - Inicio del video\n00:10 - Final del video\n00:20 - Créditos finales\n")
-        }
-
-        onAccepted: {
-            videoHandler.updateSegments(textArea.text)
-            console.log("Segmentos guardados")
-        }
     }
 
     Shortcuts {}
@@ -167,7 +150,9 @@ ApplicationWindow {
                     playerIndex: index
                     Component.onCompleted: {
                         videoHandler.registerVideoPlayer(this, index)
+
                     }
+                    
                 }
             }
         }

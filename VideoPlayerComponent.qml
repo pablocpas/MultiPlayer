@@ -17,6 +17,9 @@ Item {
     property int segmentStartTime: 0
     property int segmentEndTime: 0
 
+    property int duration: videoPlayer.duration
+    property int position: videoPlayer.position
+
     signal readyToPlay()
 
     SegmentEditor {
