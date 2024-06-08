@@ -15,6 +15,7 @@ ApplicationWindow {
     property var videoPlayers: []
     property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
     property int maxSegmentDuration: 0 // Duración máxima del segmento
+    property bool hasVideo: false // Propiedad para verificar si hay un video añadido
 
     property VideoPlayerComponent longestVideoPlayer: null
 
@@ -152,7 +153,6 @@ ApplicationWindow {
                         videoHandler.registerVideoPlayer(this, index)
 
                     }
-                    
                 }
             }
         }
@@ -179,6 +179,7 @@ ApplicationWindow {
                     value: 0
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
+                    enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
                     onValueChanged: {
                         seekAll(progressSlider.value)
                         console.log("Slider value:", progressSlider.value)
@@ -201,6 +202,7 @@ ApplicationWindow {
                     icon.width: 36
                     icon.height: 36
                     icon.color: "transparent"
+                    enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
                     onClicked: {
                         mainWindow.playNextSegment()
                     }
@@ -210,6 +212,7 @@ ApplicationWindow {
                     icon.source: "./images/play.svg"
                     checkable: true
                     id: playButton
+                    enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
                     onClicked: {
                         if (playButton.checked) {
                             playAll()
@@ -240,6 +243,7 @@ ApplicationWindow {
                     icon.width: 36
                     icon.height: 36
                     icon.color: "transparent"
+                    enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
                     onClicked: {
                         mainWindow.playNextSegment()
                     }

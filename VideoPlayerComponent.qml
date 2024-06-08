@@ -57,6 +57,7 @@ Item {
             id: videoPlayer
             anchors.fill: parent
             onDurationChanged: {
+                mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
                     mainWindow.maxSegmentDuration = videoPlayer.duration;
                 }
