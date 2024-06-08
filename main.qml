@@ -200,7 +200,7 @@ ApplicationWindow {
 
                 Rectangle {
                     id: rectangleeeee
-                    width: 140
+                    width: 90
                 }
 
                 Button {
