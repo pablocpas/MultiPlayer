@@ -54,7 +54,9 @@ Item {
             id: videoPlayer
             anchors.fill: parent
             onDurationChanged: {
-                // Handle duration change
+                if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
+                    mainWindow.maxSegmentDuration = videoPlayer.duration;
+                }
             }
             onPositionChanged: {
                 if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
@@ -247,6 +249,9 @@ Item {
         }
         function onPauseAll() {
             videoPlayerComponent.pause()
+        }
+        function onSeekAll(position) {
+            seek(position)
         }
     }
 

@@ -3,6 +3,7 @@ import QtQuick.Controls.Basic
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Layouts
+import QtQuick.Controls 6.5
 
 ApplicationWindow {
     id: mainWindow
@@ -13,11 +14,12 @@ ApplicationWindow {
     title: qsTr("Reproductor de Video")
     property var videoPlayers: []
     property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
+    property int maxSegmentDuration: 0 // Duración máxima del segmento
 
     signal playAll()
     signal pauseAll()
-
     signal playNextSegment()
+    signal seekAll(int value)
 
     Download {
         id: progressWindow
@@ -53,10 +55,10 @@ ApplicationWindow {
             x: 0
             y: 0
             Layout.fillWidth: true
-            height: 45  // Ajustar la altura de la barra de herramientas
+            height: 45
 
             background: Rectangle {
-                implicitHeight: 50  // Ajustar la altura implícita del fondo
+                implicitHeight: 50
                 color: "#161616"
                 border.width: 1
                 border.color: "#2b2b2b"
@@ -133,7 +135,6 @@ ApplicationWindow {
                 }
 
                 Component.onCompleted: {
-                    // Set the initial checked state based on numberOfPlayers
                     switch (numberOfPlayers) {
                         case 2:
                             toolButton2.checked = true;
@@ -156,14 +157,14 @@ ApplicationWindow {
             columns: 2
             rowSpacing: 10
             columnSpacing: 10
-            Layout.preferredHeight: parent.height - 60 // Ajustar según sea necesario
+            Layout.preferredHeight: parent.height - 60
 
             Repeater {
-                model: numberOfPlayers  // El modelo del Repeater es el número de VideoPlayers
+                model: numberOfPlayers
                 delegate: VideoPlayerComponent {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    playerIndex: index  // Cada componente conoce su índice
+                    playerIndex: index
                     Component.onCompleted: {
                         videoHandler.registerVideoPlayer(this, index)
                     }
@@ -175,32 +176,46 @@ ApplicationWindow {
             id: toolBar2
             width: parent.width
             Layout.fillWidth: true
-            height: 45
+            height: 90
 
             background: Rectangle {
-                implicitHeight: 50
+                implicitHeight: 90
                 color: "#161616"
                 border.width: 1
                 border.color: "#2b2b2b"
             }
+            ColumnLayout {
+                width: parent.width
+
+                Slider {
+                    id: progressSlider
+                    from: 0
+                    to: mainWindow.maxSegmentDuration
+                    value: 0
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 30
+                    onValueChanged: {
+                        seekAll(progressSlider.value)
+                        console.log("Slider value:", progressSlider.value)
+                    }
+                }
+            }
 
             RowLayout {
+                y: 36
+                anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Button {
                     icon.source: "./images/anterior.svg"
-                    
-
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-
                     background: Rectangle {
                         opacity: 0
                     }
                     icon.width: 36
                     icon.height: 36
                     icon.color: "transparent"
-                    
                     onClicked: {
                         mainWindow.playNextSegment()
                     }
@@ -209,7 +224,6 @@ ApplicationWindow {
                 Button {
                     icon.source: "./images/play.svg"
                     checkable: true
-
                     id: playButton
                     onClicked: {
                         if (playButton.checked) {
@@ -218,17 +232,14 @@ ApplicationWindow {
                             pauseAll()
                         }
                     }
-
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-
                     background: Rectangle {
                         opacity: 0
                     }
                     icon.width: 36
                     icon.height: 36
                     icon.color: "transparent"
-                    
                     onCheckedChanged: {
                         icon.source = checked ? "./images/pause.svg" : "./images/play.svg"
                     }
@@ -236,18 +247,14 @@ ApplicationWindow {
 
                 Button {
                     icon.source: "./images/siguiente.svg"
-                    
-
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-
                     background: Rectangle {
                         opacity: 0
                     }
                     icon.width: 36
                     icon.height: 36
                     icon.color: "transparent"
-                    
                     onClicked: {
                         mainWindow.playNextSegment()
                     }
@@ -259,7 +266,7 @@ ApplicationWindow {
     Button {
         text: "Recortar video"
         anchors.centerIn: parent
-        onClicked: videoHandler.trim_video(video0.propiedad, rangeSlider.first.value, rangeSlider.second.value)
+        
     }
 
     Button {
