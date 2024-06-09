@@ -26,6 +26,10 @@ Item {
         id: segmentEditor
         visible: false
         segments: videoPlayerComponent.segments
+
+        onSegmentsChanged: {
+           
+        }
     }
 
     Rectangle {
@@ -219,6 +223,7 @@ Item {
         videoPlayerComponent.segments = newSegments
         console.log("Updated segments: ", videoPlayerComponent.segments)
         videoHandler.updateSegments(playerIndex, newSegments)
+        mainWindow.updateMaxSegmentDuration() // Actualiza la duración del segmento más largo
     }
 
     function playNextSegment() {

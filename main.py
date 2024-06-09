@@ -1,20 +1,20 @@
 import sys
 import re
+import os
+import urllib.parse
+from datetime import datetime
 from PySide6.QtCore import QObject, Signal, Slot, QThread, QTimer
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
 import yt_dlp
 from moviepy.editor import VideoFileClip, clips_array
 import numpy as np
-import urllib.parse
-import os
-from datetime import datetime
 
 
 class VideoHandler(QObject):
-    finished = Signal()  # Definir esta señal en VideoHandler también
-    progressUpdated = Signal(int)  # Añadir esta línea
-    
+    finished = Signal()
+    progressUpdated = Signal(int)
+
     def __init__(self):
         super().__init__()
         self.thread = None
@@ -25,15 +25,13 @@ class VideoHandler(QObject):
     @Slot(QObject, int)
     def registerVideoPlayer(self, video_player, player_id):
         self._video_players[player_id] = video_player
-        self.segments[player_id] = []  # Initialize an empty list for segments for this player
+        self.segments[player_id] = []
         print(f"Video player {player_id} registered")
 
     @Slot(str, str, int)
     def download_youtube_video(self, url, output_path, video_id):
-        # Generar un nombre de archivo único con timestamp
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         filename = f"video_{video_id}_{timestamp}.mp4"
-        
         self.thread = QThread()
         self.worker = DownloadWorker(url, output_path, filename)
         self.worker.moveToThread(self.thread)
@@ -45,81 +43,52 @@ class VideoHandler(QObject):
 
     @Slot()
     def on_download_finished(self, video_id, path):
-        self._video_players[video_id].setPath(path)
-        self._video_players[video_id].pause()
-        self._video_players[video_id].seek(0)
-        self.finished.emit()
+        if path:
+            self._video_players[video_id].setPath(path)
+            self._video_players[video_id].pause()
+            self._video_players[video_id].seek(0)
+            self.finished.emit()
 
     @Slot(int)
     def update_progress(self, value):
-        # Emite una señal propia que pueda ser manejada por QML
-        print("Progress updating to: ", value)  # Diagnóstico: Imprimir en consola de Python
+        print("Progress updating to:", value)
         self.progressUpdated.emit(value)
 
     @Slot(str, float, float)
     def trim_video(self, filepath, start, end):
-        # Convertir la URL del archivo a una ruta de archivo local
         filepath = urllib.parse.unquote(filepath.replace("file:///", ""))
+        start, end = float(start), float(end)
 
-        # Asegúrate de que los tiempos están en segundos y son flotantes
-        start = float(start)
-        end = float(end)
-
-        print(f"Recortando el vídeo {filepath} desde {start} segundos hasta {end} segundos.")
-        
         try:
-            # Cargar el vídeo
             clip = VideoFileClip(filepath)
-            
-            # Recortar el clip al rango especificado
             trimmed_clip = clip.subclip(start, end)
-            
-            # Definir el nombre del archivo de salida
             output_filename = f"trimmed_{start}_{end}.mp4"
-            
-            # Guardar el vídeo recortado
             trimmed_clip.write_videofile(output_filename, codec="libx264")
-
             print(f"Vídeo recortado guardado como {output_filename}")
-
         except Exception as e:
             print(f"Error al procesar el video: {e}")
 
     def resize_clip(self, clip, height):
-        # Esta función ajusta el tamaño de los frames usando numpy
         def resize_frame(frame):
             from PIL import Image
-            # Convertir el array de numpy a una imagen PIL
             img = Image.fromarray(frame)
-            # Calcular el nuevo ancho manteniendo la proporción
             width = int(img.width * height / img.height)
-            # Redimensionar la imagen y volver a convertirla a array
-            resized_img = np.array(img.resize((width, height), Image.LANCZOS))
-            return resized_img
+            return np.array(img.resize((width, height), Image.LANCZOS))
         
         return clip.fl_image(resize_frame)
 
     @Slot(str, str)
     def fusion_video(self, filepath1, filepath2):
-        # Convertir la URL del archivo a una ruta de archivo local
         filepath1 = urllib.parse.unquote(filepath1.replace("file:///", ""))
         filepath2 = urllib.parse.unquote(filepath2.replace("file:///", ""))
 
-        print(f"Fusionando los vídeos {filepath1} y {filepath2}.")
-
         try:
-            # Cargar los vídeos
             clip1 = VideoFileClip(filepath1)
             clip2 = VideoFileClip(filepath2)
-
             clip2_resized = self.resize_clip(clip2, clip1.h)
-
             final_clip = clips_array([[clip1, clip2_resized]])
-            
             final_clip.write_videofile("resultado.mp4", codec='libx264')
-
             print(f"Vídeos fusionados guardados como resultado.mp4")
-
         except Exception as e:
             print(f"Error al procesar los vídeos: {e}")
 
@@ -132,7 +101,6 @@ class VideoHandler(QObject):
     def parse_segments(self, segments):
         parsed_segments = []
         for segment in segments:
-            # Asegúrate de que segment es un QObject y tiene las propiedades esperadas
             if isinstance(segment, QObject) and hasattr(segment, 'property'):
                 time_str = segment.property('timestamp')
                 description = segment.property('description')
@@ -143,7 +111,6 @@ class VideoHandler(QObject):
             else:
                 print("Invalid segment object")
         return parsed_segments
-
 
     def convert_time_to_seconds(self, time_str):
         minutes, seconds = map(int, time_str.split(':'))
@@ -163,7 +130,7 @@ class VideoHandler(QObject):
         if player_id in self._video_players and player_id in self.segments:
             segments = self.segments[player_id]
             if segments:
-                start, description = segments.pop(0)  # Get the first segment
+                start, description = segments.pop(0)
                 video_player = self._video_players[player_id]
                 self.play_segment(video_player, start)
             else:
@@ -174,17 +141,18 @@ class VideoHandler(QObject):
     def play_segment(self, video_player, start):
         video_player.seek(start)
         video_player.play()
-        QTimer.singleShot(5000, video_player.pause)  # Pausar después de 5 segundos como ejemplo
+        QTimer.singleShot(5000, video_player.pause)
+
 
 class DownloadWorker(QObject):
-    finished = Signal(str)  # Emite la ruta completa del archivo descargado
-    progress = Signal(int)  # Emite el progreso de la descarga
+    finished = Signal(str)
+    progress = Signal(int)
 
     def __init__(self, url, output_path, filename):
         super().__init__()
         self.url = url
-        self.output_path = output_path  # Definir output_path como un atributo
-        self.filename = filename  # Definir filename como un atributo
+        self.output_path = output_path
+        self.filename = filename
 
     @Slot()
     def run(self):
@@ -193,7 +161,7 @@ class DownloadWorker(QObject):
             'outtmpl': os.path.join(self.output_path, self.filename),
             'progress_hooks': [self.progress_hook],
             'noprogress': False,
-            'nocolor': True  # Desactivar color
+            'nocolor': True
         }
 
         try:
@@ -208,38 +176,22 @@ class DownloadWorker(QObject):
 
     def progress_hook(self, d):
         if d['status'] == 'downloading':
-            percentage_str = d['_percent_str'].strip()
-            # Limpiar caracteres ANSI del string del porcentaje
-            percentage_str = re.sub(r'\x1b\[[0-9;]*m', '', percentage_str)
+            percentage_str = re.sub(r'\x1b\[[0-9;]*m', '', d['_percent_str'].strip())
             try:
-                print(f"Clean percentage string: {percentage_str}")  # Diagnóstico: Imprimir el string limpio del porcentaje
                 percentage = float(percentage_str.replace('%', ''))
-                print(f"Calculated percentage: {percentage}")  # Diagnóstico: Imprimir el porcentaje calculado
                 self.progress.emit(int(percentage))
             except ValueError as e:
-                print(f"ValueError: {e}")  # Diagnóstico: Imprimir cualquier error de conversión
+                print(f"ValueError: {e}")
         elif d['status'] == 'finished':
             self.finished.emit(d['filename'])
 
 
 if __name__ == "__main__":
-    # Crea una aplicación GUI
     app = QGuiApplication(sys.argv)
-
-    # Crea un motor QML
     engine = QQmlApplicationEngine()
-
-    # Crea una instancia de VideoHandler
     video_handler = VideoHandler()
-
-    # Exponer la instancia de VideoHandler al contexto de QML
     engine.rootContext().setContextProperty("videoHandler", video_handler)
-
-    # Carga el archivo QML
     engine.load('main.qml')
-
-    # Verifica si la carga fue exitosa
     if not engine.rootObjects():
         sys.exit(-1)
-
     sys.exit(app.exec())

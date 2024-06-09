@@ -1,3 +1,5 @@
+//BottomBar.qml
+
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -30,6 +32,7 @@ ToolBar {
                 mainWindow.seekAll(progressSlider.value)
             }
         }
+
     }
 
     RowLayout {

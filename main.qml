@@ -1,3 +1,5 @@
+//main.qml
+
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Window
@@ -16,6 +18,8 @@ ApplicationWindow {
     property int numberOfPlayers: 2  // Propiedad para controlar el número de VideoPlayers
     property int maxSegmentDuration: 0 // Duración máxima del segmento
     property bool hasVideo: false // Propiedad para verificar si hay un video añadido
+
+    property int currentSegment: 0
 
     property bool isFullScreen: false
 
