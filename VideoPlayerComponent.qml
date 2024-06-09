@@ -198,6 +198,7 @@ Item {
 
         console.log("Segment names: ", segmentNames)
 
+
     }
 
     function playNextSegment() {
@@ -218,6 +219,8 @@ Item {
             videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
+
+
     }
 
     
@@ -253,10 +256,6 @@ Item {
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)
         }
-    }
-
-    Component.onCompleted: {
-        console.log("Component completed, initial segments: ", videoPlayerComponent.segments)
     }
 
 }

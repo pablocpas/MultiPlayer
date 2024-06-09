@@ -66,6 +66,11 @@ ToolBar {
             background: Rectangle {
                 opacity: 0
             }
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: "Anterior segmento"
+
             icon.width: 36
             icon.height: 36
             icon.color: "transparent"
@@ -107,6 +112,10 @@ ToolBar {
             background: Rectangle {
                 opacity: 0
             }
+            ToolTip.text: "Siguiente segmento"
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
             icon.width: 36
             icon.height: 36
             icon.color: "transparent"
