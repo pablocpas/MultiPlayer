@@ -12,10 +12,18 @@ Item {
     property bool videoLoaded: false
     property int playerIndex: 0
     property var segments: []
+
     property int currentSegmentIndex: -1
     property string currentSegmentName: ""
-    property int segmentStartTime: 0
-    property int segmentEndTime: 0
+    
+    property var segmentStartTime: []
+    property var segmentEndTime: []
+
+    property var timestamps: []
+
+    property var segmentNames: []
+
+
 
     property int duration: videoPlayer.duration
     property int position: videoPlayer.position
@@ -26,10 +34,6 @@ Item {
         id: segmentEditor
         visible: false
         segments: videoPlayerComponent.segments
-
-        onSegmentsChanged: {
-           
-        }
     }
 
     Rectangle {
@@ -185,68 +189,47 @@ Item {
         videoLoaded = true
     }
 
-    function play() {
-        // Si no hay segmentos definidos, se reproduce el video completo
-        if (videoPlayerComponent.segments.length === 0) {
-            videoPlayer.play();
-            readyToPlay();
-        } else {
-            console.log("video player position: ", videoPlayer.position);
-            console.log("segment end time: ", segmentEndTime);
+    function setSegments(segments) {
+        timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
 
-            // Verificar si la posición actual del video es menor que el tiempo de finalización del segmento actual
-            if (videoPlayer.position < segmentEndTime) {
-                videoPlayer.play();
-                readyToPlay();
-            } else {
-                // Si es el último segmento, reproducir hasta el final del video
-                if (currentSegmentIndex === videoPlayerComponent.segments.length - 1) {
-                    videoPlayer.play();
-                    readyToPlay();
-                } else {
-                    videoPlayer.pause();
-                }
-            }
-        }
-    }
+        console.log("Array: ", timestamps)
 
-    function pause() {
-        videoPlayer.pause()
-    }
+        segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
 
-    function seek(position) {
-        videoPlayer.seek(position)
-    }
+        console.log("Segment names: ", segmentNames)
 
-    function handleSegmentsUpdated(newSegments) {
-        console.log("handleSegmentsUpdated called with: ", newSegments)
-        videoPlayerComponent.segments = newSegments
-        console.log("Updated segments: ", videoPlayerComponent.segments)
-        videoHandler.updateSegments(playerIndex, newSegments)
-        mainWindow.updateMaxSegmentDuration() // Actualiza la duración del segmento más largo
     }
 
     function playNextSegment() {
-        console.log("Playing next segment, current segments length: ", videoPlayerComponent.segments.length)
-        if (videoPlayerComponent.segments.length > 0) {
-            currentSegmentIndex = (currentSegmentIndex + 1) % videoPlayerComponent.segments.length
-            let segment = videoPlayerComponent.segments[currentSegmentIndex]
-            let timestamp = segment.timestamp.split(":")
-            let seconds = parseInt(timestamp[0]) * 60 + parseInt(timestamp[1]) * 1000
-            currentSegmentName = segment.description
-            segmentStartTime = seconds
-            console.log("Playing segment: ", segment)
-
-            let nextSegment = videoPlayerComponent.segments[(currentSegmentIndex + 1) % videoPlayerComponent.segments.length]
-            let nextTimestamp = nextSegment.timestamp.split(":")
-            let nextSeconds = parseInt(nextTimestamp[0]) * 60 + parseInt(nextTimestamp[1]) * 1000
-            console.log("Next segment starts at: ", nextSeconds)
-            segmentEndTime = nextSeconds
-
-            videoPlayer.seek(segmentStartTime)
-        } else {
-            console.log("No hay segmentos definidos.")
+        if (currentSegmentIndex < timestamps.length - 1) {
+            currentSegmentIndex++
+            console.log("Playing segment: ", currentSegmentIndex)
+            videoPlayer.seek(timestamps[currentSegmentIndex]*1000)
+            videoPlayer.play()
+            currentSegmentName = segmentNames[currentSegmentIndex]
         }
+    }
+
+    function playPreviousSegment() {
+        if (currentSegmentIndex > 0) {
+            currentSegmentIndex--
+            console.log("Playing segment: ", currentSegmentIndex)
+            videoPlayer.seek(timestamps[currentSegmentIndex]*1000)
+            videoPlayer.play()
+            currentSegmentName = segmentNames[currentSegmentIndex]
+        }
+    }
+
+    
+
+    function play() {
+        videoPlayer.play()
+    }
+    function pause() {
+        videoPlayer.pause()
+    }
+    function seek(position) {
+        videoPlayer.seek(position)
     }
 
     Connections {
@@ -257,11 +240,15 @@ Item {
         function onPlayNextSegment() {
             playNextSegment()
         }
+
+        function onPlayPreviousSegment() {
+            playPreviousSegment()
+        }
         function onPauseAll() {
-            videoPlayerComponent.pause()
+            videoPlayer.pause()
         }
         function onSeekAll(position) {
-            seek(position)
+            videoPlayer.seek(position)
         }
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)
@@ -269,7 +256,7 @@ Item {
     }
 
     Component.onCompleted: {
-        segmentEditor.segmentsUpdated.connect(handleSegmentsUpdated)
         console.log("Component completed, initial segments: ", videoPlayerComponent.segments)
     }
+
 }

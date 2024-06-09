@@ -71,7 +71,7 @@ ToolBar {
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
-                mainWindow.playNextSegment()
+                mainWindow.playPreviousSegment()
             }
         }
 

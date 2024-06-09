@@ -11,13 +11,10 @@ Window {
     height: 600
     title: "Editar Segmentos"
     
-
     visible: false
 
-    property var segments: []
+    property var segments
     property string videoPath: ""  // Ruta del vídeo
-
-    signal segmentsUpdated(var segments)
 
     RowLayout {
         anchors.fill: parent
@@ -120,12 +117,6 @@ Window {
     }
 
     Component.onCompleted: {
-        segmentListModel.clear()
-        if (segments) {
-            for (let i = 0; i < segments.length; i++) {
-                segmentListModel.append(segments[i])
-            }
-        }
         videoPlayer.setPath(videoPath)
     }
 
@@ -141,8 +132,7 @@ Window {
         for (let i = 0; i < segmentListModel.count; i++) {
             segmentsArray.push(segmentListModel.get(i))
         }
-        segmentEditor.segments = segmentsArray
-        segmentEditor.segmentsUpdated(segmentsArray)
+        videoPlayerComponent.setSegments(segmentsArray)
         segmentEditor.visible = false
     }
 }
