@@ -18,6 +18,11 @@ Item {
         videoOutput: videoOut
         playbackRate: playbackRate
 
+        audioOutput: AudioOutput {
+            id: audio
+
+        }
+
         onPositionChanged: {
             if (mediaPlayer.position >= finalTime) {
                     mediaPlayer.stop();
