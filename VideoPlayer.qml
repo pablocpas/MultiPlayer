@@ -24,10 +24,6 @@ Item {
             id: audio
             volume: volumen
 
-            onVolumeChanged: {
-                console.log("Volumen cambiado a: " + volume);
-            }
-
         }
 
         onPositionChanged: {
