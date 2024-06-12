@@ -23,8 +23,6 @@ Item {
 
     property var segmentNames: []
 
-
-
     property int duration: videoPlayer.duration
     property int position: videoPlayer.position
 
@@ -34,6 +32,11 @@ Item {
         id: segmentEditor
         visible: false
         segments: videoPlayerComponent.segments
+    }
+
+    TimeStampEditor {
+        id: timeStampEditor
+        visible: false
     }
 
     Rectangle {
@@ -76,6 +79,7 @@ Item {
                     videoPlayer.pause()
                 }
             }
+            volumen: 1.0  // Inicialmente el volumen está al máximo
         }
 
         Image {
@@ -136,6 +140,8 @@ Item {
                     console.log("path: ", segmentEditor.videoPath)
                 }
             }
+            
+
         }
 
         Text {
@@ -149,6 +155,29 @@ Item {
                 margins: 10
             }
         }
+
+                    // Botón de mute
+            Button {
+                id: muteButton
+                icon.source: "./images/mute.svg" // Imagen de mute (silencio)
+                icon.width: 36
+                icon.height: 36
+                icon.color: "transparent"
+                
+                checkable: true
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                background: Rectangle {
+                    opacity: 0
+                }
+
+                onCheckedChanged: {
+                    videoPlayer.volumen = checked ? 0 : 1  // Silencia o activa el sonido
+                    console.log("video player volume: ", videoPlayer.volumen)
+                    icon.source = checked ? "./images/unmute.svg" : "./images/mute.svg" // Cambia el ícono según el estado
+                }
+            }
     }
 
     Dialog {
@@ -197,8 +226,6 @@ Item {
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
 
         console.log("Segment names: ", segmentNames)
-
-
     }
 
     function playNextSegment() {
@@ -219,11 +246,7 @@ Item {
             videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
-
-
     }
-
-    
 
     function play() {
         videoPlayer.play()
@@ -243,7 +266,6 @@ Item {
         function onPlayNextSegment() {
             playNextSegment()
         }
-
         function onPlayPreviousSegment() {
             playPreviousSegment()
         }
@@ -257,5 +279,4 @@ Item {
             videoPlayer.setPlaybackRate(value)
         }
     }
-
 }

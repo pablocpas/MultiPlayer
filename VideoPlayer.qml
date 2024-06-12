@@ -12,6 +12,8 @@ Item {
     property int position: mediaPlayer.position
     property real playbackRate: 1.0 // Nuevo: tasa de reproducción
 
+    property real volumen: 1
+
     MediaPlayer {
         id: mediaPlayer
         source: ruta
@@ -20,6 +22,11 @@ Item {
 
         audioOutput: AudioOutput {
             id: audio
+            volume: volumen
+
+            onVolumeChanged: {
+                console.log("Volumen cambiado a: " + volume);
+            }
 
         }
 
@@ -34,6 +41,8 @@ Item {
             console.log(finalTime)
             duration = finalTime
         }
+
+        
     }
 
     VideoOutput {
