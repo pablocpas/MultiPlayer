@@ -37,6 +37,8 @@ Item {
     TimeStampEditor {
         id: timeStampEditor
         visible: false
+        videoPath: videoSource
+        texto: "Editar segmentos del video " + (videoPlayerComponent.playerIndex + 1)
     }
 
     Rectangle {
@@ -277,6 +279,19 @@ Item {
         }
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)
+        }
+    }
+
+
+        Connections {
+        target: mainWindow
+        
+        function onSegmentsLoaded(segments) {
+            console.log("estoy en timestampEditor y recibi los segmentos")
+            console.log(segments)
+
+            timeStampEditor.updateSegments(segments)
+            timeStampEditor.visible = true
         }
     }
 }

@@ -24,6 +24,8 @@ ApplicationWindow {
     property VideoPlayerComponent longestVideoPlayer: null
     property double speed: 1
 
+    signal segmentsLoaded(var segments)
+
     signal playAll()
     signal pauseAll()
     signal playNextSegment()
@@ -31,8 +33,14 @@ ApplicationWindow {
     signal seekAll(int value)
     signal speedChange(double speed)
 
+    property bool segmentEditorVisible: false
+
     Download {
         id: progressWindow
+    }
+
+    SegmentEditor {
+        id: segmentEditor
     }
 
     Shortcuts {}
@@ -77,13 +85,30 @@ ApplicationWindow {
 
     Button {
         text: "Recortar video"
+        visible: false
         anchors.centerIn: parent
     }
 
     Button {
         text: "Fusion"
+        visible: false
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 46
         anchors.horizontalCenterOffset: -1
     }
+
+    function setVisible(visible) {
+        segmentEditor.visible = visible
+    }
+
+    Connections {
+        target: segmentEditor
+        function onSegmentsUpdated(segments) {
+            console.log("me llegoooo")
+
+            segmentsLoaded(segments)
+            console.log(segments)
+        }
+    }
+
 }

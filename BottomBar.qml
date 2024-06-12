@@ -1,4 +1,4 @@
-//BottomBar.qml
+// BottomBar.qml
 
 import QtQuick 6.5
 import QtQuick.Controls.Basic
@@ -137,6 +137,23 @@ ToolBar {
                 console.log("Speed changed to " + mainWindow.speed)
             }
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+        }
+
+        Button {
+            text: "Gestionar segmentos"            
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            background: Rectangle {
+                opacity: 0
+            }
+
+            icon.width: 36
+            icon.height: 36
+            icon.color: "transparent"
+            onClicked: {
+                console.log("Gestionar segmentos")
+                mainWindow.setVisible(true)
+            }
         }
     }
 }
