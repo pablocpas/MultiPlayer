@@ -15,7 +15,11 @@ Item {
 
     property int currentSegmentIndex: -1
     property string currentSegmentName: ""
-    
+
+    property string videoName: "Video " + (playerIndex + 1)
+
+    property bool tag_editable: false
+
     property var segmentStartTime: []
     property var segmentEndTime: []
 
@@ -72,8 +76,8 @@ Item {
             onDurationChanged: {
                 mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
-                    mainWindow.maxSegmentDuration = videoPlayer.duration;
-                    mainWindow.longestVideoPlayer = videoPlayerComponent;
+                    mainWindow.maxSegmentDuration = videoPlayer.duration
+                    mainWindow.longestVideoPlayer = videoPlayerComponent
                 }
             }
             onPositionChanged: {
@@ -142,7 +146,9 @@ Item {
                     console.log("path: ", segmentEditor.videoPath)
                 }
             }
-            
+        }
+
+        Row{
 
         }
 
@@ -158,30 +164,76 @@ Item {
             }
         }
 
-                    // Botón de mute
-            Button {
-                
-                id: muteButton
-                icon.source: "./images/mute.svg" // Imagen de mute (silencio)
-                icon.width: 36
-                icon.height: 36
-                icon.color: "transparent"
-                
-                checkable: true
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+        // Botón de mute
+        Button {
+            id: muteButton
+            icon.source: "./images/mute.svg" // Imagen de mute (silencio)
+            icon.width: 36
+            icon.height: 36
+            icon.color: "transparent"
+            checkable: true
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
 
-                enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            background: Rectangle {
+                opacity: 0
+            }
 
+            onCheckedChanged: {
+                videoPlayer.volumen = checked ? 0 : 1  // Silencia o activa el sonido
+                console.log("video player volume: ", videoPlayer.volumen)
+                icon.source = checked ? "./images/unmute.svg" : "./images/mute.svg" // Cambia el ícono según el estado
+            }
+        }
 
-                background: Rectangle {
-                    opacity: 0
+        Row {
+                id: inputRow
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.bottomMargin: 10
+                spacing: 5
+
+                TextEdit {
+                    id: tedit_videoName
+                    text: "Video " + (playerIndex + 1)
+                    readOnly: true
+                    color: "#c5c5c5"
+                    font.pixelSize: 16
+                    wrapMode: TextEdit.NoWrap
+                    onTextChanged: {
+                        // Reemplaza los saltos de línea con espacios
+                        tedit_videoName.text = tedit_videoName.text.replace(/\n/g, " ");
+                    }
                 }
 
-                onCheckedChanged: {
-                    videoPlayer.volumen = checked ? 0 : 1  // Silencia o activa el sonido
-                    console.log("video player volume: ", videoPlayer.volumen)
-                    icon.source = checked ? "./images/unmute.svg" : "./images/mute.svg" // Cambia el ícono según el estado
+                Button {
+                    id: button
+                    icon.source: "./images/write.svg"
+                    icon.width: 18
+                    icon.height: 18
+                    y: tedit_videoName.y -3
+                    background: Rectangle {
+                        opacity: 0
+                    }
+                    icon.color: "transparent"
+                    onClicked: {
+                        if (tag_editable) {
+                            icon.source = "./images/write.svg"
+                            tedit_videoName.readOnly = true
+                            tedit_videoName.focus = false
+                            tag_editable = false
+                            videoName = tedit_videoName.text
+                            // Emitir señal para actualizar el nombre del video
+                        } else {
+                            icon.source = "./images/save.svg"
+                            tedit_videoName.readOnly = false
+                            tedit_videoName.selectAll()
+                            tedit_videoName.focus = true
+                            tag_editable = true
+                        }
+                    }
                 }
             }
     }
@@ -210,7 +262,6 @@ Item {
         id: fileDialog
         title: "Seleccione un vídeo"
         nameFilters: ["Video files (*.mp4 *.avi *.mov)"]
-
         onAccepted: {
             videoPlayer.ruta = selectedFile
             videoPlayer.pause()
@@ -226,11 +277,8 @@ Item {
 
     function setSegments(segments) {
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
-
         console.log("Array: ", timestamps)
-
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
-
         console.log("Segment names: ", segmentNames)
     }
 
@@ -238,7 +286,7 @@ Item {
         if (currentSegmentIndex < timestamps.length - 1) {
             currentSegmentIndex++
             console.log("Playing segment: ", currentSegmentIndex)
-            videoPlayer.seek(timestamps[currentSegmentIndex]*1000)
+            videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
             videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
@@ -248,7 +296,7 @@ Item {
         if (currentSegmentIndex > 0) {
             currentSegmentIndex--
             console.log("Playing segment: ", currentSegmentIndex)
-            videoPlayer.seek(timestamps[currentSegmentIndex]*1000)
+            videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
             videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
@@ -257,9 +305,11 @@ Item {
     function play() {
         videoPlayer.play()
     }
+
     function pause() {
         videoPlayer.pause()
     }
+
     function seek(position) {
         videoPlayer.seek(position)
     }
@@ -286,14 +336,11 @@ Item {
         }
     }
 
-
-        Connections {
+    Connections {
         target: mainWindow
-        
         function onSegmentsLoaded(segments) {
             console.log("estoy en timestampEditor y recibi los segmentos")
             console.log(segments)
-
             timeStampEditor.updateSegments(segments)
             timeStampEditor.visible = true
         }
