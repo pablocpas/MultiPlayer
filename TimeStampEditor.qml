@@ -94,7 +94,13 @@ Window {
 
                     Button {
                         text: "Copiar posición del vídeo"
-                        onClicked: model.timestamp = incrustado.position
+                        onClicked: {
+                            let time = incrustado.position;
+                            let minutes = Math.floor(time / 60000);
+                            let seconds = Math.floor((time % 60000) / 1000);
+                            let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                            segmentListModel.setProperty(index, "timestamp", formattedTime);
+                        }
                     }
                 }
             }
