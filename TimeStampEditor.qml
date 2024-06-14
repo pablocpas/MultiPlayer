@@ -1,11 +1,9 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import QtMultimedia
-
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 Window {
-    id: timestampEditor
-    width: 800
+    id: window
+    width: 850
     height: 600
     title: "Editar Timestamps de Segmentos"
 
@@ -16,75 +14,58 @@ Window {
     property string texto: ""
     property string path: ""
 
-    ColumnLayout {
-        height: parent.height
-        width: parent.width
-        spacing: 10
 
-        Text {
-            text: texto
-            font.pixelSize: 20
-            Layout.alignment: Qt.AlignHCenter
-        }
+    RowLayout {
+        anchors.fill: parent
+        anchors.leftMargin: 30
+        anchors.rightMargin: 30
+        anchors.topMargin: 30
+        anchors.bottomMargin: 30
+        spacing: 90
 
-        VideoPlayer {
-            id: incrustado
-            height: timestampEditor.height / 2
-            width: timestampEditor.height / 2
-            ruta: videoPath
-            Layout.alignment: Qt.AlignCenter
-        }
+        // Primera columna: ListView
+        ColumnLayout {
+            width: parent.width / 2
 
-        Slider {
-            id: progressSlider
-            from: 0
-            to: incrustado.duration
-            value: incrustado.position
-            onMoved: incrustado.seek(progressSlider.value)
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            ListView {
+                id: segmentListView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: 300
+                model: ListModel {
+                    id: segmentListModel
+                    ListElement { name: "Segment 1"; timestamp: "00:00" }
+                    ListElement { name: "Segment 2"; timestamp: "00:00" }
+                    // Agrega más elementos según sea necesario
+                }
+                delegate: Item {
+                    width: parent.width
+                    height: 40
 
-            Layout.preferredWidth: incrustado.width
-        }
+                    RowLayout {
+                        spacing: 10
+                        width: parent.width
 
-        ListView {
-            id: segmentListView
-            Layout.preferredWidth: incrustado.width / 2
-            Layout.preferredHeight: timestampEditor.height / 4
+                        Text {
+                            text: (index + 1) + "."
+                            font.pixelSize: 16
+                            width: 30
+                            Layout.alignment: Qt.AlignVCenter
+                        }
 
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-            model: ListModel {
-                id: segmentListModel
-            }
-            delegate: Item {
-                height: 40
-                width: timestampEditor.width / 2
-
-                RowLayout {
-                    spacing: 10
-                    Layout.fillWidth: true
-
-                    Text {
-                        text: (index + 1) + "."
-                        font.pixelSize: 16
-                        width: 30
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-
-                    TextField {
-                        id: nameField
-                        text: model.name
-                        readOnly: true
-                        Layout.fillWidth: true
-                    }
+                        TextField {
+                            id: nameField
+                            text: model.name
+                            readOnly: true
+                            Layout.fillWidth: true
+                        }
 
                         TextField {
                             id: timestampField
                             text: model.timestamp
-                            Layout.fillWidth: true
-                            inputMask: "99:99"  // Input mask to ensure format 00:00
-                            validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]$/ }  // Validator to enforce proper time format
-
+                            Layout.preferredWidth: 60
+                            inputMask: "99:99"  // Máscara de entrada para asegurar el formato 00:00
+                            validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]$/ }  // Validador para reforzar el formato de tiempo correcto
                             onTextChanged: {
                                 if (timestampField.text !== model.timestamp) {
                                     segmentListModel.setProperty(index, "timestamp", timestampField.text)
@@ -92,32 +73,54 @@ Window {
                             }
                         }
 
-                    Button {
-                        text: "Copiar posición del vídeo"
-                        onClicked: {
-                            let time = incrustado.position;
-                            let minutes = Math.floor(time / 60000);
-                            let seconds = Math.floor((time % 60000) / 1000);
-                            let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-                            segmentListModel.setProperty(index, "timestamp", formattedTime);
+                        Button {
+                            text: "Copiar"
+                            onClicked: {
+                                let time = incrustado.position;
+                                let minutes = Math.floor(time / 60000);
+                                let seconds = Math.floor((time % 60000) / 1000);
+                                let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                                segmentListModel.setProperty(index, "timestamp", formattedTime);
+                            }
                         }
                     }
                 }
             }
         }
 
-        RowLayout {
-            Layout.alignment: Qt.AlignHCenter
-            Button {
-                text: "Guardar"
-                onClicked: saveTimestamps()
+        // Segunda columna: Rectángulo y Slider
+        ColumnLayout {
+            width: parent.width / 2
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            Layout.fillWidth: true
+
+            VideoPlayer {
+                id: incrustado
+                height: 380
+                width: 200
+                ruta: videoPath
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
-            Button {
-                text: "Cancelar"
-                onClicked: timestampEditor.visible = false
+
+            Slider {
+                
+                id: progressSlider
+                width: 400
+                Layout.alignment: Qt.AlignHCenter
+
+                Layout.preferredWidth: 380
+                from: 0
+                to: incrustado.duration
+                value: incrustado.position
+                onMoved: incrustado.seek(progressSlider.value)
+
             }
         }
     }
+
+    // Simulación del incrustado con posición de vídeo para el ejemplo
+    property int incrustado: { position: 0 }
 
     function saveTimestamps() {
         let segmentsArray = []
@@ -138,5 +141,4 @@ Window {
             segmentListModel.setProperty(i, "timestamp", "00:00")
         }
     }
-
 }
