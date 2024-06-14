@@ -96,5 +96,8 @@ Window {
         segmentEditor.segments = segmentsArray
         segmentEditor.segmentsUpdated(segmentsArray)  // Emitir la señal con los segmentos actualizados
         segmentEditor.visible = false
+
+        mainWindow.hasSegments = true
+
     }
 }

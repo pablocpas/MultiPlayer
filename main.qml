@@ -19,6 +19,7 @@ ApplicationWindow {
     property int numberOfPlayers: 2
     property int maxSegmentDuration: 0
     property bool hasVideo: false
+    property bool hasSegments: false
     property int currentSegment: 0
     property bool isFullScreen: false
     property VideoPlayerComponent longestVideoPlayer: null

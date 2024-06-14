@@ -40,6 +40,13 @@ ToolBar {
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
 
+
+        Text {
+            id: currentSegment
+            text: mainWindow.hasSegments ? "Segmento: " + mainWindow.currentSegment : "Segmento: No establecidos"
+            color: mainWindow.hasSegments ? "green" : "red"
+        }
+
         Button {
             icon.source: "./images/screen-full.svg"
             background: Rectangle {
