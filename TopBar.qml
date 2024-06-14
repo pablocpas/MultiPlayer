@@ -33,7 +33,10 @@ ToolBar {
                     ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onClicked: numberOfPlayers = 2
+                    onClicked: {
+                        numberOfPlayers = 2
+                        mainWindow.hasVideo = false
+                    }
 
                     background: Rectangle {
                         opacity: 0
@@ -58,7 +61,11 @@ ToolBar {
                     ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onClicked: numberOfPlayers = 3
+                    onClicked: {
+                        numberOfPlayers = 3
+                        mainWindow.hasVideo = false
+                    }
+
 
                     background: Rectangle {
                         opacity: 0
@@ -82,7 +89,11 @@ ToolBar {
                     ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    onClicked: numberOfPlayers = 4
+                    onClicked: {
+                        numberOfPlayers = 4
+                        mainWindow.hasVideo = false
+                    }
+
 
                     background: Rectangle {
                         opacity: 0

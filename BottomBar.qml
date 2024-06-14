@@ -1,12 +1,12 @@
 // BottomBar.qml
 
-import QtQuick 6.5
+import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
 ToolBar {
     id: bottomBar
-    width: parent.width
+    width: 800
     Layout.fillWidth: true
     height: 90
 
@@ -35,18 +35,18 @@ ToolBar {
 
     }
 
-    RowLayout {
-        y: 36
-        anchors.horizontalCenterOffset: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-
-
+    RowLayout{
+        y: 53
+        x: 35
         Text {
             id: currentSegment
-            text: mainWindow.hasSegments ? "Segmento: " + mainWindow.currentSegment : "Segmento: No establecidos"
-            color: mainWindow.hasSegments ? "green" : "red"
+            text: "segmentos actual"
         }
+    }
 
+    RowLayout{
+        x: controlButtons.x - 60
+        y: 36
         Button {
             icon.source: "./images/screen-full.svg"
             background: Rectangle {
@@ -65,6 +65,12 @@ ToolBar {
                 }
             }
         }
+    }
+
+    RowLayout{
+        id: controlButtons
+        y:36
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Button {
             icon.source: "./images/anterior.svg"
@@ -131,6 +137,14 @@ ToolBar {
                 mainWindow.playNextSegment()
             }
         }
+    }
+
+    RowLayout {
+        y: 36
+        anchors.horizontalCenterOffset: 199
+        anchors.horizontalCenter: parent.horizontalCenter
+
+
 
         ComboBox {
             id: speedSelector
@@ -147,7 +161,7 @@ ToolBar {
         }
 
         Button {
-            text: "Gestionar segmentos"            
+            text: "Gestionar segmentos"
             Layout.fillHeight: true
             Layout.fillWidth: true
             background: Rectangle {

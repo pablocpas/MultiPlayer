@@ -160,6 +160,7 @@ Item {
 
                     // Botón de mute
             Button {
+                
                 id: muteButton
                 icon.source: "./images/mute.svg" // Imagen de mute (silencio)
                 icon.width: 36
@@ -169,6 +170,9 @@ Item {
                 checkable: true
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+
+                enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+
 
                 background: Rectangle {
                     opacity: 0
