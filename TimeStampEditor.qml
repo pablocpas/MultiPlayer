@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 Window {
-    id: window
+    id: timestampEditor
     width: 850
     height: 600
     title: "Editar Timestamps de Segmentos"
@@ -34,9 +34,6 @@ Window {
                 Layout.minimumWidth: 300
                 model: ListModel {
                     id: segmentListModel
-                    ListElement { name: "Segment 1"; timestamp: "00:00" }
-                    ListElement { name: "Segment 2"; timestamp: "00:00" }
-                    // Agrega más elementos según sea necesario
                 }
                 delegate: Item {
 
@@ -55,7 +52,7 @@ Window {
 
                         TextField {
                             id: nameField
-                            text: model.name
+                            text: model.description
                             readOnly: true
                             Layout.fillWidth: true
                         }
@@ -116,7 +113,30 @@ Window {
                 onMoved: incrustado.seek(progressSlider.value)
 
             }
+
+            
+                // Botón de guardar
+        RowLayout {
+            anchors.leftMargin: 30
+            anchors.rightMargin: 30
+            Layout.fillWidth: true
+
+
+            spacing: 10
+
+            Button {
+                text: "Guardar"
+                Layout.alignment: Qt.AlignHCenter
+                onClicked: {
+                    saveTimestamps()
+                    timestampEditor.visible = false
+                }
+            }
         }
+        }
+
+
+               
     }
 
     // Simulación del incrustado con posición de vídeo para el ejemplo
@@ -129,6 +149,11 @@ Window {
         }
         timestampEditor.segments = segmentsArray
         timestampEditor.visible = false
+
+        videoPlayerComponent.setSegments(segmentsArray)
+
+        //show video name
+        console.log("video name: " + videoPlayerComponent.videoName)
     }
 
     function updateSegments(newSegments) {
@@ -139,6 +164,13 @@ Window {
 
             segmentListModel.append(segments[i])
             segmentListModel.setProperty(i, "timestamp", "00:00")
+        }
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            incrustado.seek(0)
+            incrustado.pause()
         }
     }
 }

@@ -70,7 +70,6 @@ Item {
         if (position < 0 || position > mediaPlayer.duration) {
             mediaPlayer.stop();
         }else{
-            mediaPlayer.pause()
             mediaPlayer.position = position;
         
         }

@@ -207,6 +207,6 @@ ToolBar {
     function updateCurrentSegment() {
         console.log("Updating current segment")
         console.log("Current index: " + currentIndex)
-        currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].name
+        currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description
     }
 }

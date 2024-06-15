@@ -52,12 +52,13 @@ Window {
 
                     TextField {
                         id: nameField
-                        text: model.name
+                        text: model.description
                         Layout.fillWidth: true
 
                         onTextChanged: {
-                            if (nameField.text !== model.name) {
-                                segmentListModel.setProperty(index, "name", nameField.text)
+                            if (nameField.text !== model.description) {
+                                segmentListModel.setProperty(index, "description", nameField.text)
+                                segmentListModel.setProperty(index, "timestamp", "")
                             }
                         }
                     }
@@ -74,7 +75,8 @@ Window {
             Button {
                 text: "Agregar Segmento"
                 onClicked: {
-                    segmentListModel.append({"name": "Nuevo segmento"})
+                    segmentListModel.append({"description": "Nuevo segmento", "timestamp": ""})
+
                 }
             }
             Button {
@@ -83,7 +85,10 @@ Window {
             }
             Button {
                 text: "Cancelar"
-                onClicked: segmentEditor.visible = false
+                onClicked: {
+                    segmentEditor.visible = false
+                    segmentListModel.clear()
+                }
             }
         }
     }
