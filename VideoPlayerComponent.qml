@@ -171,6 +171,8 @@ Item {
                 opacity: 0
             }
 
+            
+
             onCheckedChanged: {
                 videoPlayer.volumen = checked ? 0 : 1  // Silencia o activa el sonido
                 console.log("video player volume: ", videoPlayer.volumen)
@@ -267,12 +269,9 @@ Item {
     }
 
     function setSegments(segments) {
-        console.log("HOALAAAAA")
-        console.log(segments)
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
-        console.log("Array: ", timestamps)
+
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
-        console.log("Segment names: ", segmentNames)
     }
 
     function playNextSegment() {
@@ -280,7 +279,6 @@ Item {
             currentSegmentIndex++
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
-            videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
     }
@@ -290,7 +288,6 @@ Item {
             currentSegmentIndex--
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
-            videoPlayer.play()
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
     }
