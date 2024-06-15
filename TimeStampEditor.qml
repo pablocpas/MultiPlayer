@@ -1,20 +1,18 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+
 Window {
     id: timestampEditor
     width: 900
-
     height: 400
     title: "Editar Timestamps de Segmentos"
-
     visible: false
 
     property var segments
     property string videoPath: ""
     property string texto: ""
     property string path: ""
-
 
     RowLayout {
         anchors.fill: parent
@@ -37,12 +35,10 @@ Window {
                     id: segmentListModel
                 }
                 delegate: Item {
-
                     height: 40
 
                     RowLayout {
                         spacing: 10
-
 
                         Text {
                             text: (index + 1) + "."
@@ -101,47 +97,48 @@ Window {
                 Layout.fillHeight: true
             }
 
-            Slider {
-                
-                id: progressSlider
-                width: 400
-                Layout.alignment: Qt.AlignHCenter
+            RowLayout {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 10
 
-                Layout.preferredWidth: 380
-                from: 0
-                to: incrustado.duration
-                value: incrustado.position
-                onMoved: incrustado.seek(progressSlider.value)
+                Slider {
+                    id: progressSlider
+                    width: 400
+                    Layout.preferredWidth: 380
+                    from: 0
+                    to: incrustado.duration
+                    value: incrustado.position
+                    onValueChanged: {
+                        incrustado.seek(progressSlider.value)
+                        timeIndicator.text = formatTime(progressSlider.value)
+                    }
+                }
 
+                Text {
+                    id: timeIndicator
+                    text: formatTime(progressSlider.value)
+                    Layout.alignment: Qt.AlignVCenter
+                }
             }
 
-            
-                // Botón de guardar
-        RowLayout {
-            anchors.leftMargin: 30
-            anchors.rightMargin: 30
-            Layout.fillWidth: true
+            // Botón de guardar
+            RowLayout {
+                anchors.leftMargin: 30
+                anchors.rightMargin: 30
+                Layout.fillWidth: true
+                spacing: 10
 
-
-            spacing: 10
-
-            Button {
-                text: "Guardar"
-                Layout.alignment: Qt.AlignHCenter
-                onClicked: {
-                    saveTimestamps()
-                    timestampEditor.visible = false
+                Button {
+                    text: "Guardar"
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        saveTimestamps()
+                        timestampEditor.visible = false
+                    }
                 }
             }
         }
-        }
-
-
-               
     }
-
-    // Simulación del incrustado con posición de vídeo para el ejemplo
-    property int incrustado: { position: 0 }
 
     function saveTimestamps() {
         let segmentsArray = []
@@ -162,10 +159,16 @@ Window {
         segmentListModel.clear()
         console.log("segments numero: " + segments.length)
         for (var i = 0; i < segments.length; i++) {
-
             segmentListModel.append(segments[i])
             segmentListModel.setProperty(i, "timestamp", "00:00")
         }
+    }
+
+    function formatTime(ms) {
+        let totalSeconds = Math.floor(ms / 1000);
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
+        return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }
 
     onVisibleChanged: {

@@ -27,9 +27,9 @@ Item {
         }
 
         onPositionChanged: {
-            if (mediaPlayer.position >= finalTime) {
-                    mediaPlayer.stop();
-            }
+            //if (mediaPlayer.position >= finalTime) {
+            //        mediaPlayer.stop();
+            //}
         }
 
         onDurationChanged: {
@@ -66,13 +66,7 @@ Item {
     }
 
     function seek(position) {
-        //si la posición se va fuera del rango, se detiene el video
-        if (position < 0 || position > mediaPlayer.duration) {
-            mediaPlayer.stop();
-        }else{
-            mediaPlayer.position = position;
-        
-        }
+        mediaPlayer.position = position;
     }
 
     function nextFrame() {
