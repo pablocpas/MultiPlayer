@@ -3,8 +3,9 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 Window {
     id: timestampEditor
-    width: 850
-    height: 600
+    width: 900
+
+    height: 400
     title: "Editar Timestamps de Segmentos"
 
     visible: false
