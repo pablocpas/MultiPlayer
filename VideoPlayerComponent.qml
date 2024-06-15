@@ -143,18 +143,6 @@ Item {
 
         }
 
-        Text {
-            id: segmentName
-            text: videoPlayerComponent.currentSegmentName
-            color: "white"
-            font.pixelSize: 16
-            anchors {
-                top: parent.top
-                left: parent.left
-                margins: 10
-            }
-        }
-
         // Botón de mute
         Button {
             id: muteButton
