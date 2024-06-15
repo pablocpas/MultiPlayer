@@ -43,7 +43,8 @@ ToolBar {
         x: 35
         Text {
             id: currentSegment
-            text: "segmentos actual"
+            text: "Segmento actual: "
+            color: "#c5c5c5"
 
 
         }
@@ -60,6 +61,11 @@ ToolBar {
             icon.width: 36
             icon.height: 36
             icon.color: "transparent"
+
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: "Pantalla completa"
             onClicked: {
                 if (mainWindow.isFullScreen) {
                     mainWindow.visibility = Window.Windowed
@@ -150,9 +156,9 @@ ToolBar {
 
     RowLayout {
         y: 36
-        anchors.horizontalCenterOffset: 199
-        anchors.horizontalCenter: parent.horizontalCenter
+        x: controlButtons.x + 190
 
+        spacing: 20
 
 
         ComboBox {
@@ -161,6 +167,12 @@ ToolBar {
             model: ["0.25x", "0.5x", "0.75x", "1x", "1.25x", "1.5x", "1.75x", "2x"]
             Layout.alignment: Qt.AlignCenter
             currentIndex: 3
+
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: "Velocidad de reproducción"
+
             onActivated: {
                 mainWindow.speed = currentText.split("x")[0]
                 mainWindow.speedChange(mainWindow.speed)
@@ -170,16 +182,21 @@ ToolBar {
         }
 
         Button {
-            text: "Gestionar segmentos"
             Layout.fillHeight: true
             Layout.fillWidth: true
             background: Rectangle {
                 opacity: 0
             }
-
+            icon.source: "./images/segments.svg"
             icon.width: 36
             icon.height: 36
             icon.color: "transparent"
+
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: "Gestionar segmentos"
+
             onClicked: {
                 console.log("Gestionar segmentos")
                 mainWindow.setVisible(true)

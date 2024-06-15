@@ -33,6 +33,12 @@ ToolBar {
                     ButtonGroup.group: toolButtonGroup
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+
+                    ToolTip.delay: 1000
+                    ToolTip.timeout: 5000
+                    ToolTip.visible: hovered
+                    ToolTip.text: "2 reproductores"
+
                     onClicked: {
                         numberOfPlayers = 2
                         mainWindow.hasVideo = false
@@ -66,6 +72,11 @@ ToolBar {
                         mainWindow.hasVideo = false
                     }
 
+                    ToolTip.delay: 1000
+                    ToolTip.timeout: 5000
+                    ToolTip.visible: hovered
+                    ToolTip.text: "3 reproductores"
+
 
                     background: Rectangle {
                         opacity: 0
@@ -93,6 +104,11 @@ ToolBar {
                         numberOfPlayers = 4
                         mainWindow.hasVideo = false
                     }
+
+                    ToolTip.delay: 1000
+                    ToolTip.timeout: 5000
+                    ToolTip.visible: hovered
+                    ToolTip.text: "4 reproductores"
 
 
                     background: Rectangle {

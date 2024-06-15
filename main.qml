@@ -36,6 +36,8 @@ ApplicationWindow {
     signal seekAll(int value)
     signal speedChange(double speed)
 
+    signal changeSegment(int index)
+
     property bool segmentEditorVisible: false
 
     Download {
@@ -108,6 +110,7 @@ ApplicationWindow {
         if(currentSegment < segments.length - 1){
             currentSegment++
             bottomBar.updateCurrentSegment()
+            changeSegment(currentSegment)
            
         }
     }
@@ -116,6 +119,8 @@ ApplicationWindow {
         if(currentSegment > 0){
             currentSegment--
             bottomBar.updateCurrentSegment()
+            changeSegment(currentSegment)
+
         }
     }
 
