@@ -20,6 +20,8 @@ ApplicationWindow {
     property int maxSegmentDuration: 0
     property bool hasVideo: false
     property bool hasSegments: false
+
+    property var segments: []
     property int currentSegment: 0
     property bool isFullScreen: false
     property VideoPlayerComponent longestVideoPlayer: null
@@ -102,14 +104,39 @@ ApplicationWindow {
         segmentEditor.visible = visible
     }
 
+    function nextSegment() {
+        if(currentSegment < segments.length - 1){
+            currentSegment++
+            bottomBar.updateCurrentSegment()
+           
+        }
+    }
+
+    function previousSegment() {
+        if(currentSegment > 0){
+            currentSegment--
+            bottomBar.updateCurrentSegment()
+        }
+    }
+
     Connections {
         target: segmentEditor
-        function onSegmentsUpdated(segments) {
+        function onSegmentsUpdated(s) {
             console.log("me llegoooo")
+
+            segments = s
 
             segmentsLoaded(segments)
             console.log(segments)
         }
+    }
+
+    onSegmentsChanged: {
+
+
+            console.log("segments changed")
+            bottomBar.updateCurrentSegment()
+        
     }
 
 }

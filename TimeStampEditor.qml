@@ -39,12 +39,12 @@ Window {
                     // Agrega más elementos según sea necesario
                 }
                 delegate: Item {
-                    width: parent.width
+
                     height: 40
 
                     RowLayout {
                         spacing: 10
-                        width: parent.width
+
 
                         Text {
                             text: (index + 1) + "."

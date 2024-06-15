@@ -72,7 +72,7 @@ Window {
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             Button {
-                text: "Agregar Segºento"
+                text: "Agregar Segmento"
                 onClicked: {
                     segmentListModel.append({"name": "Nuevo segmento"})
                 }

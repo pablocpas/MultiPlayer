@@ -10,6 +10,9 @@ ToolBar {
     Layout.fillWidth: true
     height: 90
 
+    property int currentIndex: mainWindow.currentSegment
+
+
     background: Rectangle {
         implicitHeight: 90
         color: "#161616"
@@ -41,6 +44,8 @@ ToolBar {
         Text {
             id: currentSegment
             text: "segmentos actual"
+
+
         }
     }
 
@@ -90,6 +95,8 @@ ToolBar {
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
                 mainWindow.playPreviousSegment()
+                mainWindow.previousSegment()
+
             }
         }
 
@@ -135,6 +142,8 @@ ToolBar {
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
                 mainWindow.playNextSegment()
+                mainWindow.nextSegment()
+            
             }
         }
     }
@@ -176,5 +185,11 @@ ToolBar {
                 mainWindow.setVisible(true)
             }
         }
+    }
+
+    function updateCurrentSegment() {
+        console.log("Updating current segment")
+        console.log("Current index: " + currentIndex)
+        currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].name
     }
 }
