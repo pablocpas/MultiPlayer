@@ -16,6 +16,8 @@ Item {
     property int currentSegmentIndex: -1
     property string currentSegmentName: ""
 
+    property double offset: 0
+
     property string videoName: "Video " + (playerIndex + 1)
 
     property bool tag_editable: false
@@ -260,6 +262,23 @@ Item {
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
 
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
+
+        this.segments = segments
+
+        // Initialize longest_segments if empty or update with new segments
+        if (longest_segments.length === 0) {
+            longest_segments = segments.map(segment => segment.duration)
+        } else {
+            for (let i = 0; i < segments.length; i++) {
+                if (i < longest_segments.length) {
+                    if (segments[i].duration > longest_segments[i]) {
+                        longest_segments[i] = segments[i].duration
+                    }
+                } else {
+                    longest_segments.push(segments[i].duration)
+                }
+            }
+        }
     }
 
     function playNextSegment() {
@@ -289,7 +308,7 @@ Item {
     }
 
     function seek(position) {
-        videoPlayer.seek(position)
+        videoPlayer.seek(position + offset)
     }
 
     Connections {

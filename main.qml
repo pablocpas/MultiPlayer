@@ -106,6 +106,25 @@ ApplicationWindow {
         segmentEditor.visible = visible
     }
 
+    function setSegments(segments) {
+        this.segments = segments
+
+        // Initialize longest_segments if empty or update with new segments
+        if (longest_segments.length === 0) {
+            longest_segments = segments.map(segment => segment.duration)
+        } else {
+            for (let i = 0; i < segments.length; i++) {
+                if (i < longest_segments.length) {
+                    if (segments[i].duration > longest_segments[i]) {
+                        longest_segments[i] = segments[i].duration
+                    }
+                } else {
+                    longest_segments.push(segments[i].duration)
+                }
+            }
+        }
+    }
+
     function nextSegment() {
         if(currentSegment < segments.length - 1){
             currentSegment++
