@@ -63,7 +63,6 @@ Window {
                             onTextChanged: {
                                 if (timestampField.text !== model.timestamp) {
                                     segmentListModel.setProperty(index, "timestamp", timestampField.text)
-                                    updateDurations()
                                 }
                             }
                         }
@@ -76,7 +75,6 @@ Window {
                                 let seconds = Math.floor((time % 60000) / 1000);
                                 let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
                                 segmentListModel.setProperty(index, "timestamp", formattedTime);
-                                updateDurations()
                             }
                         }
                     }
@@ -151,7 +149,7 @@ Window {
         timestampEditor.visible = false
 
         videoPlayerComponent.setSegments(segmentsArray)
-        mainWindow.setSegments(segmentsArray)
+
         //show video name
         console.log("video name: " + videoPlayerComponent.videoName)
     }
@@ -164,7 +162,6 @@ Window {
             segmentListModel.append(segments[i])
             segmentListModel.setProperty(i, "timestamp", "00:00")
         }
-        updateDurations()
     }
 
     function formatTime(ms) {
@@ -172,29 +169,6 @@ Window {
         let minutes = Math.floor(totalSeconds / 60);
         let seconds = totalSeconds % 60;
         return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-    }
-
-    function timeToSeconds(time) {
-        let parts = time.split(":");
-        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-    }
-
-    function updateDurations() {
-        let count = segmentListModel.count;
-        let videoDurationInSeconds = Math.floor(incrustado.duration / 1000);
-        for (let i = 0; i < count; i++) {
-            let currentTimestamp = segmentListModel.get(i).timestamp;
-            let nextTimestamp = (i + 1 < count) ? segmentListModel.get(i + 1).timestamp : null;
-            let duration;
-
-            if (nextTimestamp) {
-                duration = timeToSeconds(nextTimestamp) - timeToSeconds(currentTimestamp);
-            } else {
-                // Calculate duration for the last segment relative to the video end
-                duration = videoDurationInSeconds - timeToSeconds(currentTimestamp);
-            }
-            segmentListModel.setProperty(i, "duration", duration);
-        }
     }
 
     onVisibleChanged: {
