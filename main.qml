@@ -1,5 +1,3 @@
-// main.qml
-
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Window
@@ -22,6 +20,12 @@ ApplicationWindow {
     property bool hasSegments: false
 
     property var segments: []
+
+    property var longest_segments: []
+
+    property int longest_duration: 0
+
+    property int currentTimeStamp: 0
     property int currentSegment: 0
     property bool isFullScreen: false
     property VideoPlayerComponent longestVideoPlayer: null
@@ -54,7 +58,7 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 15
 
-        TopBar{
+        TopBar {
             id: topBar
             Layout.fillWidth: true
         }
@@ -107,41 +111,54 @@ ApplicationWindow {
     }
 
     function nextSegment() {
-        if(currentSegment < segments.length - 1){
+        if (currentSegment < segments.length - 1) {
+            currentTimeStamp = segments[currentSegment].timestamp
             currentSegment++
+            longest_duration = longest_segments[currentSegment]
             bottomBar.updateCurrentSegment()
             changeSegment(currentSegment)
-           
         }
     }
 
     function previousSegment() {
-        if(currentSegment > 0){
+        if (currentSegment > 0) {
             currentSegment--
+            longest_duration = longest_segments[currentSegment]
             bottomBar.updateCurrentSegment()
             changeSegment(currentSegment)
-
         }
+    }
+
+    function setSegments(segments) {
+        this.segments = segments
+        
+        // Initialize longest_segments if empty or update with new segments
+        if (longest_segments.length === 0) {
+            longest_segments = segments.map(segment => segment.duration)
+        } else {
+            for (let i = 0; i < segments.length; i++) {
+                if (i < longest_segments.length) {
+                    if (segments[i].duration > longest_segments[i]) {
+                        longest_segments[i] = segments[i].duration
+                    }
+                } else {
+                    longest_segments.push(segments[i].duration)
+                }
+            }
+        }
+
+        
     }
 
     Connections {
         target: segmentEditor
         function onSegmentsUpdated(s) {
-            console.log("me llegoooo")
-
             segments = s
-
             segmentsLoaded(segments)
-            console.log(segments)
         }
     }
 
     onSegmentsChanged: {
-
-
-            console.log("segments changed")
-            bottomBar.updateCurrentSegment()
-        
+        bottomBar.updateCurrentSegment()
     }
-
 }

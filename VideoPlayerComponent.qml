@@ -20,8 +20,7 @@ Item {
 
     property bool tag_editable: false
 
-    property var segmentStartTime: []
-    property var segmentEndTime: []
+    property var segmentEndTime: 1
 
     property var timestamps: []
 
@@ -31,6 +30,8 @@ Item {
     property int position: videoPlayer.position
 
     signal readyToPlay()
+
+    signal segmentChanged()
 
     TimeStampEditor {
         id: timeStampEditor
@@ -75,7 +76,7 @@ Item {
                 }
             }
             onPositionChanged: {
-                if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
+                if ( segmentEndTime> 0 && videoPlayer.position >= segmentEndTime) {
                     videoPlayer.pause()
                 }
             }
@@ -259,13 +260,20 @@ Item {
     function setSegments(segments) {
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
 
+        console.log("Timestamps: ", timestamps)
+
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
+
+        segmentChanged()
+
+
     }
 
     function playNextSegment() {
         if (currentSegmentIndex < timestamps.length - 1) {
             currentSegmentIndex++
             console.log("Playing segment: ", currentSegmentIndex)
+            segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
             currentSegmentName = segmentNames[currentSegmentIndex]
         }

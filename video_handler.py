@@ -115,8 +115,9 @@ class VideoHandler(QObject):
             if isinstance(segment, QObject) and hasattr(segment, 'property'):
                 time_str = segment.property('timestamp')
                 description = segment.property('description')
+                duration = segment.property('duration')
                 if time_str and description:
-                    parsed_segments.append((self.convert_time_to_seconds(time_str), description))
+                    parsed_segments.append((self.convert_time_to_seconds(time_str), description, duration))
                 else:
                     print("Segment missing required properties")
             else:
@@ -130,7 +131,7 @@ class VideoHandler(QObject):
     def save_segments_to_file(self, player_id):
         segments = self.segments.get(player_id, [])
         with open(f'segments_{player_id}.txt', 'w') as f:
-            for start, description in segments:
+            for start, description, duration in segments:
                 minutes, seconds = divmod(start, 60)
                 time_str = f"{minutes:02}:{seconds:02}"
                 f.write(f"{time_str} - {description}\n")
