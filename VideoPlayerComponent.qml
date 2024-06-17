@@ -73,7 +73,7 @@ Item {
                 mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
                     mainWindow.maxSegmentDuration = videoPlayer.duration
-                    mainWindow.longestVideoPlayer = videoPlayerComponent
+                    //mainWindow.longestVideoPlayer = videoPlayerComponent
                 }
             }
             onPositionChanged: {
@@ -281,10 +281,12 @@ Item {
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
-                        console.log("timestamps[currentSegmentIndex]: ", timestamps[currentSegmentIndex])
-
-                        console.log("Position is: ", videoPlayer.position)
-
+            console.log("longest_videoPlayerIdAAAA[currentSegmentIndex]: ", mainWindow.longest_videoPlayerId[currentSegmentIndex])
+            console.log("playerIndexEEE: ", playerIndex)
+            if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
+                console.log("HOLAAAAAAA")
+                mainWindow.longestVideoPlayer = videoPlayerComponent
+            }
 
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
@@ -298,6 +300,10 @@ Item {
             console.log("Offset: ", offset)
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
+
+            if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
+                mainWindow.longestVideoPlayer = videoPlayerComponent
+            }
 
             console.log("timestamps[currentSegmentIndex]: ", timestamps[currentSegmentIndex])
             currentSegmentName = segmentNames[currentSegmentIndex]

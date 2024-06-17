@@ -156,7 +156,7 @@ Window {
         timestampEditor.visible = false
 
         videoPlayerComponent.setSegments(segmentsArray)
-        mainWindow.setSegments(segmentsArray)
+        mainWindow.setSegments(segmentsArray, videoPlayerComponent.playerIndex)
 
         //show video name
         console.log("video name: " + videoPlayerComponent.videoName)

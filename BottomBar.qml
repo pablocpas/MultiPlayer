@@ -27,14 +27,18 @@ ToolBar {
             id: progressSlider
             from: mainWindow.longest_timestamps[currentIndex] * 1000
             to: mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
-            value: mainWindow.longest_timestamps[currentIndex] * 1000
+            value: mainWindow.longestVideoPlayer.position
             Layout.fillWidth: true
             Layout.preferredHeight: 30
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
                 console.log("Seeking to " + progressSlider.value)
+
+                console.log("videoplayer repeater position: " + mainWindow.videoPlayersRepeater.itemAt(0).position)
             }
+
+            
         }
 
     }
@@ -45,6 +49,7 @@ ToolBar {
         Text {
             id: currentSegment
             text: "Segmento actual: "
+            font.pixelSize: 19
             color: "#c5c5c5"
 
 

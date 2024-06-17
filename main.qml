@@ -15,7 +15,6 @@ ApplicationWindow {
     height: 720
     title: qsTr("Reproductor de Video")
 
-    property var videoPlayers: []
     property int numberOfPlayers: 2
     property int maxSegmentDuration: 0
     property bool hasVideo: false
@@ -29,6 +28,9 @@ ApplicationWindow {
 
     property var longest_segments: []
     property var longest_timestamps: []
+    property var longest_videoPlayerId: []
+
+    property alias videoPlayersRepeater: videoPlayersRepeater
 
     signal segmentsLoaded(var segments)
 
@@ -54,6 +56,7 @@ ApplicationWindow {
     Shortcuts {}
 
     ColumnLayout {
+        id: layout
         anchors.fill: parent
         spacing: 15
 
@@ -72,6 +75,8 @@ ApplicationWindow {
             Layout.preferredHeight: parent.height - 60
 
             Repeater {
+
+                id: videoPlayersRepeater
                 model: numberOfPlayers
                 delegate: VideoPlayerComponent {
                     Layout.fillWidth: true
@@ -80,8 +85,6 @@ ApplicationWindow {
 
                     Component.onCompleted: {
                         videoHandler.registerVideoPlayer(this, index)
-                        registerVideoPlayer(this, index)
-
                     }
                 }
             }
@@ -95,8 +98,9 @@ ApplicationWindow {
 
     Button {
         text: "Recortar video"
-        visible: false
+        visible: true
         anchors.centerIn: parent
+        onClicked: iterateOverPlayers()
     }
 
     Button {
@@ -111,39 +115,41 @@ ApplicationWindow {
         segmentEditor.visible = visible
     }
 
-    function registerVideoPlayer(player, index) {
-        videoPlayers[index] = player
-    }
-
-    function setSegments(segments) {
+    function setSegments(segments, index) {
         this.segments = segments
+
+        console.log("AQUI VA INDEX", index)
 
         // Initialize longest_segments if empty or update with new segments
         if (longest_segments.length === 0) {
             longest_segments = segments.map(segment => segment.duration)
             longest_timestamps = segments.map(segment => segment.timestampInSeconds)
+
+            longest_videoPlayerId = segments.map(segment => index)
         } else {
             for (let i = 0; i < segments.length; i++) {
                 if (i < longest_segments.length) {
                     if (segments[i].duration > longest_segments[i]) {
                         longest_segments[i] = segments[i].duration
                         longest_timestamps[i] = segments[i].timestampInSeconds
+                        longest_videoPlayerId[i] = index
+
                     }
                 } else {
                     longest_segments.push(segments[i].duration)
                     longest_timestamps.push(segments[i].timestampInSeconds)
+                    longest_videoPlayerId.push(index)
                 }
             }
         }
-
-        console.log("longest_segments updated", longest_segments)
-        console.log("longest_timestamps updated", longest_timestamps)
 
     }
 
     function nextSegment() {
         if(currentSegment < segments.length - 1){
+
             currentSegment++
+
             bottomBar.updateCurrentSegment()
             changeSegment(currentSegment)
            
@@ -162,7 +168,6 @@ ApplicationWindow {
     Connections {
         target: segmentEditor
         function onSegmentsUpdated(s) {
-            console.log("me llegoooo")
 
             segments = s
 
@@ -173,10 +178,19 @@ ApplicationWindow {
 
     onSegmentsChanged: {
 
-
-            console.log("segments changed")
             bottomBar.updateCurrentSegment()
         
+    }
+
+        function iterateOverPlayers() {
+        for (let i = 0; i < videoPlayersRepeater.count; i++) {
+            let videoPlayer = videoPlayersRepeater.itemAt(i);
+            if (videoPlayer) {
+                console.log("VideoPlayer Index:", videoPlayer.playerIndex);
+                console.log("VideoPlayer Position:", videoPlayer.position);
+                // You can access other properties or call functions on the videoPlayer here
+            }
+        }
     }
 
 }
