@@ -74,12 +74,13 @@ Window {
                             text: "Copiar"
                             onClicked: {
                                 let time = incrustado.position;
+                                let timestampInSeconds = time / 1000
                                 let minutes = Math.floor(time / 60000);
                                 let seconds = Math.floor((time % 60000) / 1000);
                                 let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
-                                let timestampInSeconds = timeToSeconds(formattedTime);
                                 segmentListModel.setProperty(index, "timestamp", formattedTime);
                                 segmentListModel.setProperty(index, "timestampInSeconds", timestampInSeconds);
+                                console.log("Copied time: " + timestampInSeconds);
                                 updateDurations();
                             }
                         }
@@ -154,15 +155,6 @@ Window {
         timestampEditor.segments = segmentsArray
         timestampEditor.visible = false
 
-        //convert timestamps to seconds
-        for (let i = 0; i < segmentsArray.length; i++) {
-            let timestampInSeconds = timeToSeconds(segmentsArray[i].timestamp);
-            segmentsArray[i].timestamp = timestampInSeconds;
-            segmentsArray[i].timestampInSeconds = timestampInSeconds;
-            console.log("timestamp: " + segmentsArray[i].timestamp);
-            console.log("timestampInSeconds: " + segmentsArray[i].timestampInSeconds);
-        }
-
         videoPlayerComponent.setSegments(segmentsArray)
         mainWindow.setSegments(segmentsArray)
 
@@ -195,17 +187,19 @@ Window {
 
     function updateDurations() {
         let count = segmentListModel.count;
-        let videoDurationInSeconds = Math.floor(incrustado.duration / 1000);
+        let videoDurationInSeconds = incrustado.duration / 1000;
         for (let i = 0; i < count; i++) {
-            let currentTimestamp = segmentListModel.get(i).timestamp;
-            let nextTimestamp = (i + 1 < count) ? segmentListModel.get(i + 1).timestamp : null;
+            let currentTimestamp = segmentListModel.get(i).timestampInSeconds;
+            let nextTimestamp = (i + 1 < count) ? segmentListModel.get(i + 1).timestampInSeconds : null;
             let duration;
 
             if (nextTimestamp) {
-                duration = timeToSeconds(nextTimestamp) - timeToSeconds(currentTimestamp);
+                duration = nextTimestamp - currentTimestamp;
+
+                console.log("duraciones: " + duration + " " + currentTimestamp + " " + nextTimestamp)
             } else {
                 // Calculate duration for the last segment relative to the video end
-                duration = videoDurationInSeconds - timeToSeconds(currentTimestamp);
+                duration = videoDurationInSeconds - currentTimestamp;
             }
             segmentListModel.setProperty(i, "duration", duration);
         }

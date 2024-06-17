@@ -13,7 +13,7 @@ Item {
     property int playerIndex: 0
     property var segments: []
 
-    property int currentSegmentIndex: -1
+    property int currentSegmentIndex: 0
     property string currentSegmentName: ""
 
     property double offset: 0
@@ -79,6 +79,7 @@ Item {
             onPositionChanged: {
                 if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
                     videoPlayer.pause()
+                    videoPlayer.seek(segmentEndTime)
                 }
             }
             volumen: 1.0  // Inicialmente el volumen está al máximo
@@ -261,6 +262,8 @@ Item {
     function setSegments(segments) {
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
 
+        console.log("Timestamps: ", timestamps)
+
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
 
         this.segments = segments
@@ -269,12 +272,20 @@ Item {
 
     function playNextSegment() {
         if (currentSegmentIndex < timestamps.length - 1) {
+            console.log("Position is: ", videoPlayer.position)
             currentSegmentIndex++
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
+            segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
             console.log("Offset: ", offset)
 
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
+
+                        console.log("timestamps[currentSegmentIndex]: ", timestamps[currentSegmentIndex])
+
+                        console.log("Position is: ", videoPlayer.position)
+
+
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
     }
@@ -283,9 +294,12 @@ Item {
         if (currentSegmentIndex > 0) {
             currentSegmentIndex--
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
+            segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
             console.log("Offset: ", offset)
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
+
+            console.log("timestamps[currentSegmentIndex]: ", timestamps[currentSegmentIndex])
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
     }
@@ -300,6 +314,8 @@ Item {
 
     function seek(position) {
         videoPlayer.seek(position + offset * 1000)
+
+        console.log("Offset to: ", offset)
     }
 
     Connections {
@@ -318,6 +334,8 @@ Item {
         }
         function onSeekAll(position) {
             videoPlayer.seek(position + offset * 1000)
+
+            console.log("Offset to: ", offset)
         }
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)

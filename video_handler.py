@@ -113,10 +113,11 @@ class VideoHandler(QObject):
         parsed_segments = []
         for segment in segments:
             if isinstance(segment, QObject) and hasattr(segment, 'property'):
-                time_str = segment.property('timestamp')
+                time_str = segment.property('timestampInSeconds')
                 description = segment.property('description')
+                print(f"Segmento: {time_str} - {description}")
                 if time_str and description:
-                    parsed_segments.append((self.convert_time_to_seconds(time_str), description))
+                    parsed_segments.append((time_str, description))
                 else:
                     print("Segment missing required properties")
             else:
