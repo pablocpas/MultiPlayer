@@ -10,7 +10,7 @@ Item {
     property int initialTime: 0 // Nuevo: tiempo inicial de reproducción
     property bool videoLoaded: false
     property int position: mediaPlayer.position
-    property real playbackRate: 1.0 // Nuevo: tasa de reproducción
+    property real playbackRate: 1.0 // Nuevo: tasa de reproducción+
 
     property real volumen: 1
 

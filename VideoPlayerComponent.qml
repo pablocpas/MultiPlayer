@@ -265,25 +265,14 @@ Item {
 
         this.segments = segments
 
-        // Initialize longest_segments if empty or update with new segments
-        if (longest_segments.length === 0) {
-            longest_segments = segments.map(segment => segment.duration)
-        } else {
-            for (let i = 0; i < segments.length; i++) {
-                if (i < longest_segments.length) {
-                    if (segments[i].duration > longest_segments[i]) {
-                        longest_segments[i] = segments[i].duration
-                    }
-                } else {
-                    longest_segments.push(segments[i].duration)
-                }
-            }
-        }
     }
 
     function playNextSegment() {
         if (currentSegmentIndex < timestamps.length - 1) {
             currentSegmentIndex++
+            offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
+            console.log("Offset: ", offset)
+
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
             currentSegmentName = segmentNames[currentSegmentIndex]
@@ -293,6 +282,8 @@ Item {
     function playPreviousSegment() {
         if (currentSegmentIndex > 0) {
             currentSegmentIndex--
+            offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
+            console.log("Offset: ", offset)
             console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
             currentSegmentName = segmentNames[currentSegmentIndex]
@@ -308,7 +299,7 @@ Item {
     }
 
     function seek(position) {
-        videoPlayer.seek(position + offset)
+        videoPlayer.seek(position + offset * 1000)
     }
 
     Connections {
@@ -326,7 +317,7 @@ Item {
             videoPlayer.pause()
         }
         function onSeekAll(position) {
-            videoPlayer.seek(position)
+            videoPlayer.seek(position + offset * 1000)
         }
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)
@@ -341,5 +332,6 @@ Item {
             timeStampEditor.updateSegments(segments)
             timeStampEditor.visible = true
         }
+
     }
 }

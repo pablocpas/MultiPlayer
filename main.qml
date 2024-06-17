@@ -27,6 +27,9 @@ ApplicationWindow {
     property VideoPlayerComponent longestVideoPlayer: null
     property double speed: 1
 
+    property var longest_segments: []
+    property var longest_timestamps: []
+
     signal segmentsLoaded(var segments)
 
     signal playAll()
@@ -77,6 +80,8 @@ ApplicationWindow {
 
                     Component.onCompleted: {
                         videoHandler.registerVideoPlayer(this, index)
+                        registerVideoPlayer(this, index)
+
                     }
                 }
             }
@@ -106,23 +111,34 @@ ApplicationWindow {
         segmentEditor.visible = visible
     }
 
+    function registerVideoPlayer(player, index) {
+        videoPlayers[index] = player
+    }
+
     function setSegments(segments) {
         this.segments = segments
 
         // Initialize longest_segments if empty or update with new segments
         if (longest_segments.length === 0) {
             longest_segments = segments.map(segment => segment.duration)
+            longest_timestamps = segments.map(segment => segment.timestampInSeconds)
         } else {
             for (let i = 0; i < segments.length; i++) {
                 if (i < longest_segments.length) {
                     if (segments[i].duration > longest_segments[i]) {
                         longest_segments[i] = segments[i].duration
+                        longest_timestamps[i] = segments[i].timestampInSeconds
                     }
                 } else {
                     longest_segments.push(segments[i].duration)
+                    longest_timestamps.push(segments[i].timestampInSeconds)
                 }
             }
         }
+
+        console.log("longest_segments updated", longest_segments)
+        console.log("longest_timestamps updated", longest_timestamps)
+
     }
 
     function nextSegment() {

@@ -25,14 +25,15 @@ ToolBar {
 
         Slider {
             id: progressSlider
-            from: 0
-            to: mainWindow.maxSegmentDuration
-            value: mainWindow.longestVideoPlayer.position
+            from: mainWindow.longest_timestamps[currentIndex] * 1000
+            to: mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
+            value: mainWindow.longest_timestamps[currentIndex] * 1000
             Layout.fillWidth: true
             Layout.preferredHeight: 30
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
+                console.log("Seeking to " + progressSlider.value)
             }
         }
 

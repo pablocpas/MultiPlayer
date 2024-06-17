@@ -62,8 +62,10 @@ Window {
                             validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]$/ }  // Validador para reforzar el formato de tiempo correcto
                             onTextChanged: {
                                 if (timestampField.text !== model.timestamp) {
-                                    segmentListModel.setProperty(index, "timestamp", timestampField.text)
-                                    updateDurations()
+                                    let timestampInSeconds = timeToSeconds(timestampField.text);
+                                    segmentListModel.setProperty(index, "timestamp", timestampField.text);
+                                    segmentListModel.setProperty(index, "timestampInSeconds", timestampInSeconds);
+                                    updateDurations();
                                 }
                             }
                         }
@@ -75,8 +77,10 @@ Window {
                                 let minutes = Math.floor(time / 60000);
                                 let seconds = Math.floor((time % 60000) / 1000);
                                 let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                                let timestampInSeconds = timeToSeconds(formattedTime);
                                 segmentListModel.setProperty(index, "timestamp", formattedTime);
-                                updateDurations()
+                                segmentListModel.setProperty(index, "timestampInSeconds", timestampInSeconds);
+                                updateDurations();
                             }
                         }
                     }
@@ -150,6 +154,15 @@ Window {
         timestampEditor.segments = segmentsArray
         timestampEditor.visible = false
 
+        //convert timestamps to seconds
+        for (let i = 0; i < segmentsArray.length; i++) {
+            let timestampInSeconds = timeToSeconds(segmentsArray[i].timestamp);
+            segmentsArray[i].timestamp = timestampInSeconds;
+            segmentsArray[i].timestampInSeconds = timestampInSeconds;
+            console.log("timestamp: " + segmentsArray[i].timestamp);
+            console.log("timestampInSeconds: " + segmentsArray[i].timestampInSeconds);
+        }
+
         videoPlayerComponent.setSegments(segmentsArray)
         mainWindow.setSegments(segmentsArray)
 
@@ -164,6 +177,7 @@ Window {
         for (var i = 0; i < segments.length; i++) {
             segmentListModel.append(segments[i])
             segmentListModel.setProperty(i, "timestamp", "00:00")
+            segmentListModel.setProperty(i, "timestampInSeconds", 0) // Inicializar con 0
         }
     }
 
