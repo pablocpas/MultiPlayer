@@ -1,0 +1,24 @@
+# Doxyfile
+
+PROJECT_NAME           = "MultiPlayer"
+OUTPUT_DIRECTORY       = ./docs
+INPUT                  = ./main.qml \
+                         ./VideoPlayerComponent.qml \
+                         ./VideoPlayer.qml \
+                         ./BottomBar.qml \
+                         ./TopBar.qml \
+                         ./SegmentsEditor.qml \
+                         ./Shortcuts.qml \
+                         ./TimeStampEditor.qml \
+                         ./Download.qml
+FILE_PATTERNS          = *.qml
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+FILTER_PATTERNS        = *.qml=doxyqml
+EXTENSION_MAPPING      = qml=C++
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO
