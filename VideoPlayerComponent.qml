@@ -272,19 +272,13 @@ Item {
 
     function playNextSegment() {
         if (currentSegmentIndex < timestamps.length - 1) {
-            console.log("Position is: ", videoPlayer.position)
             currentSegmentIndex++
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
             segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
-            console.log("Offset: ", offset)
 
-            console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
-            console.log("longest_videoPlayerIdAAAA[currentSegmentIndex]: ", mainWindow.longest_videoPlayerId[currentSegmentIndex])
-            console.log("playerIndexEEE: ", playerIndex)
             if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
-                console.log("HOLAAAAAAA")
                 mainWindow.longestVideoPlayer = videoPlayerComponent
             }
 
@@ -297,15 +291,12 @@ Item {
             currentSegmentIndex--
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
             segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
-            console.log("Offset: ", offset)
-            console.log("Playing segment: ", currentSegmentIndex)
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
             if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
                 mainWindow.longestVideoPlayer = videoPlayerComponent
             }
 
-            console.log("timestamps[currentSegmentIndex]: ", timestamps[currentSegmentIndex])
             currentSegmentName = segmentNames[currentSegmentIndex]
         }
     }
@@ -320,8 +311,6 @@ Item {
 
     function seek(position) {
         videoPlayer.seek(position + offset * 1000)
-
-        console.log("Offset to: ", offset)
     }
 
     Connections {
@@ -340,8 +329,6 @@ Item {
         }
         function onSeekAll(position) {
             videoPlayer.seek(position + offset * 1000)
-
-            console.log("Offset to: ", offset)
         }
         function onSpeedChange(value) {
             videoPlayer.setPlaybackRate(value)
@@ -351,8 +338,6 @@ Item {
     Connections {
         target: mainWindow
         function onSegmentsLoaded(segments) {
-            console.log("estoy en timestampEditor y recibi los segmentos")
-            console.log(segments)
             timeStampEditor.updateSegments(segments)
             timeStampEditor.visible = true
         }

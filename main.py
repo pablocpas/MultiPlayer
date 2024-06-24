@@ -14,9 +14,12 @@ if __name__ == "__main__":
 
     app.setApplicationName("Video Player")
     app.setWindowIcon(QIcon("./images/icono.png"))
+
+
     video_handler = VideoHandler()
     engine.rootContext().setContextProperty("videoHandler", video_handler)
     engine.load('main.qml')
+    
     if not engine.rootObjects():
         sys.exit(-1)
     sys.exit(app.exec())

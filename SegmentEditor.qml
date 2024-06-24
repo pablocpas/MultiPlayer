@@ -75,8 +75,12 @@ Window {
             Button {
                 text: "Agregar Segmento"
                 onClicked: {
-                    segmentListModel.append({"description": "Nuevo segmento", "timestamp": ""})
-
+                    // Obtener el número del próximo segmento
+                    let nextSegmentNumber = segmentListModel.count + 1;
+                    segmentListModel.append({
+                        "description": "Segmento " + nextSegmentNumber, 
+                        "timestamp": ""
+                    });
                 }
             }
             Button {
@@ -103,6 +107,5 @@ Window {
         segmentEditor.visible = false
 
         mainWindow.hasSegments = true
-
     }
 }
