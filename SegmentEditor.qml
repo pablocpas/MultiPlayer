@@ -38,6 +38,7 @@ Window {
             delegate: Item {
                 height: 40
                 width: 400
+                id: item
 
                 RowLayout {
                     spacing: 10
@@ -67,7 +68,14 @@ Window {
                         onClicked: segmentListModel.remove(index)
                     }
                 }
+
+                function selectAll() {
+                    nameField.selectAll()
+                    nameField.forceActiveFocus()
+                }
+
             }
+
         }
 
         RowLayout {
@@ -81,6 +89,13 @@ Window {
                         "description": "Segmento " + nextSegmentNumber, 
                         "timestamp": ""
                     });
+
+                        segmentListView.forceLayout(); // Actualiza el ListView
+
+                        let newItem = segmentListView.itemAtIndex(segmentListModel.count - 1)
+                        if (newItem) {
+                            newItem.selectAll()
+                        }
                 }
             }
             Button {
