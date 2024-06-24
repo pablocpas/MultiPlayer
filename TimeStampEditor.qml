@@ -105,7 +105,8 @@ Window {
             }
 
             RowLayout {
-                anchors.horizontalCenter: parent.horizontalCenter
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
                 spacing: 10
 
                 Slider {

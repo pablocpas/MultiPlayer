@@ -255,7 +255,7 @@ Item {
     }
 
     function setPath(path) {
-        videoPlayer.setPath(path)
+        videoSource = path
         videoLoaded = true
     }
 
@@ -343,4 +343,15 @@ Item {
         }
 
     }
+
+    //Connections {
+        //target: videoHandler
+        //function onFinished(file_path, video_index) {   
+
+            //if(video_index == playerIndex){
+                //setPath(file_path)
+
+            //}
+        //}
+    //}
 }

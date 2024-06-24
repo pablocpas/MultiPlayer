@@ -96,11 +96,30 @@ ApplicationWindow {
         }
     }
 
+    
     Button {
-        text: "Recortar video"
-        visible: true
-        anchors.centerIn: parent
-        onClicked: iterateOverPlayers()
+            icon.source: "./images/download.svg"
+            visible: true
+            anchors.centerIn: parent
+
+
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            background: Rectangle {
+                opacity: 0
+            }
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: "Exportar vídeo combinado"
+
+            icon.width: 36
+            icon.height: 36
+            icon.color: "transparent"
+            enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            onClicked: {
+                videoHandler.exportVideo()
+            }
     }
 
     Button {

@@ -7,8 +7,14 @@ from download_worker import DownloadWorker
 from datetime import datetime
 import os
 
+class VideoPlayer:
+    def __init__(self, video_player):
+        self.video_player = video_player
+        self.path = ""
+        self.segments = []
+
 class VideoHandler(QObject):
-    finished = Signal()
+    finished = Signal(str, int)
     progressUpdated = Signal(int)
 
     def __init__(self):
@@ -16,12 +22,10 @@ class VideoHandler(QObject):
         self.thread = None
         self.worker = None
         self._video_players = {}
-        self.segments = {}
 
     @Slot(QObject, int)
     def registerVideoPlayer(self, video_player, player_id):
-        self._video_players[player_id] = video_player
-        self.segments[player_id] = []
+        self._video_players[player_id] = VideoPlayer(video_player)
         print(f"Video player {player_id} registered")
 
     @Slot(str, str, int)
@@ -40,10 +44,12 @@ class VideoHandler(QObject):
     @Slot()
     def on_download_finished(self, video_id, path):
         if path:
-            self._video_players[video_id].setPath(path)
-            self._video_players[video_id].pause()
-            self._video_players[video_id].seek(0)
-            self.finished.emit()
+            video_player_obj = self._video_players[video_id]
+            video_player_obj.path = path
+            video_player_obj.video_player.setPath(path)
+            video_player_obj.video_player.pause()
+            video_player_obj.video_player.seek(0)
+            self.finished.emit(path, video_id)
 
     @Slot(int)
     def update_progress(self, value):
@@ -90,20 +96,21 @@ class VideoHandler(QObject):
 
     @Slot(int, list, result='QVariantList')
     def updateSegments(self, player_id, segments):
-        self.segments[player_id] = self.parse_segments(segments)
-        print(f"Segmentos actualizados para el reproductor {player_id}: {self.segments[player_id]}")
+        video_player_obj = self._video_players[player_id]
+        video_player_obj.segments = self.parse_segments(segments)
+        print(f"Segmentos actualizados para el reproductor {player_id}: {video_player_obj.segments}")
         self.save_segments_to_file(player_id)
 
         # Extraer los tiempos de inicio y devolverlos como una lista
-        start_times = [segment[0] for segment in self.segments[player_id]]
+        start_times = [segment[0] for segment in video_player_obj.segments]
         return start_times
-    
+
     @Slot(int, result='QVariantList')
     def getDescription(self, player_id):
-        # Verificar si hay segmentos para el player_id dado
-        if player_id in self.segments:
+        video_player_obj = self._video_players.get(player_id)
+        if video_player_obj and video_player_obj.segments:
             # Extraer las descripciones de los segmentos
-            descriptions = [segment[1] for segment in self.segments[player_id]]
+            descriptions = [segment[1] for segment in video_player_obj.segments]
             return descriptions
         else:
             # Si no hay segmentos para el player_id, retornar una lista vacía
@@ -129,7 +136,8 @@ class VideoHandler(QObject):
         return minutes * 60 + seconds
 
     def save_segments_to_file(self, player_id):
-        segments = self.segments.get(player_id, [])
+        video_player_obj = self._video_players.get(player_id)
+        segments = video_player_obj.segments if video_player_obj else []
         with open(f'segments_{player_id}.txt', 'w') as f:
             for start, description in segments:
                 minutes, seconds = divmod(start, 60)
