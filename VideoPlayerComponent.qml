@@ -250,6 +250,7 @@ Item {
             videoPlayer.ruta = selectedFile
             videoPlayer.pause()
             videoPlayer.seek(0)
+            videoHandler.load_video(playerIndex, selectedFile)
             videoLoaded = true
         }
     }

@@ -51,6 +51,12 @@ class VideoHandler(QObject):
             video_player_obj.video_player.seek(0)
             self.finished.emit(path, video_id)
 
+    @Slot(int, str)
+    def load_video(self, video_id, path):
+        if path:
+            video_player_obj = self._video_players[video_id]
+            video_player_obj.path = path
+
     @Slot(int)
     def update_progress(self, value):
         print("Progress updating to:", value)

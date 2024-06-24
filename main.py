@@ -10,7 +10,8 @@ if __name__ == "__main__":
     engine = QQmlApplicationEngine()
 
     myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+    if(sys.platform == "win32"):
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app.setApplicationName("Video Player")
     app.setWindowIcon(QIcon("./images/icono.png"))
