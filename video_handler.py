@@ -1,6 +1,6 @@
 from PySide6.QtCore import QObject, Signal, Slot, QThread
 from PySide6.QtGui import QGuiApplication
-from moviepy.editor import VideoFileClip, clips_array
+from moviepy.editor import VideoFileClip, clips_array, TextClip, CompositeVideoClip
 import urllib.parse
 import numpy as np
 from download_worker import DownloadWorker
@@ -56,44 +56,6 @@ class VideoHandler(QObject):
         print("Progress updating to:", value)
         self.progressUpdated.emit(value)
 
-    @Slot(str, float, float)
-    def trim_video(self, filepath, start, end):
-        filepath = urllib.parse.unquote(filepath.replace("file:///", ""))
-        start, end = float(start), float(end)
-
-        try:
-            clip = VideoFileClip(filepath)
-            trimmed_clip = clip.subclip(start, end)
-            output_filename = f"trimmed_{start}_{end}.mp4"
-            trimmed_clip.write_videofile(output_filename, codec="libx264")
-            print(f"Vídeo recortado guardado como {output_filename}")
-        except Exception as e:
-            print(f"Error al procesar el video: {e}")
-
-    def resize_clip(self, clip, height):
-        def resize_frame(frame):
-            from PIL import Image
-            img = Image.fromarray(frame)
-            width = int(img.width * height / img.height)
-            return np.array(img.resize((width, height), Image.LANCZOS))
-        
-        return clip.fl_image(resize_frame)
-
-    @Slot(str, str)
-    def fusion_video(self, filepath1, filepath2):
-        filepath1 = urllib.parse.unquote(filepath1.replace("file:///", ""))
-        filepath2 = urllib.parse.unquote(filepath2.replace("file:///", ""))
-
-        try:
-            clip1 = VideoFileClip(filepath1)
-            clip2 = VideoFileClip(filepath2)
-            clip2_resized = self.resize_clip(clip2, clip1.h)
-            final_clip = clips_array([[clip1, clip2_resized]])
-            final_clip.write_videofile("resultado.mp4", codec='libx264')
-            print(f"Vídeos fusionados guardados como resultado.mp4")
-        except Exception as e:
-            print(f"Error al procesar los vídeos: {e}")
-
     @Slot(int, list, result='QVariantList')
     def updateSegments(self, player_id, segments):
         video_player_obj = self._video_players[player_id]
@@ -144,3 +106,39 @@ class VideoHandler(QObject):
                 time_str = f"{minutes:02}:{seconds:02}"
                 f.write(f"{time_str} - {description}\n")
         print(f"Segmentos guardados en segments_{player_id}.txt")
+
+
+    @Slot()
+    def combine_videos(self):
+
+        # save in paths the paths of all videoplayers
+        paths = []
+        for video_player in self._video_players.values():
+            print("video_player.path: ", video_player.path)
+            if video_player.path:
+                paths.append(video_player.path)
+
+
+        print ("video players: ", self._video_players.values())
+        print("Combinando videos...")
+        print(paths)
+        clips = [VideoFileClip(path) for path in paths]
+
+        if len(clips) == 0:
+            print("No hay videos para combinar.")
+            return
+
+        # Configuración de la matriz de clips
+        if len(clips) == 1:
+            combined = clips[0]
+        elif len(clips) == 2:
+            combined = clips_array([[clips[0], clips[1]]])
+        elif len(clips) == 3:
+            combined = clips_array([[clips[0], clips[1]], [clips[2], None]])
+        elif len(clips) >= 4:
+            combined = clips_array([[clips[0], clips[1]], [clips[2], clips[3]]])
+
+        output_path = "combined_video.mp4"
+        combined.write_videofile(output_path, codec="libx264")
+        print(f"Video combinado guardado en {output_path}")
+
