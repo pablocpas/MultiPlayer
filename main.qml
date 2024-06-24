@@ -32,6 +32,9 @@ ApplicationWindow {
 
     property alias videoPlayersRepeater: videoPlayersRepeater
 
+    signal playing()
+    signal pausa()
+
     signal segmentsLoaded(var segments)
 
     signal playAll()
@@ -118,7 +121,8 @@ ApplicationWindow {
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
-                videoHandler.combine_videos()
+                //videoHandler.combine_videos()
+                console.log("")
             }
     }
 
@@ -166,9 +170,7 @@ ApplicationWindow {
 
     function nextSegment() {
         if(currentSegment < segments.length - 1){
-
             currentSegment++
-
             bottomBar.updateCurrentSegment()
             changeSegment(currentSegment)
            
@@ -195,21 +197,18 @@ ApplicationWindow {
         }
     }
 
+    Connections {
+        target: videoPlayer
+        function onPlaying() {
+            console.log("plaingggggg")
+        }
+    }
+
     onSegmentsChanged: {
 
-            bottomBar.updateCurrentSegment()
+        bottomBar.updateCurrentSegment()
         
     }
 
-        function iterateOverPlayers() {
-        for (let i = 0; i < videoPlayersRepeater.count; i++) {
-            let videoPlayer = videoPlayersRepeater.itemAt(i);
-            if (videoPlayer) {
-                console.log("VideoPlayer Index:", videoPlayer.playerIndex);
-                console.log("VideoPlayer Position:", videoPlayer.position);
-                // You can access other properties or call functions on the videoPlayer here
-            }
-        }
-    }
 
 }

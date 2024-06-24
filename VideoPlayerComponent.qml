@@ -209,6 +209,7 @@ Item {
                             tedit_videoName.focus = false
                             tag_editable = false
                             videoName = tedit_videoName.text
+                            videoHandler.setVideoName(playerIndex, videoName)
                             // Emitir señal para actualizar el nombre del video
                         } else {
                             icon.source = "./images/save.svg"
@@ -275,12 +276,19 @@ Item {
         if (currentSegmentIndex < timestamps.length - 1) {
             currentSegmentIndex++
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
+
             segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
 
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
+            videoPlayer.play()
+
+
+            
+
             if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
                 mainWindow.longestVideoPlayer = videoPlayerComponent
+
             }
 
             currentSegmentName = segmentNames[currentSegmentIndex]
@@ -294,6 +302,9 @@ Item {
             segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
+            videoPlayer.play()
+
+
             if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
                 mainWindow.longestVideoPlayer = videoPlayerComponent
             }
@@ -303,6 +314,9 @@ Item {
     }
 
     function play() {
+        console.log("Playing video")
+        //Position
+        console.log("Position: ", position)
         videoPlayer.play()
     }
 

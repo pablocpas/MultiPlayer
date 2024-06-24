@@ -12,6 +12,7 @@ class VideoPlayer:
         self.video_player = video_player
         self.path = ""
         self.segments = []
+        self.name = ""
 
 class VideoHandler(QObject):
     finished = Signal(str, int)
@@ -51,6 +52,11 @@ class VideoHandler(QObject):
             video_player_obj.video_player.seek(0)
             self.finished.emit(path, video_id)
 
+    def setVideoName(self, player_id, name):
+        video_player_obj = self._video_players.get(player_id)
+        if video_player_obj:
+            video_player_obj.name = name
+    
     @Slot(int, str)
     def load_video(self, video_id, path):
         if path:
@@ -114,6 +120,7 @@ class VideoHandler(QObject):
         print(f"Segmentos guardados en segments_{player_id}.txt")
 
 
+
     @Slot()
     def combine_videos(self):
 
@@ -124,10 +131,6 @@ class VideoHandler(QObject):
             if video_player.path:
                 paths.append(video_player.path)
 
-
-        print ("video players: ", self._video_players.values())
-        print("Combinando videos...")
-        print(paths)
         clips = [VideoFileClip(path) for path in paths]
 
         if len(clips) == 0:

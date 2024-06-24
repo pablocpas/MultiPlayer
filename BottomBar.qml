@@ -33,9 +33,11 @@ ToolBar {
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
-                console.log("Seeking to " + progressSlider.value)
-
-                console.log("videoplayer repeater position: " + mainWindow.videoPlayersRepeater.itemAt(0).position)
+                console.log("progressSlider.value: " + progressSlider.value)
+                
+            }
+            onValueChanged: {
+                console.log("onValueChanged")
             }
 
             
@@ -51,7 +53,6 @@ ToolBar {
             text: "Segmento actual: "
             font.pixelSize: 19
             color: "#c5c5c5"
-
 
         }
     }
@@ -108,7 +109,7 @@ ToolBar {
             onClicked: {
                 mainWindow.playPreviousSegment()
                 mainWindow.previousSegment()
-
+            
             }
         }
 
@@ -182,7 +183,6 @@ ToolBar {
             onActivated: {
                 mainWindow.speed = currentText.split("x")[0]
                 mainWindow.speedChange(mainWindow.speed)
-                console.log("Speed changed to " + mainWindow.speed)
             }
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
         }
@@ -211,8 +211,17 @@ ToolBar {
     }
 
     function updateCurrentSegment() {
-        console.log("Updating current segment")
-        console.log("Current index: " + currentIndex)
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description
+    }
+
+    Connections  {
+        target: mainWindow
+        onPlaying: {
+            playButton.checked = true
+        }
+
+        onPaused: {
+            playButton.checked = false
+        }
     }
 }

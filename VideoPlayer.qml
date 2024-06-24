@@ -54,6 +54,7 @@ Item {
 
     function play() {
         mediaPlayer.play();
+        mainWindow.playing()
     }
 
     function stop() {
@@ -63,6 +64,7 @@ Item {
     function pause() {
         mediaPlayer.pause();
         console.log("pausado")
+        mainWindow.pausa()
     }
 
     function seek(position) {
