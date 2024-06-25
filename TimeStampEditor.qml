@@ -14,6 +14,19 @@ Window {
     property string texto: ""
     property string path: ""
 
+    Shortcut{
+        sequence: "."
+        onActivated: {
+            incrustado.nextFrame()
+        }
+    }
+
+    Shortcut{
+        sequence: ","
+        onActivated: {
+            incrustado.previousFrame()
+        }
+    }
 
 
     RowLayout {
@@ -146,6 +159,22 @@ Window {
                 anchors.rightMargin: 30
                 Layout.fillWidth: true
                 spacing: 10
+
+                Button {
+                    text: "Anterior fotograma"
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        incrustado.previousFrame()
+                    }
+                }
+
+                Button {
+                    text: "Siguiente fotograma"
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        incrustado.nextFrame()
+                    }
+                }
 
                 Button {
                     text: "Guardar"
