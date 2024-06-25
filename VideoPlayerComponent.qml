@@ -349,6 +349,10 @@ Item {
 
     }
 
+    Component.onCompleted: {
+        videoHandler.setVideoName(playerIndex, videoName)
+    }
+
     //Connections {
         //target: videoHandler
         //function onFinished(file_path, video_index) {   

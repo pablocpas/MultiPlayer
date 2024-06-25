@@ -1,18 +1,21 @@
 from PySide6.QtCore import QObject, Signal, Slot, QThread
 from PySide6.QtGui import QGuiApplication
 from moviepy.editor import VideoFileClip, clips_array, TextClip, CompositeVideoClip
+from moviepy.config import change_settings
 import urllib.parse
 import numpy as np
 from download_worker import DownloadWorker
 from datetime import datetime
 import os
 
+change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
+
 class VideoPlayer:
     def __init__(self, video_player):
         self.video_player = video_player
         self.path = ""
         self.segments = []
-        self.name = ""
+        self.name = "aaa"
 
 class VideoHandler(QObject):
     finished = Signal(str, int)
@@ -52,6 +55,7 @@ class VideoHandler(QObject):
             video_player_obj.video_player.seek(0)
             self.finished.emit(path, video_id)
 
+    @Slot(int, str)
     def setVideoName(self, player_id, name):
         video_player_obj = self._video_players.get(player_id)
         if video_player_obj:
@@ -120,16 +124,18 @@ class VideoHandler(QObject):
         print(f"Segmentos guardados en segments_{player_id}.txt")
 
 
-
     @Slot()
     def combine_videos(self):
-
-        # save in paths the paths of all videoplayers
         paths = []
+        video_names = []
+        segments = []
+        
         for video_player in self._video_players.values():
-            print("video_player.path: ", video_player.path)
             if video_player.path:
-                paths.append(video_player.path)
+                path = video_player.path.replace('file:///', '')  # Eliminar el prefijo 'file:///'
+                paths.append(path)
+                video_names.append(video_player.name)
+                segments.append(video_player.segments)
 
         clips = [VideoFileClip(path) for path in paths]
 
@@ -137,17 +143,30 @@ class VideoHandler(QObject):
             print("No hay videos para combinar.")
             return
 
-        # Configuración de la matriz de clips
-        if len(clips) == 1:
-            combined = clips[0]
-        elif len(clips) == 2:
-            combined = clips_array([[clips[0], clips[1]]])
-        elif len(clips) == 3:
-            combined = clips_array([[clips[0], clips[1]], [clips[2], None]])
-        elif len(clips) >= 4:
-            combined = clips_array([[clips[0], clips[1]], [clips[2], clips[3]]])
+        for segment_index in range(len(segments[0])):
+            segment_clips = []
+            for i, clip in enumerate(clips):
+                start_time = segments[i][segment_index][0]
+                end_time = clip.duration
+                if segment_index < len(segments[i]) - 1:
+                    end_time = segments[i][segment_index + 1][0]
+                subclip = clip.subclip(start_time, end_time)
 
-        output_path = "combined_video.mp4"
-        combined.write_videofile(output_path, codec="libx264")
-        print(f"Video combinado guardado en {output_path}")
+                txt_clip_video_name = TextClip(video_names[i], fontsize=24, color='white').set_position(('center', 'top')).set_duration(subclip.duration)
+                txt_clip_segment_name = TextClip(segments[i][segment_index][1], fontsize=24, color='white').set_position(('center', 'bottom')).set_duration(subclip.duration)
 
+                labeled_clip = CompositeVideoClip([subclip, txt_clip_video_name, txt_clip_segment_name])
+                segment_clips.append(labeled_clip)
+
+            if len(segment_clips) == 1:
+                combined = segment_clips[0]
+            elif len(segment_clips) == 2:
+                combined = clips_array([[segment_clips[0], segment_clips[1]]])
+            elif len(segment_clips) == 3:
+                combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], None]])
+            elif len(segment_clips) >= 4:
+                combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], segment_clips[3]]])
+
+            output_path = f"combined_video_segment_{segment_index + 1}.mp4"
+            combined.write_videofile(output_path, codec="libx264", threads=4)
+            print(f"Video combinado guardado en {output_path}")

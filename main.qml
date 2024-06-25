@@ -122,8 +122,8 @@ ApplicationWindow {
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
-                //videoHandler.combine_videos()
-                console.log("")
+                videoHandler.combine_videos()
+                
             }
     }
 
