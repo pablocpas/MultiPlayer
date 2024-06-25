@@ -13,7 +13,7 @@ Item {
     property int playerIndex: 0
     property var segments: []
 
-    property int currentSegmentIndex: 0
+    property int currentSegmentIndex: -1
     property string currentSegmentName: ""
 
     property double offset: 0
@@ -135,7 +135,7 @@ Item {
             Button {
                 text: "Editar Segmentos"
                 Layout.alignment: Qt.AlignHCenter
-                visible: videoLoaded
+                visible: false
                 onClicked: {
 
                 }
@@ -282,9 +282,6 @@ Item {
             videoPlayer.seek(timestamps[currentSegmentIndex] * 1000)
 
             videoPlayer.play()
-
-
-            
 
             if(mainWindow.longest_videoPlayerId[currentSegmentIndex] == playerIndex){
                 mainWindow.longestVideoPlayer = videoPlayerComponent

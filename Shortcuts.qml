@@ -5,16 +5,14 @@ Item {
     Shortcut{
         sequence: "."
         onActivated: {
-            video0.nextFrame()
-            video1.nextFrame()
+            mainWindow.nextFrame()
         }
     }
 
     Shortcut{
         sequence: ","
         onActivated: {
-            video0.previousFrame()
-            video1.previousFrame()
+            mainWindow.previousFrame()
         }
     }
 

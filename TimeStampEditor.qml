@@ -212,4 +212,8 @@ Window {
             incrustado.pause()
         }
     }
+
+    Component.onCompleted: {
+                        mainWindow.segmentsReady= 0
+                    }
 }

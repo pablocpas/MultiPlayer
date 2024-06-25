@@ -34,10 +34,6 @@ ToolBar {
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
                 console.log("progressSlider.value: " + progressSlider.value)
-                
-            }
-            onValueChanged: {
-                console.log("onValueChanged")
             }
 
             
@@ -216,11 +212,11 @@ ToolBar {
 
     Connections  {
         target: mainWindow
-        onPlaying: {
+        function onPlaying() {
             playButton.checked = true
         }
 
-        onPaused: {
+        function onPaused() {
             playButton.checked = false
         }
     }

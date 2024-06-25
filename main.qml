@@ -30,6 +30,8 @@ ApplicationWindow {
     property var longest_timestamps: []
     property var longest_videoPlayerId: []
 
+    property var segmentsReady: 0
+
     property alias videoPlayersRepeater: videoPlayersRepeater
 
     signal playing()
@@ -43,6 +45,9 @@ ApplicationWindow {
     signal playPreviousSegment()
     signal seekAll(int value)
     signal speedChange(double speed)
+
+    signal nextFrame()
+    signal previousFrame()
 
     signal changeSegment(int index)
 
@@ -141,7 +146,11 @@ ApplicationWindow {
     function setSegments(segments, index) {
         this.segments = segments
 
-        console.log("AQUI VA INDEX", index)
+        segmentsReady += 1
+
+        if (segmentsReady === numberOfPlayers) {
+            playNextSegment()
+        }
 
         // Initialize longest_segments if empty or update with new segments
         if (longest_segments.length === 0) {
@@ -165,6 +174,7 @@ ApplicationWindow {
                 }
             }
         }
+
 
     }
 
@@ -194,13 +204,6 @@ ApplicationWindow {
 
             segmentsLoaded(segments)
             console.log(segments)
-        }
-    }
-
-    Connections {
-        target: videoPlayer
-        function onPlaying() {
-            console.log("plaingggggg")
         }
     }
 
