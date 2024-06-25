@@ -33,7 +33,6 @@ ToolBar {
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
-                console.log("progressSlider.value: " + progressSlider.value)
             }
 
             
@@ -216,7 +215,7 @@ ToolBar {
             playButton.checked = true
         }
 
-        function onPaused() {
+        function onPausa() {
             playButton.checked = false
         }
     }

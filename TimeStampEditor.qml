@@ -14,6 +14,8 @@ Window {
     property string texto: ""
     property string path: ""
 
+
+
     RowLayout {
         anchors.fill: parent
         anchors.leftMargin: 30
@@ -22,9 +24,18 @@ Window {
         anchors.bottomMargin: 30
         spacing: 90
 
+
         // Primera columna: ListView
         ColumnLayout {
             width: parent.width / 2
+
+            
+            Text {
+        id: title
+        text: "Selecciona el tiempo de inicio de cada segmento \n"
+        font.pixelSize: 12
+
+    }
 
             ListView {
                 id: segmentListView

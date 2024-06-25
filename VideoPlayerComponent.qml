@@ -22,7 +22,6 @@ Item {
 
     property bool tag_editable: false
 
-    property var segmentStartTime: []
     property var segmentEndTime: []
 
     property var timestamps: []
@@ -31,8 +30,6 @@ Item {
 
     property int duration: videoPlayer.duration
     property int position: videoPlayer.position
-
-    signal readyToPlay()
 
     TimeStampEditor {
         id: timeStampEditor
@@ -140,10 +137,6 @@ Item {
 
                 }
             }
-        }
-
-        Row{
-
         }
 
         // Botón de mute

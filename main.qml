@@ -32,8 +32,6 @@ ApplicationWindow {
 
     property var segmentsReady: 0
 
-    property alias videoPlayersRepeater: videoPlayersRepeater
-
     signal playing()
     signal pausa()
 
@@ -48,8 +46,6 @@ ApplicationWindow {
 
     signal nextFrame()
     signal previousFrame()
-
-    signal changeSegment(int index)
 
     property bool segmentEditorVisible: false
 
@@ -182,7 +178,6 @@ ApplicationWindow {
         if(currentSegment < segments.length - 1){
             currentSegment++
             bottomBar.updateCurrentSegment()
-            changeSegment(currentSegment)
            
         }
     }
@@ -191,8 +186,6 @@ ApplicationWindow {
         if(currentSegment > 0){
             currentSegment--
             bottomBar.updateCurrentSegment()
-            changeSegment(currentSegment)
-
         }
     }
 
