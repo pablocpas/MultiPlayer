@@ -8,7 +8,10 @@ from download_worker import DownloadWorker
 from datetime import datetime
 import os
 
-change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
+# Set the path to the ImageMagick binary
+# if windows
+if os.name == 'nt':
+    change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
 
 class VideoPlayer:
     def __init__(self, video_player):
@@ -131,8 +134,13 @@ class VideoHandler(QObject):
         segments = []
         
         for video_player in self._video_players.values():
-            if video_player.path:
+            if video_player.path:                
                 path = video_player.path.replace('file:///', '')  # Eliminar el prefijo 'file:///'
+
+                #if linux add / to the path
+                if os.name == 'posix':
+                    path = '/' + path
+
                 paths.append(path)
                 video_names.append(video_player.name)
                 segments.append(video_player.segments)
@@ -168,5 +176,5 @@ class VideoHandler(QObject):
                 combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], segment_clips[3]]])
 
             output_path = f"combined_video_segment_{segment_index + 1}.mp4"
-            combined.write_videofile(output_path, codec="libx264", threads=4)
+            combined.write_videofile(output_path, codec="libx264", threads=16)
             print(f"Video combinado guardado en {output_path}")
