@@ -5,6 +5,7 @@ from moviepy.config import change_settings
 import urllib.parse
 import numpy as np
 from download_worker import DownloadWorker
+from combine_worker import CombineWorker
 from datetime import datetime
 import os
 
@@ -29,6 +30,7 @@ class VideoHandler(QObject):
         self.thread = None
         self.worker = None
         self._video_players = {}
+
 
     @Slot(QObject, int)
     def registerVideoPlayer(self, video_player, player_id):
@@ -129,52 +131,13 @@ class VideoHandler(QObject):
 
     @Slot()
     def combine_videos(self):
-        paths = []
-        video_names = []
-        segments = []
-        
-        for video_player in self._video_players.values():
-            if video_player.path:                
-                path = video_player.path.replace('file:///', '')  # Eliminar el prefijo 'file:///'
+        self.thread = QThread()
+        print("Combinando videos... 111")
+        self.combine_worker = CombineWorker(self._video_players)
+        self.combine_worker.moveToThread(self.thread)
+        self.combine_worker.progress.connect(self.update_progress)
+        self.combine_worker.finished.connect(self.thread.quit)
+        self.combine_worker.finished.connect(lambda message: print(message))
 
-                #if linux add / to the path
-                if os.name == 'posix':
-                    path = '/' + path
-
-                paths.append(path)
-                video_names.append(video_player.name)
-                segments.append(video_player.segments)
-
-        clips = [VideoFileClip(path) for path in paths]
-
-        if len(clips) == 0:
-            print("No hay videos para combinar.")
-            return
-
-        for segment_index in range(len(segments[0])):
-            segment_clips = []
-            for i, clip in enumerate(clips):
-                start_time = segments[i][segment_index][0]
-                end_time = clip.duration
-                if segment_index < len(segments[i]) - 1:
-                    end_time = segments[i][segment_index + 1][0]
-                subclip = clip.subclip(start_time, end_time)
-
-                txt_clip_video_name = TextClip(video_names[i], fontsize=24, color='white').set_position(('center', 'top')).set_duration(subclip.duration)
-                txt_clip_segment_name = TextClip(segments[i][segment_index][1], fontsize=24, color='white').set_position(('center', 'bottom')).set_duration(subclip.duration)
-
-                labeled_clip = CompositeVideoClip([subclip, txt_clip_video_name, txt_clip_segment_name])
-                segment_clips.append(labeled_clip)
-
-            if len(segment_clips) == 1:
-                combined = segment_clips[0]
-            elif len(segment_clips) == 2:
-                combined = clips_array([[segment_clips[0], segment_clips[1]]])
-            elif len(segment_clips) == 3:
-                combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], None]])
-            elif len(segment_clips) >= 4:
-                combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], segment_clips[3]]])
-
-            output_path = f"combined_video_segment_{segment_index + 1}.mp4"
-            combined.write_videofile(output_path, codec="libx264", threads=16)
-            print(f"Video combinado guardado en {output_path}")
+        self.thread.started.connect(self.combine_worker.run)
+        self.thread.start()

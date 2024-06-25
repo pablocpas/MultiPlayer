@@ -2,11 +2,11 @@ import QtQuick
 import QtQuick.Controls
 
 Window {
-    id: progressWindow
+    id: exportingWindow
     visible: false
     width: 400
     height: 200
-    title: "Exportar vídeos"
+    title: "Exoratción en Progreso"
 
     ProgressBar {
         id: progressBar
@@ -25,7 +25,7 @@ Window {
         anchors.bottom: progressBar.top
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 10
-        text: qsTr("Descargando vídeo...")
+        text: qsTr("Exportando...")
         font.pixelSize: 19
     }
 
@@ -39,7 +39,7 @@ Window {
         function onFinished(file_path) {
             console.log("aaaaaaaeeeee")
             
-            progressWindow.close();  // Cerrar la ventana cuando la descarga finaliza
+            exportingWindow.close();  // Cerrar la ventana cuando la descarga finaliza
         }
 }
 

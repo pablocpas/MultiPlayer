@@ -53,6 +53,10 @@ ApplicationWindow {
         id: progressWindow
     }
 
+    Export {
+        id: exportWindow
+    }
+
     SegmentEditor {
         id: segmentEditor
     }
@@ -122,6 +126,7 @@ ApplicationWindow {
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
+                exportWindow.visible = true
                 videoHandler.combine_videos()
                 
             }
