@@ -128,9 +128,7 @@ ApplicationWindow {
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
             onClicked: {
-                exportWindow.visible = true
-                videoHandler.combine_videos()
-                
+                exportWindow.visible = true                
             }
     }
 

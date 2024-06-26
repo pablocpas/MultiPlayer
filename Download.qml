@@ -32,13 +32,10 @@ Window {
     Connections {
         target: videoHandler
         function onProgressUpdated(progress) {
-            console.log("Progress received: " + progress);
             progressBar.updateProgress(progress);
         }
 
-        function onFinished(file_path) {
-            console.log("aaaaaaaeeeee")
-            
+        function onFinished(file_path) {            
             progressWindow.close();  // Cerrar la ventana cuando la descarga finaliza
         }
 }

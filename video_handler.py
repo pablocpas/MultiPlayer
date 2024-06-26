@@ -141,3 +141,8 @@ class VideoHandler(QObject):
 
         self.thread.started.connect(self.combine_worker.run)
         self.thread.start()
+
+    @Slot()
+    def stop(self):
+        if self.thread:
+            self.combine_worker.stop()
