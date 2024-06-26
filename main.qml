@@ -15,6 +15,8 @@ ApplicationWindow {
     height: 720
     title: qsTr("Reproductor de Video")
 
+    visibility: mainWindow.isFullScreen ? Window.FullScreen : Window.Windowed
+
     property int numberOfPlayers: 2
     property int maxSegmentDuration: 0
     property bool hasVideo: false
@@ -140,7 +142,7 @@ ApplicationWindow {
         anchors.horizontalCenterOffset: -1
     }
 
-    function setVisible(visible) {
+    function setSegmentEditorVisibility(visible) {
         segmentEditor.visible = visible
     }
 

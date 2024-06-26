@@ -70,10 +70,8 @@ ToolBar {
             ToolTip.text: "Pantalla completa"
             onClicked: {
                 if (mainWindow.isFullScreen) {
-                    mainWindow.visibility = Window.Windowed
                     mainWindow.isFullScreen = false
                 } else {
-                    mainWindow.visibility = Window.FullScreen
                     mainWindow.isFullScreen = true
                 }
             }
@@ -199,8 +197,7 @@ ToolBar {
             ToolTip.text: "Gestionar segmentos"
 
             onClicked: {
-                console.log("Gestionar segmentos")
-                mainWindow.setVisible(true)
+                mainWindow.setSegmentEditorVisibility(true)
             }
         }
     }
