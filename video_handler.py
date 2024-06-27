@@ -74,7 +74,6 @@ class VideoHandler(QObject):
 
     @Slot(int)
     def update_progress(self, value):
-        print("Progress updating to:", value)
         self.progressUpdated.emit(value)
 
     @Slot(int, list, result='QVariantList')

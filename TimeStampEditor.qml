@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 
 Window {
     id: timestampEditor
-    width: 900
+    width: 950
     height: 400
     title: "Editar Timestamps de Segmentos"
     visible: false
@@ -14,20 +14,19 @@ Window {
     property string texto: ""
     property string path: ""
 
-    Shortcut{
+    Shortcut {
         sequence: "."
         onActivated: {
             incrustado.nextFrame()
         }
     }
 
-    Shortcut{
+    Shortcut {
         sequence: ","
         onActivated: {
             incrustado.previousFrame()
         }
     }
-
 
     RowLayout {
         anchors.fill: parent
@@ -37,18 +36,15 @@ Window {
         anchors.bottomMargin: 30
         spacing: 90
 
-
         // Primera columna: ListView
         ColumnLayout {
             width: parent.width / 2
 
-            
             Text {
-        id: title
-        text: "Selecciona el tiempo de inicio de cada segmento \n"
-        font.pixelSize: 12
-
-    }
+                id: title
+                text: "Selecciona el tiempo de inicio de cada segmento \n"
+                font.pixelSize: 12
+            }
 
             ListView {
                 id: segmentListView
@@ -81,9 +77,9 @@ Window {
                         TextField {
                             id: timestampField
                             text: model.timestamp
-                            Layout.preferredWidth: 60
-                            inputMask: "99:99"  // Máscara de entrada para asegurar el formato 00:00
-                            validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]$/ }  // Validador para reforzar el formato de tiempo correcto
+                            Layout.preferredWidth: 80
+                            inputMask: "99:99:999"  // Máscara de entrada para asegurar el formato 00:00:000
+                            validator: RegularExpressionValidator { regularExpression: /^(?:[0-5][0-9]):[0-5][0-9]:[0-9]{3}$/ }  // Validador para reforzar el formato de tiempo correcto
                             onTextChanged: {
                                 if (timestampField.text !== model.timestamp) {
                                     let timestampInSeconds = timeToSeconds(timestampField.text);
@@ -98,10 +94,13 @@ Window {
                             text: "Copiar"
                             onClicked: {
                                 let time = incrustado.position;
-                                let timestampInSeconds = time / 1000
+                                let timestampInSeconds = time / 1000;
                                 let minutes = Math.floor(time / 60000);
                                 let seconds = Math.floor((time % 60000) / 1000);
-                                let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                                let milliseconds = time % 1000;
+                                let formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+                                                    (seconds < 10 ? "0" + seconds : seconds) + ":" + 
+                                                    (milliseconds < 100 ? (milliseconds < 10 ? "00" + milliseconds : "0" + milliseconds) : milliseconds);
                                 segmentListModel.setProperty(index, "timestamp", formattedTime);
                                 segmentListModel.setProperty(index, "timestampInSeconds", timestampInSeconds);
                                 console.log("Copied time: " + timestampInSeconds);
@@ -136,6 +135,8 @@ Window {
                 Slider {
                     id: progressSlider
                     width: 400
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     Layout.preferredWidth: 380
                     from: 0
                     to: incrustado.duration
@@ -209,7 +210,7 @@ Window {
         console.log("segments numero: " + segments.length)
         for (var i = 0; i < segments.length; i++) {
             segmentListModel.append(segments[i])
-            segmentListModel.setProperty(i, "timestamp", "00:00")
+            segmentListModel.setProperty(i, "timestamp", "00:00:000")
             segmentListModel.setProperty(i, "timestampInSeconds", 0) // Inicializar con 0
         }
     }
@@ -218,12 +219,15 @@ Window {
         let totalSeconds = Math.floor(ms / 1000);
         let minutes = Math.floor(totalSeconds / 60);
         let seconds = totalSeconds % 60;
-        return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+        let milliseconds = Math.floor(ms % 1000); // Truncar los milisegundos a tres dígitos
+        return (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+               (seconds < 10 ? "0" + seconds : seconds) + ":" + 
+               (milliseconds < 100 ? (milliseconds < 10 ? "00" + milliseconds : "0" + milliseconds) : milliseconds);
     }
 
     function timeToSeconds(time) {
         let parts = time.split(":");
-        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]) + parseInt(parts[2]) / 1000;
     }
 
     function updateDurations() {
@@ -254,6 +258,6 @@ Window {
     }
 
     Component.onCompleted: {
-                        mainWindow.segmentsReady= 0
-                    }
+        mainWindow.segmentsReady = 0
+    }
 }

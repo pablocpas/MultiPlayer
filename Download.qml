@@ -29,6 +29,11 @@ Window {
         font.pixelSize: 19
     }
 
+
+    onVisibleChanged: {
+        progressBar.value = 0;
+    }
+
     Connections {
         target: videoHandler
         function onProgressUpdated(progress) {
@@ -38,8 +43,7 @@ Window {
         function onFinished(file_path) {            
             progressWindow.close();  // Cerrar la ventana cuando la descarga finaliza
         }
-}
-
+    }
 
 
 }

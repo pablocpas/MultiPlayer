@@ -114,7 +114,7 @@ Item {
             spacing: 10
 
             Button {
-                text: "Seleccionar Video " + (playerIndex)
+                text: "Seleccionar Video " + (playerIndex + 1)
                 visible: !videoLoaded
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {

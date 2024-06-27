@@ -8,6 +8,8 @@ Window {
     height: 200
     title: "Exportación en Progreso"
 
+    flags: Qt.Window | Qt.WindowTitleHint | Qt.WindowCloseButtonHint
+
     minimumWidth: 400
     minimumHeight: 200
     maximumWidth: 400
