@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 
 Window {
     id: exportingWindow
@@ -15,36 +16,50 @@ Window {
     maximumWidth: 400
     maximumHeight: 200
 
-    ProgressBar {
-        id: progressBar
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        width: parent.width - 40
-        height: 30
-        value: 0
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 10
 
-        function updateProgress(value) {
-            progressBar.value = value / 100
+        Text {
+            id: text1
+            text: qsTr("Exportando...")
+            font.pixelSize: 19
+            Layout.alignment: Qt.AlignHCenter
         }
-    }
 
-    Text {
-        id: text1
-        anchors.bottom: progressBar.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 10
-        text: qsTr("Exportando...")
-        font.pixelSize: 19
-    }
+        ProgressBar {
+            id: progressBar
+            width: parent.width - 40
+            height: 30
+            value: 0
+            Layout.alignment: Qt.AlignHCenter
 
-    Button {
-        id: cancelButton
-        text: qsTr("Cancelar")
-        anchors.top: progressBar.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 10
-        onClicked: {
-            confirmationDialog.open()
+            function updateProgress(value) {
+                progressBar.value = value / 100
+            }
+        }
+
+        Button {
+            id: cancelButton
+            text: qsTr("Cancelar")
+            Layout.alignment: Qt.AlignHCenter
+            onClicked: {
+                confirmationDialog.open()
+            }
+        }
+
+        Text {
+            id: finishedText
+            visible: false
+            wrapMode: Text.WordWrap
+            Layout.alignment: Qt.AlignHCenter
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    videoHandler.open_file_explorer(finishedText.text)
+                }
+            }
         }
     }
 
@@ -54,7 +69,7 @@ Window {
         modal: true
         standardButtons: Dialog.Yes | Dialog.No
         anchors.centerIn: parent
-        
+
         Text {
             text: qsTr("¿Estás seguro de que deseas cancelar la exportación?")
             wrapMode: Text.WordWrap
@@ -73,8 +88,10 @@ Window {
             progressBar.updateProgress(progress);
         }
 
-        function onFinished(file_path) {
-            exportingWindow.close();  // Cerrar la ventana cuando la exportación finaliza
+        function onFinishedCombine(file_path) {
+            //exportingWindow.visible = false;  // Cerrar la ventana cuando la exportación finaliza
+            finishedText.text = file_path;
+            finishedText.visible = true;
         }
     }
 

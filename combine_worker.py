@@ -115,7 +115,9 @@ class CombineWorker(QObject):
                 logger.update_current_segment()
                 print(f"Video combinado guardado en {output_path}")
 
-            self.finished.emit("All videos combined successfully.")
+            # Emitir la ruta absoluta
+            self.finished.emit(os.path.abspath(output_path))
+
         except CancellationException as ce:
             print(ce)
             self.finished.emit("Combining was cancelled.")

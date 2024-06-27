@@ -2,8 +2,8 @@ from PySide6.QtCore import QObject, Signal, Slot, QThread
 from PySide6.QtGui import QGuiApplication
 from moviepy.editor import VideoFileClip, clips_array, TextClip, CompositeVideoClip
 from moviepy.config import change_settings
-import urllib.parse
-import numpy as np
+import platform
+import subprocess
 from download_worker import DownloadWorker
 from combine_worker import CombineWorker
 from datetime import datetime
@@ -25,6 +25,7 @@ class VideoHandler(QObject):
     finished = Signal(str, int)
     progressUpdated = Signal(int)
 
+    finishedCombine = Signal(str)
     def __init__(self):
         super().__init__()
         self.thread = None
@@ -136,7 +137,7 @@ class VideoHandler(QObject):
         self.combine_worker.moveToThread(self.thread)
         self.combine_worker.progress.connect(self.update_progress)
         self.combine_worker.finished.connect(self.thread.quit)
-        self.combine_worker.finished.connect(lambda message: print(message))
+        self.combine_worker.finished.connect(lambda path: self.finishedCombine.emit(path))
 
         self.thread.started.connect(self.combine_worker.run)
         self.thread.start()
@@ -145,3 +146,17 @@ class VideoHandler(QObject):
     def stop(self):
         if self.thread:
             self.combine_worker.stop()
+
+    #usar esto con path:
+    #subprocess.Popen(r'explorer /select,"C:\Users\Pablo\Documents\tfg3\MultiPlayer\aaa,aaa_segment_1.mp4"')
+
+    @Slot(str)
+    def open_file_explorer(self, path):
+        path = os.path.normpath(path)
+        if platform.system() == "Windows":
+            subprocess.Popen(fr'explorer /select,"{path}"')
+
+        elif platform.system() == "Darwin":  # macOS
+            subprocess.run(["open", path])
+        else:  # Linux and other UNIX-like systems
+            subprocess.run(["xdg-open", path])
