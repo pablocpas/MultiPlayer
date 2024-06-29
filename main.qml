@@ -101,21 +101,21 @@ ApplicationWindow {
     /** type:bool Indica si el editor de segmentos está visible */
     property bool segmentEditorVisible: false
 
-    /** Ventana de descarga */
+    /** Componente ventana de descarga */
     Download {
         id: progressWindow
     }
-    /** Ventana de exportación */
+    /** Componente ventana de exportación */
     Export {
         id: exportWindow
     }
 
-    /** Editor de segmentos */
+    /** Componente ventana editor de segmentos */
     SegmentEditor {
         id: segmentEditor
     }
 
-    /** Shortcuts */
+    /** Componente atajos de teclado */
     Shortcuts {}
 
     ColumnLayout {
@@ -123,7 +123,7 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 15
 
-        /** Barra superior */
+        /** Componente barra superior */
         TopBar{
             id: topBar
             Layout.fillWidth: true
@@ -154,7 +154,7 @@ ApplicationWindow {
             }
         }
 
-        /** Barra inferior */
+        /** Componente barra inferior */
         BottomBar {
             id: bottomBar
             Layout.fillWidth: true
