@@ -48,6 +48,7 @@ Item {
     /** type:int Posición actual del video */
     property int position: videoPlayer.position
 
+    /** Editor de marcas de tiempo */
     TimeStampEditor {
         id: timeStampEditor
         visible: false
@@ -80,6 +81,7 @@ Item {
             }
         }
 
+        /** Reproductor de video */
         VideoPlayer {
             id: videoPlayer
             anchors.fill: parent
@@ -231,6 +233,7 @@ Item {
         }
     }
 
+    /** Diálogo de Youtube */
     Dialog {
         id: youtubeDialog
         title: "Introduce la URL de Youtube"

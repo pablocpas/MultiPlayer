@@ -101,18 +101,21 @@ ApplicationWindow {
     /** type:bool Indica si el editor de segmentos está visible */
     property bool segmentEditorVisible: false
 
+    /** Ventana de descarga */
     Download {
         id: progressWindow
     }
-
+    /** Ventana de exportación */
     Export {
         id: exportWindow
     }
 
+    /** Editor de segmentos */
     SegmentEditor {
         id: segmentEditor
     }
 
+    /** Shortcuts */
     Shortcuts {}
 
     ColumnLayout {
@@ -120,11 +123,13 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 15
 
+        /** Barra superior */
         TopBar{
             id: topBar
             Layout.fillWidth: true
         }
 
+        /** Reproductores de video */
         GridLayout {
             id: grid
             Layout.fillWidth: true
@@ -149,12 +154,14 @@ ApplicationWindow {
             }
         }
 
+        /** Barra inferior */
         BottomBar {
             id: bottomBar
             Layout.fillWidth: true
         }
     }
 
+    /** Botón de descarga */
     Button {
         icon.source: "./images/download.svg"
         visible: true
