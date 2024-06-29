@@ -11,6 +11,7 @@ ToolBar {
     height: 90
 
     property int currentIndex: mainWindow.currentSegment
+    property int numberOfSegments: mainWindow.segments.length
 
 
     background: Rectangle {
@@ -203,7 +204,7 @@ ToolBar {
     }
 
     function updateCurrentSegment() {
-        currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description
+        currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
     }
 
     Connections  {
