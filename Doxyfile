@@ -10,15 +10,19 @@ INPUT                  = ./main.qml \
                          ./SegmentsEditor.qml \
                          ./Shortcuts.qml \
                          ./TimeStampEditor.qml \
-                         ./Download.qml
+                         ./Download.qml \
+                         ./Export.qml \
 FILE_PATTERNS          = *.qml
 RECURSIVE              = YES
+OUTPUT_LANGUAGE        = Spanish
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 FILTER_PATTERNS        = *.qml=doxyqml
 EXTENSION_MAPPING      = qml=C++
+GENERATE_LATEX = YES
 GENERATE_HTML          = YES
-GENERATE_LATEX         = NO
 GENERATE_MAN           = NO
 GENERATE_RTF           = NO
 GENERATE_XML           = NO
+USE_PDFLATEX = YES
+

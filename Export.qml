@@ -1,7 +1,12 @@
+// Export.qml
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
+/**
+ * Ventana para mostrar el progreso de la exportación de videos.
+ */
 Window {
     id: exportingWindow
     visible: false
@@ -34,6 +39,10 @@ Window {
             value: 0
             Layout.alignment: Qt.AlignHCenter
 
+            /**
+             * Actualiza el progreso de la barra de progreso.
+             * @param value Valor del progreso.
+             */
             function updateProgress(value) {
                 progressBar.value = value / 100
             }
@@ -84,10 +93,18 @@ Window {
 
     Connections {
         target: videoHandler
+        /**
+         * Actualiza el progreso de la exportación.
+         * @param progress Progreso actual de la exportación.
+         */
         function onProgressUpdated(progress) {
             progressBar.updateProgress(progress);
         }
 
+        /**
+         * Acción realizada cuando la combinación de videos finaliza.
+         * @param file_path Ruta del archivo exportado.
+         */
         function onFinishedCombine(file_path) {
             //exportingWindow.visible = false;  // Cerrar la ventana cuando la exportación finaliza
             finishedText.text = file_path;
@@ -95,6 +112,9 @@ Window {
         }
     }
 
+    /**
+     * Inicia la combinación de videos cuando la ventana se hace visible.
+     */
     onVisibleChanged: {
         if (visible) {
             videoHandler.combine_videos()

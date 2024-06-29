@@ -1,7 +1,12 @@
+// TimeStampEditor.qml
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
+/**
+ * Ventana para editar los timestamps de los segmentos de video.
+ */
 Window {
     id: timestampEditor
     width: 950
@@ -9,13 +14,20 @@ Window {
     title: "Editar Timestamps de Segmentos"
     visible: false
 
+    /** type:var Lista de segmentos */
     property var segments
+    /** type:string Ruta del video */
     property string videoPath: ""
+    /** type:string Texto descriptivo */
     property string texto: ""
+    /** type:string Ruta adicional */
     property string path: ""
 
     Shortcut {
         sequence: "."
+        /**
+         * Avanza al siguiente cuadro del video cuando se presiona el atajo.
+         */
         onActivated: {
             incrustado.nextFrame()
         }
@@ -23,6 +35,9 @@ Window {
 
     Shortcut {
         sequence: ","
+        /**
+         * Retrocede al cuadro anterior del video cuando se presiona el atajo.
+         */
         onActivated: {
             incrustado.previousFrame()
         }
@@ -92,6 +107,9 @@ Window {
 
                         Button {
                             text: "Copiar"
+                            /**
+                             * Copia la posición actual del video al campo de timestamp.
+                             */
                             onClicked: {
                                 let time = incrustado.position;
                                 let timestampInSeconds = time / 1000;
@@ -129,7 +147,6 @@ Window {
 
             RowLayout {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-
                 spacing: 10
 
                 Slider {
@@ -141,6 +158,9 @@ Window {
                     from: 0
                     to: incrustado.duration
                     value: incrustado.position
+                    /**
+                     * Actualiza la posición del video y el indicador de tiempo al cambiar el valor del slider.
+                     */
                     onValueChanged: {
                         incrustado.seek(progressSlider.value)
                         timeIndicator.text = formatTime(progressSlider.value)
@@ -180,6 +200,9 @@ Window {
                 Button {
                     text: "Guardar"
                     Layout.alignment: Qt.AlignHCenter
+                    /**
+                     * Guarda los timestamps y cierra el editor.
+                     */
                     onClicked: {
                         saveTimestamps()
                         timestampEditor.visible = false
@@ -189,6 +212,9 @@ Window {
         }
     }
 
+    /**
+     * Guarda los timestamps actuales en el modelo de segmentos y actualiza el reproductor de video.
+     */
     function saveTimestamps() {
         let segmentsArray = []
         for (let i = 0; i < segmentListModel.count; i++) {
@@ -204,6 +230,10 @@ Window {
         console.log("video name: " + videoPlayerComponent.videoName)
     }
 
+    /**
+     * Actualiza los segmentos en el editor con los nuevos segmentos proporcionados.
+     * @param type:var newSegments Nuevos segmentos.
+     */
     function updateSegments(newSegments) {
         segments = newSegments
         segmentListModel.clear()
@@ -215,6 +245,11 @@ Window {
         }
     }
 
+    /**
+     * Formatea el tiempo en milisegundos a un string en el formato mm:ss:SSS.
+     * @param type:int ms Tiempo en milisegundos.
+     * @return type:string Tiempo formateado.
+     */
     function formatTime(ms) {
         let totalSeconds = Math.floor(ms / 1000);
         let minutes = Math.floor(totalSeconds / 60);
@@ -225,11 +260,19 @@ Window {
                (milliseconds < 100 ? (milliseconds < 10 ? "00" + milliseconds : "0" + milliseconds) : milliseconds);
     }
 
+    /**
+     * Convierte el tiempo en formato mm:ss:SSS a segundos.
+     * @param type:string time Tiempo en formato mm:ss:SSS.
+     * @return type:real Tiempo en segundos.
+     */
     function timeToSeconds(time) {
         let parts = time.split(":");
         return parseInt(parts[0]) * 60 + parseInt(parts[1]) + parseInt(parts[2]) / 1000;
     }
 
+    /**
+     * Actualiza la duración de cada segmento basado en los timestamps.
+     */
     function updateDurations() {
         let count = segmentListModel.count;
         let videoDurationInSeconds = incrustado.duration / 1000;
@@ -240,7 +283,6 @@ Window {
 
             if (nextTimestamp) {
                 duration = nextTimestamp - currentTimestamp;
-
                 console.log("duraciones: " + duration + " " + currentTimestamp + " " + nextTimestamp)
             } else {
                 // Calculate duration for the last segment relative to the video end
@@ -250,6 +292,9 @@ Window {
         }
     }
 
+    /**
+     * Resetea el video al inicio y lo pausa al cambiar la visibilidad de la ventana.
+     */
     onVisibleChanged: {
         if (visible) {
             incrustado.seek(0)
@@ -257,6 +302,9 @@ Window {
         }
     }
 
+    /**
+     * Inicializa la propiedad segmentsReady de mainWindow al completar el componente.
+     */
     Component.onCompleted: {
         mainWindow.segmentsReady = 0
     }

@@ -4,15 +4,19 @@ import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
+/**
+ * Barra de herramientas inferior del reproductor de video.
+ */
 ToolBar {
     id: bottomBar
     width: 800
     Layout.fillWidth: true
     height: 90
 
+    /** type:int Índice del segmento actual */
     property int currentIndex: mainWindow.currentSegment
+    /** type:int Número de segmentos */
     property int numberOfSegments: mainWindow.segments.length
-
 
     background: Rectangle {
         implicitHeight: 90
@@ -32,16 +36,16 @@ ToolBar {
             Layout.fillWidth: true
             Layout.preferredHeight: 30
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            /**
+             * Busca la posición en todos los videos cuando se mueve el slider.
+             */
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
             }
-
-            
         }
-
     }
 
-    RowLayout{
+    RowLayout {
         y: 53
         x: 35
         Text {
@@ -49,11 +53,10 @@ ToolBar {
             text: "Segmento actual: "
             font.pixelSize: 19
             color: "#c5c5c5"
-
         }
     }
 
-    RowLayout{
+    RowLayout {
         x: controlButtons.x - 60
         y: 36
         Button {
@@ -69,6 +72,9 @@ ToolBar {
             ToolTip.timeout: 5000
             ToolTip.visible: hovered
             ToolTip.text: "Pantalla completa"
+            /**
+             * Alterna entre pantalla completa y ventana.
+             */
             onClicked: {
                 if (mainWindow.isFullScreen) {
                     mainWindow.isFullScreen = false
@@ -79,9 +85,9 @@ ToolBar {
         }
     }
 
-    RowLayout{
+    RowLayout {
         id: controlButtons
-        y:36
+        y: 36
         anchors.horizontalCenter: parent.horizontalCenter
 
         Button {
@@ -100,10 +106,12 @@ ToolBar {
             icon.height: 36
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            /**
+             * Reproduce el segmento anterior.
+             */
             onClicked: {
                 mainWindow.playPreviousSegment()
                 mainWindow.previousSegment()
-            
             }
         }
 
@@ -112,6 +120,9 @@ ToolBar {
             checkable: true
             id: playButton
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            /**
+             * Reproduce o pausa todos los videos.
+             */
             onClicked: {
                 if (playButton.checked) {
                     mainWindow.playAll()
@@ -127,6 +138,9 @@ ToolBar {
             icon.width: 36
             icon.height: 36
             icon.color: "transparent"
+            /**
+             * Cambia el ícono entre reproducir y pausar según el estado.
+             */
             onCheckedChanged: {
                 icon.source = checked ? "./images/pause.svg" : "./images/play.svg"
             }
@@ -147,10 +161,12 @@ ToolBar {
             icon.height: 36
             icon.color: "transparent"
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
+            /**
+             * Reproduce el siguiente segmento.
+             */
             onClicked: {
                 mainWindow.playNextSegment()
                 mainWindow.nextSegment()
-            
             }
         }
     }
@@ -158,9 +174,7 @@ ToolBar {
     RowLayout {
         y: 36
         x: controlButtons.x + 190
-
         spacing: 20
-
 
         ComboBox {
             id: speedSelector
@@ -173,7 +187,9 @@ ToolBar {
             ToolTip.timeout: 5000
             ToolTip.visible: hovered
             ToolTip.text: "Velocidad de reproducción"
-
+            /**
+             * Cambia la velocidad de reproducción.
+             */
             onActivated: {
                 mainWindow.speed = currentText.split("x")[0]
                 mainWindow.speedChange(mainWindow.speed)
@@ -196,23 +212,34 @@ ToolBar {
             ToolTip.timeout: 5000
             ToolTip.visible: hovered
             ToolTip.text: "Gestionar segmentos"
-
+            /**
+             * Abre el editor de segmentos.
+             */
             onClicked: {
                 mainWindow.setSegmentEditorVisibility(true)
             }
         }
     }
 
+    /**
+     * Actualiza el texto del segmento actual en la barra inferior.
+     */
     function updateCurrentSegment() {
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
     }
 
-    Connections  {
+    Connections {
         target: mainWindow
+        /**
+         * Actualiza el estado del botón de reproducción cuando el video está reproduciéndose.
+         */
         function onPlaying() {
             playButton.checked = true
         }
 
+        /**
+         * Actualiza el estado del botón de reproducción cuando el video está en pausa.
+         */
         function onPausa() {
             playButton.checked = false
         }

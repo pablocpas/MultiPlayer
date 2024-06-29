@@ -1,14 +1,24 @@
+// segmentEditor.qml
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+/**
+ * Ventana para editar los segmentos de video.
+ */
 Window {
     id: segmentEditor
     width: 600
     height: 400
     title: "Editar Segmentos"
 
+    /** type:var Lista de segmentos */
     property var segments
+    /**
+     * Señal emitida cuando los segmentos son actualizados.
+     * @param segments Lista de segmentos actualizados.
+     */
     signal segmentsUpdated(var segments)
 
     ColumnLayout {
@@ -65,23 +75,30 @@ Window {
                     }
                     Button {
                         text: "Eliminar"
+                        /**
+                         * Elimina el segmento actual de la lista.
+                         */
                         onClicked: segmentListModel.remove(index)
                     }
                 }
 
+                /**
+                 * Selecciona todo el texto del campo de nombre y enfoca el campo.
+                 */
                 function selectAll() {
                     nameField.selectAll()
                     nameField.forceActiveFocus()
                 }
-
             }
-
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             Button {
                 text: "Agregar Segmento"
+                /**
+                 * Agrega un nuevo segmento a la lista.
+                 */
                 onClicked: {
                     // Obtener el número del próximo segmento
                     let nextSegmentNumber = segmentListModel.count + 1;
@@ -90,20 +107,26 @@ Window {
                         "timestamp": ""
                     });
 
-                        segmentListView.forceLayout(); // Actualiza el ListView
+                    segmentListView.forceLayout(); // Actualiza el ListView
 
-                        let newItem = segmentListView.itemAtIndex(segmentListModel.count - 1)
-                        if (newItem) {
-                            newItem.selectAll()
-                        }
+                    let newItem = segmentListView.itemAtIndex(segmentListModel.count - 1)
+                    if (newItem) {
+                        newItem.selectAll()
+                    }
                 }
             }
             Button {
                 text: "Guardar"
+                /**
+                 * Guarda los segmentos actuales.
+                 */
                 onClicked: saveSegments()
             }
             Button {
                 text: "Cancelar"
+                /**
+                 * Cancela la edición y cierra el editor de segmentos.
+                 */
                 onClicked: {
                     segmentEditor.visible = false
                     segmentListModel.clear()
@@ -112,6 +135,9 @@ Window {
         }
     }
 
+    /**
+     * Guarda los segmentos actuales en el modelo de segmentos y actualiza el estado de la ventana principal.
+     */
     function saveSegments() {
         let segmentsArray = []
         for (let i = 0; i < segmentListModel.count; i++) {
