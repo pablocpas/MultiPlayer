@@ -1,5 +1,10 @@
 // Download.qml
 
+/** \addtogroup frontend
+ * @{
+ */
+
+
 import QtQuick
 import QtQuick.Controls
 
@@ -65,3 +70,5 @@ Window {
         }
     }
 }
+
+/** @} */

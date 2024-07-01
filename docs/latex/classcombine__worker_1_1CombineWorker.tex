@@ -1,0 +1,118 @@
+\doxysection{Referencia de la clase combine\+\_\+worker.\+Combine\+Worker}
+\hypertarget{classcombine__worker_1_1CombineWorker}{}\label{classcombine__worker_1_1CombineWorker}\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+Diagrama de herencia de combine\+\_\+worker.\+Combine\+Worker\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcombine__worker_1_1CombineWorker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_af7c65c21ca1ad06c499b0834c50abd83}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, video\+\_\+players)
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a13fbd92d0add91c36367bfbf32d1048f}{is\+\_\+running}} (self)
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a9f5433937475cfa6fd4f7d9bf719a189}{run}} (self)
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_acf65d210aa431dd305b491920d06a642}{stop}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a8076f14985a22d86f279dfd9260afaa7}{progress}} = Signal(int)
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a4343c9bfa33c5ee02fcb5bc5375cbce9}{finished}} = Signal(str)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a6705097273cf5ffe03701654f7676346}{\+\_\+video\+\_\+players}}
+\item 
+\mbox{\hyperlink{classcombine__worker_1_1CombineWorker_a43f875b009cbce085e563d057d9f32e6}{\+\_\+is\+\_\+running}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Clase para manejar la combinación de videos.
+
+Señales:
+    progress(int): Emitida para actualizar el progreso de la combinación.
+    finished(str): Emitida cuando la combinación de videos ha terminado.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classcombine__worker_1_1CombineWorker_af7c65c21ca1ad06c499b0834c50abd83}\label{classcombine__worker_1_1CombineWorker_af7c65c21ca1ad06c499b0834c50abd83} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{video\+\_\+players }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa el CombineWorker con los reproductores de video.
+
+Args:
+    video_players: Diccionario de reproductores de video.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcombine__worker_1_1CombineWorker_a13fbd92d0add91c36367bfbf32d1048f}\label{classcombine__worker_1_1CombineWorker_a13fbd92d0add91c36367bfbf32d1048f} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!is\_running@{is\_running}}
+\index{is\_running@{is\_running}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{is\_running()}{is\_running()}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+is\+\_\+running (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Verifica si el proceso de combinación está en ejecución.
+
+Returns:
+    bool: Verdadero si el proceso está en ejecución, falso de lo contrario.
+\end{DoxyVerb}
+ \Hypertarget{classcombine__worker_1_1CombineWorker_a9f5433937475cfa6fd4f7d9bf719a189}\label{classcombine__worker_1_1CombineWorker_a9f5433937475cfa6fd4f7d9bf719a189} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!run@{run}}
+\index{run@{run}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ejecuta el proceso de combinación de videos.
+\end{DoxyVerb}
+ \Hypertarget{classcombine__worker_1_1CombineWorker_acf65d210aa431dd305b491920d06a642}\label{classcombine__worker_1_1CombineWorker_acf65d210aa431dd305b491920d06a642} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!stop@{stop}}
+\index{stop@{stop}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+stop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Detiene el proceso de combinación de videos.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcombine__worker_1_1CombineWorker_a43f875b009cbce085e563d057d9f32e6}\label{classcombine__worker_1_1CombineWorker_a43f875b009cbce085e563d057d9f32e6} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!\_is\_running@{\_is\_running}}
+\index{\_is\_running@{\_is\_running}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{\_is\_running}{\_is\_running}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+\_\+is\+\_\+running\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcombine__worker_1_1CombineWorker_a6705097273cf5ffe03701654f7676346}\label{classcombine__worker_1_1CombineWorker_a6705097273cf5ffe03701654f7676346} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!\_video\_players@{\_video\_players}}
+\index{\_video\_players@{\_video\_players}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{\_video\_players}{\_video\_players}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+\_\+video\+\_\+players\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcombine__worker_1_1CombineWorker_a4343c9bfa33c5ee02fcb5bc5375cbce9}\label{classcombine__worker_1_1CombineWorker_a4343c9bfa33c5ee02fcb5bc5375cbce9} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!finished@{finished}}
+\index{finished@{finished}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{finished}{finished}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+finished = Signal(str)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcombine__worker_1_1CombineWorker_a8076f14985a22d86f279dfd9260afaa7}\label{classcombine__worker_1_1CombineWorker_a8076f14985a22d86f279dfd9260afaa7} 
+\index{combine\_worker.CombineWorker@{combine\_worker.CombineWorker}!progress@{progress}}
+\index{progress@{progress}!combine\_worker.CombineWorker@{combine\_worker.CombineWorker}}
+\doxysubsubsection{\texorpdfstring{progress}{progress}}
+{\footnotesize\ttfamily combine\+\_\+worker.\+Combine\+Worker.\+progress = Signal(int)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{combine__worker_8py}{combine\+\_\+worker.\+py}}\end{DoxyCompactItemize}

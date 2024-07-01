@@ -1,5 +1,10 @@
 // TopBar.qml
 
+/** \addtogroup frontend
+ * @{
+ */
+
+
 import QtQuick 6.5
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -136,3 +141,5 @@ ToolBar {
         }
     }
 }
+
+/** @} */

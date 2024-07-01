@@ -1,5 +1,10 @@
 // VideoPlayer.qml
 
+/** \addtogroup frontend
+ * @{
+ */
+
+
 import QtQuick
 import QtMultimedia
 
@@ -152,3 +157,5 @@ Item {
         setPlaybackRate(2.0);
     }
 }
+
+/** @} */

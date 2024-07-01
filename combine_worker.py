@@ -4,12 +4,27 @@ import os
 from proglog import ProgressBarLogger
 import multiprocessing
 
+## @ingroup python
 class CancellationException(Exception):
+    """
+    Excepción personalizada para manejar la cancelación del proceso de combinación de videos.
+    """
     pass
 
+## @ingroup python
 class MyCombineLogger(ProgressBarLogger):
-    
+    """
+    Logger personalizado para manejar el progreso de la combinación de videos.
+    """
     def __init__(self, signal, total_segments, combine_worker):
+        """
+        Inicializa el MyCombineLogger con las señales y el número total de segmentos.
+
+        Args:
+            signal: Señal para emitir el progreso.
+            total_segments: Número total de segmentos a combinar.
+            combine_worker: Instancia de CombineWorker.
+        """
         super().__init__()
         self.progress_signal = signal
         self.total_segments = total_segments
@@ -17,34 +32,75 @@ class MyCombineLogger(ProgressBarLogger):
         self.combine_worker = combine_worker
 
     def callback(self, **changes):
+        """
+        Callback para manejar cambios en los parámetros de progreso.
+
+        Args:
+            changes: Diccionario con los cambios en los parámetros.
+        """
         for (parameter, value) in changes.items():
-            print ('Parameter %s is now %s' % (parameter, value))
+            print ('Parámetro %s ahora es %s' % (parameter, value))
     
     def bars_callback(self, bar, attr, value, old_value=None):
+        """
+        Callback para manejar cambios en las barras de progreso.
+
+        Args:
+            bar: Barra de progreso.
+            attr: Atributo de la barra.
+            value: Valor actual del atributo.
+            old_value: Valor anterior del atributo.
+        """
         if not self.combine_worker.is_running():
-            raise CancellationException('Combining cancelled')
+            raise CancellationException('Combinación cancelada')
         if bar == 't':
             segment_progress = (value / self.bars[bar]['total']) * 100
             global_progress = ((self.current_segment + segment_progress / 100) / self.total_segments) * 100
             self.progress_signal.emit(int(global_progress))
 
     def update_current_segment(self):
+        """
+        Actualiza el segmento actual incrementando en uno.
+        """
         self.current_segment += 1
 
+## @ingroup python
 class CombineWorker(QObject):
+    """
+    Clase para manejar la combinación de videos.
+    
+    Señales:
+        progress(int): Emitida para actualizar el progreso de la combinación.
+        finished(str): Emitida cuando la combinación de videos ha terminado.
+    """
     progress = Signal(int)
     finished = Signal(str)
 
     def __init__(self, video_players):
+        """
+        Inicializa el CombineWorker con los reproductores de video.
+
+        Args:
+            video_players: Diccionario de reproductores de video.
+        """
         super().__init__()
         self._video_players = video_players
         self._is_running = True  # Variable de control para cancelar
 
     def is_running(self):
+        """
+        Verifica si el proceso de combinación está en ejecución.
+
+        Returns:
+            bool: Verdadero si el proceso está en ejecución, falso de lo contrario.
+        """
         return self._is_running
 
     @Slot()
     def run(self):
+        """
+        Ejecuta el proceso de combinación de videos.
+        """
         try:
             print("Combinando videos...")
 
@@ -76,12 +132,12 @@ class CombineWorker(QObject):
 
             for segment_index in range(total_segments):
                 if not self._is_running:
-                    raise CancellationException('Combining cancelled')
+                    raise CancellationException('Combinación cancelada')
 
                 segment_clips = []
                 for i, clip in enumerate(clips):
                     if not self._is_running:
-                        raise CancellationException('Combining cancelled')
+                        raise CancellationException('Combinación cancelada')
 
                     start_time = segments[i][segment_index][0]
                     end_time = clip.duration
@@ -105,7 +161,7 @@ class CombineWorker(QObject):
                     combined = clips_array([[segment_clips[0], segment_clips[1]], [segment_clips[2], segment_clips[3]]])
 
                 if not self._is_running:
-                    raise CancellationException('Combining cancelled')
+                    raise CancellationException('Combinación cancelada')
 
                 video_name_str = ','.join(video_names)
                 output_path = f"{video_name_str}_segment_{segment_index + 1}.mp4"
@@ -122,8 +178,11 @@ class CombineWorker(QObject):
             print(ce)
             self.finished.emit("Combining was cancelled.")
         except Exception as e:
-            print(f"Failed to combine videos: {e}")
+            print(f"Error al combinar videos: {e}")
             self.finished.emit(None)
 
     def stop(self):
+        """
+        Detiene el proceso de combinación de videos.
+        """
         self._is_running = False

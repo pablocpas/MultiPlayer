@@ -1,4 +1,9 @@
 // Shortcuts.qml
+
+/** \addtogroup frontend
+ * @{
+ */
+
 import QtQuick
 
 /**
@@ -117,3 +122,5 @@ Item {
         }
     }
 }
+
+/** @} */

@@ -1,0 +1,118 @@
+\doxysection{Referencia de la clase download\+\_\+worker.\+Download\+Worker}
+\hypertarget{classdownload__worker_1_1DownloadWorker}{}\label{classdownload__worker_1_1DownloadWorker}\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+Diagrama de herencia de download\+\_\+worker.\+Download\+Worker\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdownload__worker_1_1DownloadWorker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_a911c35abf283f94a665d4e299d0630ab}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_ad924d64710502d423e836bfdcea23730}{url}}, \mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_ac3e1a9faf350ab3d57932dc20be1d401}{output\+\_\+path}}, \mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_a7f9a7c2aff8f6dc7c6d358ed43a327e8}{filename}})
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_a46a2293703274ddc18d610256b738a0c}{run}} (self)
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_adb7fbbbe067f7ea507588a8cf3308378}{progress\+\_\+hook}} (self, d)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_ad924d64710502d423e836bfdcea23730}{url}}
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_ac3e1a9faf350ab3d57932dc20be1d401}{output\+\_\+path}}
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_a7f9a7c2aff8f6dc7c6d358ed43a327e8}{filename}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_acc16c8f565c3cbf7fba367d021ae76cf}{finished}} = Signal(str)
+\item 
+\mbox{\hyperlink{classdownload__worker_1_1DownloadWorker_ada6299c1cf3f0ef230e4d6efcb0d80a5}{progress}} = Signal(int)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Clase para manejar la descarga de videos utilizando yt-dlp.
+
+Señales:
+    finished(str): Emitida cuando la descarga del video ha terminado.
+    progress(int): Emitida para actualizar el progreso de la descarga.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classdownload__worker_1_1DownloadWorker_a911c35abf283f94a665d4e299d0630ab}\label{classdownload__worker_1_1DownloadWorker_a911c35abf283f94a665d4e299d0630ab} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{output\+\_\+path,  }\item[{}]{filename }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa el DownloadWorker con la URL del video, la ruta de salida y el nombre del archivo.
+
+Args:
+    url: La URL del video para descargar.
+    output_path: La ruta donde se guardará el video descargado.
+    filename: El nombre del archivo para el video descargado.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classdownload__worker_1_1DownloadWorker_adb7fbbbe067f7ea507588a8cf3308378}\label{classdownload__worker_1_1DownloadWorker_adb7fbbbe067f7ea507588a8cf3308378} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!progress\_hook@{progress\_hook}}
+\index{progress\_hook@{progress\_hook}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{progress\_hook()}{progress\_hook()}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+progress\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{d }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Hook de progreso para la descarga del video.
+
+Args:
+    d: Diccionario con la información de progreso.
+\end{DoxyVerb}
+ \Hypertarget{classdownload__worker_1_1DownloadWorker_a46a2293703274ddc18d610256b738a0c}\label{classdownload__worker_1_1DownloadWorker_a46a2293703274ddc18d610256b738a0c} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!run@{run}}
+\index{run@{run}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ejecuta la descarga del video.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classdownload__worker_1_1DownloadWorker_a7f9a7c2aff8f6dc7c6d358ed43a327e8}\label{classdownload__worker_1_1DownloadWorker_a7f9a7c2aff8f6dc7c6d358ed43a327e8} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!filename@{filename}}
+\index{filename@{filename}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{filename}{filename}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+filename}
+
+\Hypertarget{classdownload__worker_1_1DownloadWorker_acc16c8f565c3cbf7fba367d021ae76cf}\label{classdownload__worker_1_1DownloadWorker_acc16c8f565c3cbf7fba367d021ae76cf} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!finished@{finished}}
+\index{finished@{finished}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{finished}{finished}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+finished = Signal(str)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classdownload__worker_1_1DownloadWorker_ac3e1a9faf350ab3d57932dc20be1d401}\label{classdownload__worker_1_1DownloadWorker_ac3e1a9faf350ab3d57932dc20be1d401} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!output\_path@{output\_path}}
+\index{output\_path@{output\_path}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{output\_path}{output\_path}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+output\+\_\+path}
+
+\Hypertarget{classdownload__worker_1_1DownloadWorker_ada6299c1cf3f0ef230e4d6efcb0d80a5}\label{classdownload__worker_1_1DownloadWorker_ada6299c1cf3f0ef230e4d6efcb0d80a5} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!progress@{progress}}
+\index{progress@{progress}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{progress}{progress}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+progress = Signal(int)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classdownload__worker_1_1DownloadWorker_ad924d64710502d423e836bfdcea23730}\label{classdownload__worker_1_1DownloadWorker_ad924d64710502d423e836bfdcea23730} 
+\index{download\_worker.DownloadWorker@{download\_worker.DownloadWorker}!url@{url}}
+\index{url@{url}!download\_worker.DownloadWorker@{download\_worker.DownloadWorker}}
+\doxysubsubsection{\texorpdfstring{url}{url}}
+{\footnotesize\ttfamily download\+\_\+worker.\+Download\+Worker.\+url}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{download__worker_8py}{download\+\_\+worker.\+py}}\end{DoxyCompactItemize}

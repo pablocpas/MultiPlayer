@@ -1,0 +1,1001 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MultiPlayer: Frontend</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">MultiPlayer
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Clases</a> &#124;
+<a href="#var-members">Variables</a> &#124;
+<a href="#prop-members">Propiedades</a>  </div>
+  <div class="headertitle"><div class="title">Frontend</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain.html">main</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVideoPlayerComponent.html">VideoPlayerComponent</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVideoPlayer.html">VideoPlayer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBottomBar.html">BottomBar</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTopBar.html">TopBar</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShortcuts.html">Shortcuts</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeStampEditor.html">TimeStampEditor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDownload.html">Download</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExport.html">Export</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gab58a6db4656899e4daefff0777234b1b" id="r_gab58a6db4656899e4daefff0777234b1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTimeStampEditor.html">TimeStampEditor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab58a6db4656899e4daefff0777234b1b">VideoPlayerComponent::timeStampEditor</a></td></tr>
+<tr class="separator:gab58a6db4656899e4daefff0777234b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafa8d294d9f66f54c59ab45c4a6137da4" id="r_gafa8d294d9f66f54c59ab45c4a6137da4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVideoPlayer.html">VideoPlayer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gafa8d294d9f66f54c59ab45c4a6137da4">VideoPlayerComponent::videoPlayer</a></td></tr>
+<tr class="separator:gafa8d294d9f66f54c59ab45c4a6137da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga395b55568280a74b8dbe56898431306f" id="r_ga395b55568280a74b8dbe56898431306f"><td class="memItemLeft" align="right" valign="top">Image&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga395b55568280a74b8dbe56898431306f">VideoPlayerComponent::dragIcon</a></td></tr>
+<tr class="separator:ga395b55568280a74b8dbe56898431306f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8cbebc9a82cf6706352eee717149e363" id="r_ga8cbebc9a82cf6706352eee717149e363"><td class="memItemLeft" align="right" valign="top">ColumnLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8cbebc9a82cf6706352eee717149e363">VideoPlayerComponent::buttonLayout</a></td></tr>
+<tr class="separator:ga8cbebc9a82cf6706352eee717149e363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0adf6871475e85186ef48729168907dc" id="r_ga0adf6871475e85186ef48729168907dc"><td class="memItemLeft" align="right" valign="top">Button&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0adf6871475e85186ef48729168907dc">VideoPlayerComponent::muteButton</a></td></tr>
+<tr class="separator:ga0adf6871475e85186ef48729168907dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga502af5e86f72328dbc2b3e3f6f8470b6" id="r_ga502af5e86f72328dbc2b3e3f6f8470b6"><td class="memItemLeft" align="right" valign="top">Row&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga502af5e86f72328dbc2b3e3f6f8470b6">VideoPlayerComponent::inputRow</a></td></tr>
+<tr class="separator:ga502af5e86f72328dbc2b3e3f6f8470b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac231e077b53550370cf18ce4cb5e9040" id="r_gac231e077b53550370cf18ce4cb5e9040"><td class="memItemLeft" align="right" valign="top">TextEdit&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gac231e077b53550370cf18ce4cb5e9040">VideoPlayerComponent::tedit_videoName</a></td></tr>
+<tr class="separator:gac231e077b53550370cf18ce4cb5e9040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73446960013d128cc2411efb53e48e6b" id="r_ga73446960013d128cc2411efb53e48e6b"><td class="memItemLeft" align="right" valign="top">Button&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga73446960013d128cc2411efb53e48e6b">VideoPlayerComponent::button</a></td></tr>
+<tr class="separator:ga73446960013d128cc2411efb53e48e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa65aad2e4ff062b300c1232984731618" id="r_gaa65aad2e4ff062b300c1232984731618"><td class="memItemLeft" align="right" valign="top">Dialog&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaa65aad2e4ff062b300c1232984731618">VideoPlayerComponent::youtubeDialog</a></td></tr>
+<tr class="separator:gaa65aad2e4ff062b300c1232984731618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1d694c099e20acccca5749d3117f93ac" id="r_ga1d694c099e20acccca5749d3117f93ac"><td class="memItemLeft" align="right" valign="top">TextField&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1d694c099e20acccca5749d3117f93ac">VideoPlayerComponent::textURL</a></td></tr>
+<tr class="separator:ga1d694c099e20acccca5749d3117f93ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6b66cef0ca3bfabaed640bcc94bd85be" id="r_ga6b66cef0ca3bfabaed640bcc94bd85be"><td class="memItemLeft" align="right" valign="top">FileDialog&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga6b66cef0ca3bfabaed640bcc94bd85be">VideoPlayerComponent::fileDialog</a></td></tr>
+<tr class="separator:ga6b66cef0ca3bfabaed640bcc94bd85be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4556ed58bffab317380fa3461e9c583c" id="r_ga4556ed58bffab317380fa3461e9c583c"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4556ed58bffab317380fa3461e9c583c">BottomBar::width</a></td></tr>
+<tr class="separator:ga4556ed58bffab317380fa3461e9c583c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae4f4932338e0de64a510875eec0ba55e" id="r_gae4f4932338e0de64a510875eec0ba55e"><td class="memItemLeft" align="right" valign="top">var Layout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gae4f4932338e0de64a510875eec0ba55e">BottomBar::fillWidth</a></td></tr>
+<tr class="separator:gae4f4932338e0de64a510875eec0ba55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf84ead23662bf69dde59b0821d87b9da" id="r_gaf84ead23662bf69dde59b0821d87b9da"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf84ead23662bf69dde59b0821d87b9da">BottomBar::height</a></td></tr>
+<tr class="separator:gaf84ead23662bf69dde59b0821d87b9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga78cef3329bb66c8b7e96b3c91cac3c17" id="r_ga78cef3329bb66c8b7e96b3c91cac3c17"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga78cef3329bb66c8b7e96b3c91cac3c17">BottomBar::background</a></td></tr>
+<tr class="separator:ga78cef3329bb66c8b7e96b3c91cac3c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75a10b6e1d1224d839e39a62d54fe6a0" id="r_ga75a10b6e1d1224d839e39a62d54fe6a0"><td class="memItemLeft" align="right" valign="top">Slider&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga75a10b6e1d1224d839e39a62d54fe6a0">BottomBar::progressSlider</a></td></tr>
+<tr class="separator:ga75a10b6e1d1224d839e39a62d54fe6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga996c79f03bba551265b9801d582404b7" id="r_ga996c79f03bba551265b9801d582404b7"><td class="memItemLeft" align="right" valign="top">Text&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga996c79f03bba551265b9801d582404b7">BottomBar::currentSegment</a></td></tr>
+<tr class="separator:ga996c79f03bba551265b9801d582404b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga31e05e28802e84c8e63f98bdcb6a4f27" id="r_ga31e05e28802e84c8e63f98bdcb6a4f27"><td class="memItemLeft" align="right" valign="top">RowLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga31e05e28802e84c8e63f98bdcb6a4f27">BottomBar::controlButtons</a></td></tr>
+<tr class="separator:ga31e05e28802e84c8e63f98bdcb6a4f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6cbf99dfbc34e9b28e5778ef69fcb136" id="r_ga6cbf99dfbc34e9b28e5778ef69fcb136"><td class="memItemLeft" align="right" valign="top">Button&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga6cbf99dfbc34e9b28e5778ef69fcb136">BottomBar::playButton</a></td></tr>
+<tr class="separator:ga6cbf99dfbc34e9b28e5778ef69fcb136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa55dc378df0a206f27215e6122a14763" id="r_gaa55dc378df0a206f27215e6122a14763"><td class="memItemLeft" align="right" valign="top">ComboBox&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaa55dc378df0a206f27215e6122a14763">BottomBar::speedSelector</a></td></tr>
+<tr class="separator:gaa55dc378df0a206f27215e6122a14763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="prop-members" name="prop-members"></a>
+Propiedades</h2></td></tr>
+<tr class="memitem:ga5af6a9db56b769fa74cdcf0ed19bc0d9" id="r_ga5af6a9db56b769fa74cdcf0ed19bc0d9"><td class="memItemLeft" align="right" valign="top">alias&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga5af6a9db56b769fa74cdcf0ed19bc0d9">VideoPlayerComponent::videoSource</a></td></tr>
+<tr class="separator:ga5af6a9db56b769fa74cdcf0ed19bc0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga202e9baf67c5a0933dbab3fcf9ddf239" id="r_ga202e9baf67c5a0933dbab3fcf9ddf239"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga202e9baf67c5a0933dbab3fcf9ddf239">VideoPlayerComponent::videoLoaded</a></td></tr>
+<tr class="separator:ga202e9baf67c5a0933dbab3fcf9ddf239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga979d6aa3f3d97eab230c8759be96c180" id="r_ga979d6aa3f3d97eab230c8759be96c180"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga979d6aa3f3d97eab230c8759be96c180">VideoPlayerComponent::playerIndex</a></td></tr>
+<tr class="separator:ga979d6aa3f3d97eab230c8759be96c180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c3dc44d8c39fda422fb32839db7eccd" id="r_ga4c3dc44d8c39fda422fb32839db7eccd"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4c3dc44d8c39fda422fb32839db7eccd">VideoPlayerComponent::segments</a></td></tr>
+<tr class="separator:ga4c3dc44d8c39fda422fb32839db7eccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4587843369a986cea06d2a2199147952" id="r_ga4587843369a986cea06d2a2199147952"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4587843369a986cea06d2a2199147952">VideoPlayerComponent::currentSegmentIndex</a></td></tr>
+<tr class="separator:ga4587843369a986cea06d2a2199147952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa990caf4cdbd22e2027cfebc0005a120" id="r_gaa990caf4cdbd22e2027cfebc0005a120"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaa990caf4cdbd22e2027cfebc0005a120">VideoPlayerComponent::currentSegmentName</a></td></tr>
+<tr class="separator:gaa990caf4cdbd22e2027cfebc0005a120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0499f44104e1b162fd1f11663a4e69bd" id="r_ga0499f44104e1b162fd1f11663a4e69bd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0499f44104e1b162fd1f11663a4e69bd">VideoPlayerComponent::offset</a></td></tr>
+<tr class="separator:ga0499f44104e1b162fd1f11663a4e69bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1607b076a6fbcd78231c8614ea8d0cc3" id="r_ga1607b076a6fbcd78231c8614ea8d0cc3"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1607b076a6fbcd78231c8614ea8d0cc3">VideoPlayerComponent::videoName</a></td></tr>
+<tr class="separator:ga1607b076a6fbcd78231c8614ea8d0cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1648334c8fc1386654ee8f56f29b3a52" id="r_ga1648334c8fc1386654ee8f56f29b3a52"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1648334c8fc1386654ee8f56f29b3a52">VideoPlayerComponent::tag_editable</a></td></tr>
+<tr class="separator:ga1648334c8fc1386654ee8f56f29b3a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c4163d4df70a640fb7aaba44516a6a1" id="r_ga7c4163d4df70a640fb7aaba44516a6a1"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga7c4163d4df70a640fb7aaba44516a6a1">VideoPlayerComponent::segmentEndTime</a></td></tr>
+<tr class="separator:ga7c4163d4df70a640fb7aaba44516a6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3eba9076ccddede5e9429559c4bf8389" id="r_ga3eba9076ccddede5e9429559c4bf8389"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga3eba9076ccddede5e9429559c4bf8389">VideoPlayerComponent::timestamps</a></td></tr>
+<tr class="separator:ga3eba9076ccddede5e9429559c4bf8389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf3537eb1f6e6a65ff3062448f2cc25ff" id="r_gaf3537eb1f6e6a65ff3062448f2cc25ff"><td class="memItemLeft" align="right" valign="top">var&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf3537eb1f6e6a65ff3062448f2cc25ff">VideoPlayerComponent::segmentNames</a></td></tr>
+<tr class="separator:gaf3537eb1f6e6a65ff3062448f2cc25ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1dbd2b5fdf05e2ec6db9fcaf380abeef" id="r_ga1dbd2b5fdf05e2ec6db9fcaf380abeef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1dbd2b5fdf05e2ec6db9fcaf380abeef">VideoPlayerComponent::duration</a></td></tr>
+<tr class="separator:ga1dbd2b5fdf05e2ec6db9fcaf380abeef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ed6bf728169769961cf02db90c8c8d4" id="r_ga0ed6bf728169769961cf02db90c8c8d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0ed6bf728169769961cf02db90c8c8d4">VideoPlayerComponent::position</a></td></tr>
+<tr class="separator:ga0ed6bf728169769961cf02db90c8c8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d947c53e7473ba820368242c8af868d" id="r_ga8d947c53e7473ba820368242c8af868d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8d947c53e7473ba820368242c8af868d">BottomBar::currentIndex</a></td></tr>
+<tr class="separator:ga8d947c53e7473ba820368242c8af868d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37ce81977295d277c8bb5a32cc6a0f6e" id="r_ga37ce81977295d277c8bb5a32cc6a0f6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga37ce81977295d277c8bb5a32cc6a0f6e">BottomBar::numberOfSegments</a></td></tr>
+<tr class="separator:ga37ce81977295d277c8bb5a32cc6a0f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="ga78cef3329bb66c8b7e96b3c91cac3c17" name="ga78cef3329bb66c8b7e96b3c91cac3c17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78cef3329bb66c8b7e96b3c91cac3c17">&#9670;&#160;</a></span>background</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var BottomBar::background</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga73446960013d128cc2411efb53e48e6b" name="ga73446960013d128cc2411efb53e48e6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga73446960013d128cc2411efb53e48e6b">&#9670;&#160;</a></span>button</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button VideoPlayerComponent::button</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga8cbebc9a82cf6706352eee717149e363" name="ga8cbebc9a82cf6706352eee717149e363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8cbebc9a82cf6706352eee717149e363">&#9670;&#160;</a></span>buttonLayout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ColumnLayout VideoPlayerComponent::buttonLayout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga31e05e28802e84c8e63f98bdcb6a4f27" name="ga31e05e28802e84c8e63f98bdcb6a4f27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31e05e28802e84c8e63f98bdcb6a4f27">&#9670;&#160;</a></span>controlButtons</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RowLayout BottomBar::controlButtons</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga996c79f03bba551265b9801d582404b7" name="ga996c79f03bba551265b9801d582404b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga996c79f03bba551265b9801d582404b7">&#9670;&#160;</a></span>currentSegment</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Text BottomBar::currentSegment</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga395b55568280a74b8dbe56898431306f" name="ga395b55568280a74b8dbe56898431306f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga395b55568280a74b8dbe56898431306f">&#9670;&#160;</a></span>dragIcon</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Image VideoPlayerComponent::dragIcon</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga6b66cef0ca3bfabaed640bcc94bd85be" name="ga6b66cef0ca3bfabaed640bcc94bd85be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6b66cef0ca3bfabaed640bcc94bd85be">&#9670;&#160;</a></span>fileDialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileDialog VideoPlayerComponent::fileDialog</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gae4f4932338e0de64a510875eec0ba55e" name="gae4f4932338e0de64a510875eec0ba55e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae4f4932338e0de64a510875eec0ba55e">&#9670;&#160;</a></span>fillWidth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var Layout BottomBar::fillWidth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaf84ead23662bf69dde59b0821d87b9da" name="gaf84ead23662bf69dde59b0821d87b9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf84ead23662bf69dde59b0821d87b9da">&#9670;&#160;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var BottomBar::height</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga502af5e86f72328dbc2b3e3f6f8470b6" name="ga502af5e86f72328dbc2b3e3f6f8470b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga502af5e86f72328dbc2b3e3f6f8470b6">&#9670;&#160;</a></span>inputRow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Row VideoPlayerComponent::inputRow</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga0adf6871475e85186ef48729168907dc" name="ga0adf6871475e85186ef48729168907dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0adf6871475e85186ef48729168907dc">&#9670;&#160;</a></span>muteButton</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button VideoPlayerComponent::muteButton</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga6cbf99dfbc34e9b28e5778ef69fcb136" name="ga6cbf99dfbc34e9b28e5778ef69fcb136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6cbf99dfbc34e9b28e5778ef69fcb136">&#9670;&#160;</a></span>playButton</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button BottomBar::playButton</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga75a10b6e1d1224d839e39a62d54fe6a0" name="ga75a10b6e1d1224d839e39a62d54fe6a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga75a10b6e1d1224d839e39a62d54fe6a0">&#9670;&#160;</a></span>progressSlider</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Slider BottomBar::progressSlider</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaa55dc378df0a206f27215e6122a14763" name="gaa55dc378df0a206f27215e6122a14763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa55dc378df0a206f27215e6122a14763">&#9670;&#160;</a></span>speedSelector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ComboBox BottomBar::speedSelector</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gac231e077b53550370cf18ce4cb5e9040" name="gac231e077b53550370cf18ce4cb5e9040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac231e077b53550370cf18ce4cb5e9040">&#9670;&#160;</a></span>tedit_videoName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TextEdit VideoPlayerComponent::tedit_videoName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga1d694c099e20acccca5749d3117f93ac" name="ga1d694c099e20acccca5749d3117f93ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1d694c099e20acccca5749d3117f93ac">&#9670;&#160;</a></span>textURL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TextField VideoPlayerComponent::textURL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gab58a6db4656899e4daefff0777234b1b" name="gab58a6db4656899e4daefff0777234b1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab58a6db4656899e4daefff0777234b1b">&#9670;&#160;</a></span>timeStampEditor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTimeStampEditor.html">TimeStampEditor</a> VideoPlayerComponent::timeStampEditor</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Editor de marcas de tiempo </p>
+
+</div>
+</div>
+<a id="gafa8d294d9f66f54c59ab45c4a6137da4" name="gafa8d294d9f66f54c59ab45c4a6137da4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa8d294d9f66f54c59ab45c4a6137da4">&#9670;&#160;</a></span>videoPlayer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVideoPlayer.html">VideoPlayer</a> VideoPlayerComponent::videoPlayer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Reproductor de video </p>
+
+</div>
+</div>
+<a id="ga4556ed58bffab317380fa3461e9c583c" name="ga4556ed58bffab317380fa3461e9c583c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4556ed58bffab317380fa3461e9c583c">&#9670;&#160;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var BottomBar::width</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaa65aad2e4ff062b300c1232984731618" name="gaa65aad2e4ff062b300c1232984731618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa65aad2e4ff062b300c1232984731618">&#9670;&#160;</a></span>youtubeDialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dialog VideoPlayerComponent::youtubeDialog</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Diálogo de Youtube </p>
+
+</div>
+</div>
+<h2 class="groupheader">Propiedades</h2>
+<a id="ga8d947c53e7473ba820368242c8af868d" name="ga8d947c53e7473ba820368242c8af868d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8d947c53e7473ba820368242c8af868d">&#9670;&#160;</a></span>currentIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BottomBar::currentIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Índice del segmento actual </p>
+
+</div>
+</div>
+<a id="ga4587843369a986cea06d2a2199147952" name="ga4587843369a986cea06d2a2199147952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4587843369a986cea06d2a2199147952">&#9670;&#160;</a></span>currentSegmentIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VideoPlayerComponent::currentSegmentIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Índice del segmento actual </p>
+
+</div>
+</div>
+<a id="gaa990caf4cdbd22e2027cfebc0005a120" name="gaa990caf4cdbd22e2027cfebc0005a120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa990caf4cdbd22e2027cfebc0005a120">&#9670;&#160;</a></span>currentSegmentName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string VideoPlayerComponent::currentSegmentName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Nombre del segmento actual </p>
+
+</div>
+</div>
+<a id="ga1dbd2b5fdf05e2ec6db9fcaf380abeef" name="ga1dbd2b5fdf05e2ec6db9fcaf380abeef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1dbd2b5fdf05e2ec6db9fcaf380abeef">&#9670;&#160;</a></span>duration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VideoPlayerComponent::duration</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Duración del video </p>
+
+</div>
+</div>
+<a id="ga37ce81977295d277c8bb5a32cc6a0f6e" name="ga37ce81977295d277c8bb5a32cc6a0f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga37ce81977295d277c8bb5a32cc6a0f6e">&#9670;&#160;</a></span>numberOfSegments</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BottomBar::numberOfSegments</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Número de segmentos </p>
+
+</div>
+</div>
+<a id="ga0499f44104e1b162fd1f11663a4e69bd" name="ga0499f44104e1b162fd1f11663a4e69bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0499f44104e1b162fd1f11663a4e69bd">&#9670;&#160;</a></span>offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double VideoPlayerComponent::offset</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Desplazamiento de tiempo </p>
+
+</div>
+</div>
+<a id="ga979d6aa3f3d97eab230c8759be96c180" name="ga979d6aa3f3d97eab230c8759be96c180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga979d6aa3f3d97eab230c8759be96c180">&#9670;&#160;</a></span>playerIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VideoPlayerComponent::playerIndex</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Índice del reproductor </p>
+
+</div>
+</div>
+<a id="ga0ed6bf728169769961cf02db90c8c8d4" name="ga0ed6bf728169769961cf02db90c8c8d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ed6bf728169769961cf02db90c8c8d4">&#9670;&#160;</a></span>position</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VideoPlayerComponent::position</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Posición actual del video </p>
+
+</div>
+</div>
+<a id="ga7c4163d4df70a640fb7aaba44516a6a1" name="ga7c4163d4df70a640fb7aaba44516a6a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c4163d4df70a640fb7aaba44516a6a1">&#9670;&#160;</a></span>segmentEndTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var VideoPlayerComponent::segmentEndTime</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Tiempos de finalización de los segmentos </p>
+
+</div>
+</div>
+<a id="gaf3537eb1f6e6a65ff3062448f2cc25ff" name="gaf3537eb1f6e6a65ff3062448f2cc25ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf3537eb1f6e6a65ff3062448f2cc25ff">&#9670;&#160;</a></span>segmentNames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var VideoPlayerComponent::segmentNames</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Nombres de los segmentos </p>
+
+</div>
+</div>
+<a id="ga4c3dc44d8c39fda422fb32839db7eccd" name="ga4c3dc44d8c39fda422fb32839db7eccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c3dc44d8c39fda422fb32839db7eccd">&#9670;&#160;</a></span>segments</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var VideoPlayerComponent::segments</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Lista de segmentos </p>
+
+</div>
+</div>
+<a id="ga1648334c8fc1386654ee8f56f29b3a52" name="ga1648334c8fc1386654ee8f56f29b3a52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1648334c8fc1386654ee8f56f29b3a52">&#9670;&#160;</a></span>tag_editable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VideoPlayerComponent::tag_editable</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indica si la etiqueta es editable </p>
+
+</div>
+</div>
+<a id="ga3eba9076ccddede5e9429559c4bf8389" name="ga3eba9076ccddede5e9429559c4bf8389"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3eba9076ccddede5e9429559c4bf8389">&#9670;&#160;</a></span>timestamps</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var VideoPlayerComponent::timestamps</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Marcas de tiempo </p>
+
+</div>
+</div>
+<a id="ga202e9baf67c5a0933dbab3fcf9ddf239" name="ga202e9baf67c5a0933dbab3fcf9ddf239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga202e9baf67c5a0933dbab3fcf9ddf239">&#9670;&#160;</a></span>videoLoaded</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VideoPlayerComponent::videoLoaded</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Indica si el video está cargado </p>
+
+</div>
+</div>
+<a id="ga1607b076a6fbcd78231c8614ea8d0cc3" name="ga1607b076a6fbcd78231c8614ea8d0cc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1607b076a6fbcd78231c8614ea8d0cc3">&#9670;&#160;</a></span>videoName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string VideoPlayerComponent::videoName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Nombre del video </p>
+
+</div>
+</div>
+<a id="ga5af6a9db56b769fa74cdcf0ed19bc0d9" name="ga5af6a9db56b769fa74cdcf0ed19bc0d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5af6a9db56b769fa74cdcf0ed19bc0d9">&#9670;&#160;</a></span>videoSource</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">alias VideoPlayerComponent::videoSource</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">read</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Fuente del video </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

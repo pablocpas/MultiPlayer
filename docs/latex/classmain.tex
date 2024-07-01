@@ -1,0 +1,457 @@
+\doxysection{Referencia de la clase main}
+\hypertarget{classmain}{}\label{classmain}\index{main@{main}}
+Diagrama de herencia de main\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmain}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Señales}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmain_afd75005dd6a4831b830c733fa68d8c9e}{playing}} ()
+\item 
+void \mbox{\hyperlink{classmain_a47e0b0198157d3601bc2dd5078e9ce7e}{pausa}} ()
+\item 
+void \mbox{\hyperlink{classmain_af468a72cb9f06187dad39faaf42d0ba2}{segments\+Loaded}} (var segments)
+\item 
+void \mbox{\hyperlink{classmain_a46ab8035b45bc40e7a7376574f899c61}{play\+All}} ()
+\item 
+void \mbox{\hyperlink{classmain_a8f7b1e30899759d9267c19985ac0d20c}{pause\+All}} ()
+\item 
+void \mbox{\hyperlink{classmain_ae5bca299986bff1528c6985b25eddd9e}{play\+Next\+Segment}} ()
+\item 
+void \mbox{\hyperlink{classmain_a1d32a1cea56c25afd4aa415dad3cbf24}{play\+Previous\+Segment}} ()
+\item 
+void \mbox{\hyperlink{classmain_a99243a6a978f4c969b9ed7105b2de27b}{seek\+All}} (int value)
+\item 
+void \mbox{\hyperlink{classmain_a3af2382cce92dca34ae9f0953c8aabdb}{speed\+Change}} (double speed)
+\item 
+void \mbox{\hyperlink{classmain_aea0e83cf8dcb1b0bac574b1837f18eef}{next\+Frame}} ()
+\item 
+void \mbox{\hyperlink{classmain_a5c525aceb0fa9cc47a05d2bedda0918c}{previous\+Frame}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmain_af8dc3bc03f686e2969169eb4275d1840}{set\+Segment\+Editor\+Visibility}} (bool visible)
+\item 
+void \mbox{\hyperlink{classmain_a401893a841685d0f0f09879db17b4de2}{set\+Segments}} (var segments, int index)
+\item 
+void \mbox{\hyperlink{classmain_a1362cdff74fcb6ed1f08518c799f8d60}{next\+Segment}} ()
+\item 
+void \mbox{\hyperlink{classmain_a7dfb580b13211d7987f85885bab264e9}{previous\+Segment}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classmain_a38c87e89e6ad62449fd712e8f051a49d}{IMAGEMAGICK\+\_\+\+BINARY}} = "{}C\+:\textbackslash{}\textbackslash{}\+Program Files\textbackslash{}\textbackslash{}\+Image\+Magick-\/7.\+1.\+1-\/Q16-\/HDRI\textbackslash{}\textbackslash{}magick.\+exe"{}
+\item 
+\mbox{\hyperlink{classmain_a03b6adcdf574a0b20c970691677129e0}{app}} = QGui\+Application(sys.\+argv)
+\item 
+\mbox{\hyperlink{classmain_ac277e07f417a0c8ca35125b5ad7c85e1}{engine}} = QQml\+Application\+Engine()
+\item 
+str \mbox{\hyperlink{classmain_a38bdd190539f71bc1032a39a07094caf}{myappid}} = \textquotesingle{}mycompany.\+myproduct.\+subproduct.\+version\textquotesingle{}
+\item 
+\mbox{\hyperlink{classmain_aedcb598200a698ef1c7323e240379eb2}{video\+\_\+handler}} = Video\+Handler()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Propiedades}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classmain_a973498c1b5eba19ca8208794348106c8}{number\+Of\+Players}}
+\item 
+int \mbox{\hyperlink{classmain_a70a0baad5ecad032b3f7661e6320d740}{max\+Segment\+Duration}}
+\item 
+bool \mbox{\hyperlink{classmain_a67b55a4727900babc8ef2ce3d25fad9b}{has\+Video}}
+\item 
+bool \mbox{\hyperlink{classmain_a42a7eab5e05c293eca07d9893e82bdc6}{has\+Segments}}
+\item 
+var \mbox{\hyperlink{classmain_a94a8e0c5d97dca0c7f6f33c1ec1c1eef}{segments}}
+\item 
+int \mbox{\hyperlink{classmain_a0cab2e43c73f58be722f33db64d7a989}{current\+Segment}}
+\item 
+bool \mbox{\hyperlink{classmain_a97c1a74a151d37a01fc00832518ef9b4}{is\+Full\+Screen}}
+\item 
+\mbox{\hyperlink{classVideoPlayerComponent}{Video\+Player\+Component}} \mbox{\hyperlink{classmain_ac323b49c88f0d85b1a9d4cca163758bb}{longest\+Video\+Player}}
+\item 
+double \mbox{\hyperlink{classmain_a024ad6b047b7a729a2cb09db232e5002}{speed}}
+\item 
+var \mbox{\hyperlink{classmain_a7af0132534fa511021ad1e9b84433e3e}{longest\+\_\+segments}}
+\item 
+var \mbox{\hyperlink{classmain_ab0a12e2a36e8f6f55ab4205c99979a7f}{longest\+\_\+timestamps}}
+\item 
+var \mbox{\hyperlink{classmain_a75407e6a87b43f59be62ba9057a8c3cc}{longest\+\_\+video\+Player\+Id}}
+\item 
+int \mbox{\hyperlink{classmain_a6eced1132c00b67b6c0e74cdf1caf0ea}{segments\+Ready}}
+\item 
+bool \mbox{\hyperlink{classmain_a426ca38244ce846ccae9b904f047b0ad}{segment\+Editor\+Visible}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+var \mbox{\hyperlink{classmain_af890a0dc244f9b460bf0569f59b6245d}{visible}}
+\item 
+var \mbox{\hyperlink{classmain_a71e6d68b67e21b5d730600c103656a17}{color}}
+\item 
+var \mbox{\hyperlink{classmain_a521975d48ecbcc1851b78efd18381e94}{width}}
+\item 
+var \mbox{\hyperlink{classmain_ab20503a8b521cd3955b6d889ddbf8416}{height}}
+\item 
+var \mbox{\hyperlink{classmain_aa2b5da233ebccde49335b243fd869d3b}{title}}
+\item 
+var \mbox{\hyperlink{classmain_a22088eb359ba262094356fa781f18b04}{visibility}}
+\item 
+\mbox{\hyperlink{classDownload}{Download}} \mbox{\hyperlink{classmain_a4977ef90406c03f634438d213baa57c7}{progress\+Window}}
+\item 
+\mbox{\hyperlink{classExport}{Export}} \mbox{\hyperlink{classmain_a54e0e68c52efd5571bb73399e3d4d331}{export\+Window}}
+\item 
+Segment\+Editor \mbox{\hyperlink{classmain_a620c99c2e9cdae89ddf0978e26177d0d}{segment\+Editor}}
+\item 
+Column\+Layout \mbox{\hyperlink{classmain_ad47ce1ed30e29e64a0bb9dc5047dbaf6}{layout}}
+\item 
+\mbox{\hyperlink{classTopBar}{Top\+Bar}} \mbox{\hyperlink{classmain_a401e32debf71ee69b59e98664a318efe}{top\+Bar}}
+\item 
+Grid\+Layout \mbox{\hyperlink{classmain_af1d1f80221633ecde0bade27f860aba6}{grid}}
+\item 
+Repeater \mbox{\hyperlink{classmain_adba7ca3fe637e3d15399e1267cb856a2}{video\+Players\+Repeater}}
+\item 
+\mbox{\hyperlink{classBottomBar}{Bottom\+Bar}} \mbox{\hyperlink{classmain_a08307553cf73f3e17843a459020662b4}{bottom\+Bar}}
+\item 
+var \mbox{\hyperlink{classmain_a28f62057399c6ef9f91b616f6687837a}{on\+Segments\+Changed}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classmain_aea0e83cf8dcb1b0bac574b1837f18eef}\label{classmain_aea0e83cf8dcb1b0bac574b1837f18eef} 
+\index{main@{main}!nextFrame@{nextFrame}}
+\index{nextFrame@{nextFrame}!main@{main}}
+\doxysubsubsection{\texorpdfstring{nextFrame}{nextFrame}}
+{\footnotesize\ttfamily void main\+::next\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para avanzar un cuadro \Hypertarget{classmain_a1362cdff74fcb6ed1f08518c799f8d60}\label{classmain_a1362cdff74fcb6ed1f08518c799f8d60} 
+\index{main@{main}!nextSegment@{nextSegment}}
+\index{nextSegment@{nextSegment}!main@{main}}
+\doxysubsubsection{\texorpdfstring{nextSegment()}{nextSegment()}}
+{\footnotesize\ttfamily void main\+::next\+Segment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Avanza al siguiente segmento \Hypertarget{classmain_a47e0b0198157d3601bc2dd5078e9ce7e}\label{classmain_a47e0b0198157d3601bc2dd5078e9ce7e} 
+\index{main@{main}!pausa@{pausa}}
+\index{pausa@{pausa}!main@{main}}
+\doxysubsubsection{\texorpdfstring{pausa}{pausa}}
+{\footnotesize\ttfamily void main\+::pausa (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida cuando se pone en pausa \Hypertarget{classmain_a8f7b1e30899759d9267c19985ac0d20c}\label{classmain_a8f7b1e30899759d9267c19985ac0d20c} 
+\index{main@{main}!pauseAll@{pauseAll}}
+\index{pauseAll@{pauseAll}!main@{main}}
+\doxysubsubsection{\texorpdfstring{pauseAll}{pauseAll}}
+{\footnotesize\ttfamily void main\+::pause\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para pausar todos los videos \Hypertarget{classmain_a46ab8035b45bc40e7a7376574f899c61}\label{classmain_a46ab8035b45bc40e7a7376574f899c61} 
+\index{main@{main}!playAll@{playAll}}
+\index{playAll@{playAll}!main@{main}}
+\doxysubsubsection{\texorpdfstring{playAll}{playAll}}
+{\footnotesize\ttfamily void main\+::play\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para reproducir todos los videos \Hypertarget{classmain_afd75005dd6a4831b830c733fa68d8c9e}\label{classmain_afd75005dd6a4831b830c733fa68d8c9e} 
+\index{main@{main}!playing@{playing}}
+\index{playing@{playing}!main@{main}}
+\doxysubsubsection{\texorpdfstring{playing}{playing}}
+{\footnotesize\ttfamily void main\+::playing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida cuando se está reproduciendo \Hypertarget{classmain_ae5bca299986bff1528c6985b25eddd9e}\label{classmain_ae5bca299986bff1528c6985b25eddd9e} 
+\index{main@{main}!playNextSegment@{playNextSegment}}
+\index{playNextSegment@{playNextSegment}!main@{main}}
+\doxysubsubsection{\texorpdfstring{playNextSegment}{playNextSegment}}
+{\footnotesize\ttfamily void main\+::play\+Next\+Segment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para reproducir el siguiente segmento \Hypertarget{classmain_a1d32a1cea56c25afd4aa415dad3cbf24}\label{classmain_a1d32a1cea56c25afd4aa415dad3cbf24} 
+\index{main@{main}!playPreviousSegment@{playPreviousSegment}}
+\index{playPreviousSegment@{playPreviousSegment}!main@{main}}
+\doxysubsubsection{\texorpdfstring{playPreviousSegment}{playPreviousSegment}}
+{\footnotesize\ttfamily void main\+::play\+Previous\+Segment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para reproducir el segmento anterior \Hypertarget{classmain_a5c525aceb0fa9cc47a05d2bedda0918c}\label{classmain_a5c525aceb0fa9cc47a05d2bedda0918c} 
+\index{main@{main}!previousFrame@{previousFrame}}
+\index{previousFrame@{previousFrame}!main@{main}}
+\doxysubsubsection{\texorpdfstring{previousFrame}{previousFrame}}
+{\footnotesize\ttfamily void main\+::previous\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para retroceder un cuadro \Hypertarget{classmain_a7dfb580b13211d7987f85885bab264e9}\label{classmain_a7dfb580b13211d7987f85885bab264e9} 
+\index{main@{main}!previousSegment@{previousSegment}}
+\index{previousSegment@{previousSegment}!main@{main}}
+\doxysubsubsection{\texorpdfstring{previousSegment()}{previousSegment()}}
+{\footnotesize\ttfamily void main\+::previous\+Segment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrocede al segmento anterior \Hypertarget{classmain_a99243a6a978f4c969b9ed7105b2de27b}\label{classmain_a99243a6a978f4c969b9ed7105b2de27b} 
+\index{main@{main}!seekAll@{seekAll}}
+\index{seekAll@{seekAll}!main@{main}}
+\doxysubsubsection{\texorpdfstring{seekAll}{seekAll}}
+{\footnotesize\ttfamily void main\+::seek\+All (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para buscar en todos los videos 
+\begin{DoxyParams}{Parámetros}
+{\em value} & Valor de búsqueda en segundos \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmain_af468a72cb9f06187dad39faaf42d0ba2}\label{classmain_af468a72cb9f06187dad39faaf42d0ba2} 
+\index{main@{main}!segmentsLoaded@{segmentsLoaded}}
+\index{segmentsLoaded@{segmentsLoaded}!main@{main}}
+\doxysubsubsection{\texorpdfstring{segmentsLoaded}{segmentsLoaded}}
+{\footnotesize\ttfamily void main\+::segments\+Loaded (\begin{DoxyParamCaption}\item[{var}]{segments }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida cuando los segmentos están cargados 
+\begin{DoxyParams}{Parámetros}
+{\em segments} & Lista de segmentos cargados \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmain_af8dc3bc03f686e2969169eb4275d1840}\label{classmain_af8dc3bc03f686e2969169eb4275d1840} 
+\index{main@{main}!setSegmentEditorVisibility@{setSegmentEditorVisibility}}
+\index{setSegmentEditorVisibility@{setSegmentEditorVisibility}!main@{main}}
+\doxysubsubsection{\texorpdfstring{setSegmentEditorVisibility()}{setSegmentEditorVisibility()}}
+{\footnotesize\ttfamily void main\+::set\+Segment\+Editor\+Visibility (\begin{DoxyParamCaption}\item[{bool}]{visible }\end{DoxyParamCaption})}
+
+Establece la visibilidad del editor de segmentos 
+\begin{DoxyParams}{Parámetros}
+{\em visible} & Indica si el editor debe ser visible \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmain_a401893a841685d0f0f09879db17b4de2}\label{classmain_a401893a841685d0f0f09879db17b4de2} 
+\index{main@{main}!setSegments@{setSegments}}
+\index{setSegments@{setSegments}!main@{main}}
+\doxysubsubsection{\texorpdfstring{setSegments()}{setSegments()}}
+{\footnotesize\ttfamily void main\+::set\+Segments (\begin{DoxyParamCaption}\item[{var}]{segments,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+Configura los segmentos 
+\begin{DoxyParams}{Parámetros}
+{\em segments} & Lista de segmentos \\
+\hline
+{\em index} & Índice del reproductor de video \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmain_a3af2382cce92dca34ae9f0953c8aabdb}\label{classmain_a3af2382cce92dca34ae9f0953c8aabdb} 
+\index{main@{main}!speedChange@{speedChange}}
+\index{speedChange@{speedChange}!main@{main}}
+\doxysubsubsection{\texorpdfstring{speedChange}{speedChange}}
+{\footnotesize\ttfamily void main\+::speed\+Change (\begin{DoxyParamCaption}\item[{double}]{speed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Señal emitida para cambiar la velocidad de reproducción 
+\begin{DoxyParams}{Parámetros}
+{\em speed} & Nueva velocidad de reproducción \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classmain_a03b6adcdf574a0b20c970691677129e0}\label{classmain_a03b6adcdf574a0b20c970691677129e0} 
+\index{main@{main}!app@{app}}
+\index{app@{app}!main@{main}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily main.\+app = QGui\+Application(sys.\+argv)}
+
+\Hypertarget{classmain_a08307553cf73f3e17843a459020662b4}\label{classmain_a08307553cf73f3e17843a459020662b4} 
+\index{main@{main}!bottomBar@{bottomBar}}
+\index{bottomBar@{bottomBar}!main@{main}}
+\doxysubsubsection{\texorpdfstring{bottomBar}{bottomBar}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBottomBar}{Bottom\+Bar}} main\+::bottom\+Bar\hspace{0.3cm}{\ttfamily [private]}}
+
+Componente barra inferior \Hypertarget{classmain_a71e6d68b67e21b5d730600c103656a17}\label{classmain_a71e6d68b67e21b5d730600c103656a17} 
+\index{main@{main}!color@{color}}
+\index{color@{color}!main@{main}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily var main\+::color\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_ac277e07f417a0c8ca35125b5ad7c85e1}\label{classmain_ac277e07f417a0c8ca35125b5ad7c85e1} 
+\index{main@{main}!engine@{engine}}
+\index{engine@{engine}!main@{main}}
+\doxysubsubsection{\texorpdfstring{engine}{engine}}
+{\footnotesize\ttfamily main.\+engine = QQml\+Application\+Engine()}
+
+\Hypertarget{classmain_a54e0e68c52efd5571bb73399e3d4d331}\label{classmain_a54e0e68c52efd5571bb73399e3d4d331} 
+\index{main@{main}!exportWindow@{exportWindow}}
+\index{exportWindow@{exportWindow}!main@{main}}
+\doxysubsubsection{\texorpdfstring{exportWindow}{exportWindow}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExport}{Export}} main\+::export\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+Componente ventana de exportación \Hypertarget{classmain_af1d1f80221633ecde0bade27f860aba6}\label{classmain_af1d1f80221633ecde0bade27f860aba6} 
+\index{main@{main}!grid@{grid}}
+\index{grid@{grid}!main@{main}}
+\doxysubsubsection{\texorpdfstring{grid}{grid}}
+{\footnotesize\ttfamily Grid\+Layout main\+::grid\hspace{0.3cm}{\ttfamily [private]}}
+
+Reproductores de video \Hypertarget{classmain_ab20503a8b521cd3955b6d889ddbf8416}\label{classmain_ab20503a8b521cd3955b6d889ddbf8416} 
+\index{main@{main}!height@{height}}
+\index{height@{height}!main@{main}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily var main\+::height\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a38c87e89e6ad62449fd712e8f051a49d}\label{classmain_a38c87e89e6ad62449fd712e8f051a49d} 
+\index{main@{main}!IMAGEMAGICK\_BINARY@{IMAGEMAGICK\_BINARY}}
+\index{IMAGEMAGICK\_BINARY@{IMAGEMAGICK\_BINARY}!main@{main}}
+\doxysubsubsection{\texorpdfstring{IMAGEMAGICK\_BINARY}{IMAGEMAGICK\_BINARY}}
+{\footnotesize\ttfamily str main.\+IMAGEMAGICK\+\_\+\+BINARY = "{}C\+:\textbackslash{}\textbackslash{}\+Program Files\textbackslash{}\textbackslash{}\+Image\+Magick-\/7.\+1.\+1-\/Q16-\/HDRI\textbackslash{}\textbackslash{}magick.\+exe"{}}
+
+\Hypertarget{classmain_ad47ce1ed30e29e64a0bb9dc5047dbaf6}\label{classmain_ad47ce1ed30e29e64a0bb9dc5047dbaf6} 
+\index{main@{main}!layout@{layout}}
+\index{layout@{layout}!main@{main}}
+\doxysubsubsection{\texorpdfstring{layout}{layout}}
+{\footnotesize\ttfamily Column\+Layout main\+::layout\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a38bdd190539f71bc1032a39a07094caf}\label{classmain_a38bdd190539f71bc1032a39a07094caf} 
+\index{main@{main}!myappid@{myappid}}
+\index{myappid@{myappid}!main@{main}}
+\doxysubsubsection{\texorpdfstring{myappid}{myappid}}
+{\footnotesize\ttfamily str main.\+myappid = \textquotesingle{}mycompany.\+myproduct.\+subproduct.\+version\textquotesingle{}}
+
+\Hypertarget{classmain_a28f62057399c6ef9f91b616f6687837a}\label{classmain_a28f62057399c6ef9f91b616f6687837a} 
+\index{main@{main}!onSegmentsChanged@{onSegmentsChanged}}
+\index{onSegmentsChanged@{onSegmentsChanged}!main@{main}}
+\doxysubsubsection{\texorpdfstring{onSegmentsChanged}{onSegmentsChanged}}
+{\footnotesize\ttfamily var main\+::on\+Segments\+Changed\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a4977ef90406c03f634438d213baa57c7}\label{classmain_a4977ef90406c03f634438d213baa57c7} 
+\index{main@{main}!progressWindow@{progressWindow}}
+\index{progressWindow@{progressWindow}!main@{main}}
+\doxysubsubsection{\texorpdfstring{progressWindow}{progressWindow}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDownload}{Download}} main\+::progress\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+Componente ventana de descarga \Hypertarget{classmain_a620c99c2e9cdae89ddf0978e26177d0d}\label{classmain_a620c99c2e9cdae89ddf0978e26177d0d} 
+\index{main@{main}!segmentEditor@{segmentEditor}}
+\index{segmentEditor@{segmentEditor}!main@{main}}
+\doxysubsubsection{\texorpdfstring{segmentEditor}{segmentEditor}}
+{\footnotesize\ttfamily Segment\+Editor main\+::segment\+Editor\hspace{0.3cm}{\ttfamily [private]}}
+
+Componente ventana editor de segmentos \Hypertarget{classmain_aa2b5da233ebccde49335b243fd869d3b}\label{classmain_aa2b5da233ebccde49335b243fd869d3b} 
+\index{main@{main}!title@{title}}
+\index{title@{title}!main@{main}}
+\doxysubsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily var main\+::title\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a401e32debf71ee69b59e98664a318efe}\label{classmain_a401e32debf71ee69b59e98664a318efe} 
+\index{main@{main}!topBar@{topBar}}
+\index{topBar@{topBar}!main@{main}}
+\doxysubsubsection{\texorpdfstring{topBar}{topBar}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTopBar}{Top\+Bar}} main\+::top\+Bar\hspace{0.3cm}{\ttfamily [private]}}
+
+Componente barra superior \Hypertarget{classmain_aedcb598200a698ef1c7323e240379eb2}\label{classmain_aedcb598200a698ef1c7323e240379eb2} 
+\index{main@{main}!video\_handler@{video\_handler}}
+\index{video\_handler@{video\_handler}!main@{main}}
+\doxysubsubsection{\texorpdfstring{video\_handler}{video\_handler}}
+{\footnotesize\ttfamily main.\+video\+\_\+handler = Video\+Handler()}
+
+\Hypertarget{classmain_adba7ca3fe637e3d15399e1267cb856a2}\label{classmain_adba7ca3fe637e3d15399e1267cb856a2} 
+\index{main@{main}!videoPlayersRepeater@{videoPlayersRepeater}}
+\index{videoPlayersRepeater@{videoPlayersRepeater}!main@{main}}
+\doxysubsubsection{\texorpdfstring{videoPlayersRepeater}{videoPlayersRepeater}}
+{\footnotesize\ttfamily Repeater main\+::video\+Players\+Repeater\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a22088eb359ba262094356fa781f18b04}\label{classmain_a22088eb359ba262094356fa781f18b04} 
+\index{main@{main}!visibility@{visibility}}
+\index{visibility@{visibility}!main@{main}}
+\doxysubsubsection{\texorpdfstring{visibility}{visibility}}
+{\footnotesize\ttfamily var main\+::visibility\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_af890a0dc244f9b460bf0569f59b6245d}\label{classmain_af890a0dc244f9b460bf0569f59b6245d} 
+\index{main@{main}!visible@{visible}}
+\index{visible@{visible}!main@{main}}
+\doxysubsubsection{\texorpdfstring{visible}{visible}}
+{\footnotesize\ttfamily var main\+::visible\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmain_a521975d48ecbcc1851b78efd18381e94}\label{classmain_a521975d48ecbcc1851b78efd18381e94} 
+\index{main@{main}!width@{width}}
+\index{width@{width}!main@{main}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily var main\+::width\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Documentación de propiedades}
+\Hypertarget{classmain_a0cab2e43c73f58be722f33db64d7a989}\label{classmain_a0cab2e43c73f58be722f33db64d7a989} 
+\index{main@{main}!currentSegment@{currentSegment}}
+\index{currentSegment@{currentSegment}!main@{main}}
+\doxysubsubsection{\texorpdfstring{currentSegment}{currentSegment}}
+{\footnotesize\ttfamily int main\+::current\+Segment\hspace{0.3cm}{\ttfamily [read]}}
+
+Índice del segmento actual \Hypertarget{classmain_a42a7eab5e05c293eca07d9893e82bdc6}\label{classmain_a42a7eab5e05c293eca07d9893e82bdc6} 
+\index{main@{main}!hasSegments@{hasSegments}}
+\index{hasSegments@{hasSegments}!main@{main}}
+\doxysubsubsection{\texorpdfstring{hasSegments}{hasSegments}}
+{\footnotesize\ttfamily bool main\+::has\+Segments\hspace{0.3cm}{\ttfamily [read]}}
+
+Indica si hay segmentos \Hypertarget{classmain_a67b55a4727900babc8ef2ce3d25fad9b}\label{classmain_a67b55a4727900babc8ef2ce3d25fad9b} 
+\index{main@{main}!hasVideo@{hasVideo}}
+\index{hasVideo@{hasVideo}!main@{main}}
+\doxysubsubsection{\texorpdfstring{hasVideo}{hasVideo}}
+{\footnotesize\ttfamily bool main\+::has\+Video\hspace{0.3cm}{\ttfamily [read]}}
+
+Indica si hay video \Hypertarget{classmain_a97c1a74a151d37a01fc00832518ef9b4}\label{classmain_a97c1a74a151d37a01fc00832518ef9b4} 
+\index{main@{main}!isFullScreen@{isFullScreen}}
+\index{isFullScreen@{isFullScreen}!main@{main}}
+\doxysubsubsection{\texorpdfstring{isFullScreen}{isFullScreen}}
+{\footnotesize\ttfamily bool main\+::is\+Full\+Screen\hspace{0.3cm}{\ttfamily [read]}}
+
+Indica si está en pantalla completa \Hypertarget{classmain_a7af0132534fa511021ad1e9b84433e3e}\label{classmain_a7af0132534fa511021ad1e9b84433e3e} 
+\index{main@{main}!longest\_segments@{longest\_segments}}
+\index{longest\_segments@{longest\_segments}!main@{main}}
+\doxysubsubsection{\texorpdfstring{longest\_segments}{longest\_segments}}
+{\footnotesize\ttfamily var main\+::longest\+\_\+segments\hspace{0.3cm}{\ttfamily [read]}}
+
+Lista de los segmentos más largos \Hypertarget{classmain_ab0a12e2a36e8f6f55ab4205c99979a7f}\label{classmain_ab0a12e2a36e8f6f55ab4205c99979a7f} 
+\index{main@{main}!longest\_timestamps@{longest\_timestamps}}
+\index{longest\_timestamps@{longest\_timestamps}!main@{main}}
+\doxysubsubsection{\texorpdfstring{longest\_timestamps}{longest\_timestamps}}
+{\footnotesize\ttfamily var main\+::longest\+\_\+timestamps\hspace{0.3cm}{\ttfamily [read]}}
+
+Lista de marcas de tiempo más largas \Hypertarget{classmain_a75407e6a87b43f59be62ba9057a8c3cc}\label{classmain_a75407e6a87b43f59be62ba9057a8c3cc} 
+\index{main@{main}!longest\_videoPlayerId@{longest\_videoPlayerId}}
+\index{longest\_videoPlayerId@{longest\_videoPlayerId}!main@{main}}
+\doxysubsubsection{\texorpdfstring{longest\_videoPlayerId}{longest\_videoPlayerId}}
+{\footnotesize\ttfamily var main\+::longest\+\_\+video\+Player\+Id\hspace{0.3cm}{\ttfamily [read]}}
+
+Lista de IDs de los reproductores de video más largos \Hypertarget{classmain_ac323b49c88f0d85b1a9d4cca163758bb}\label{classmain_ac323b49c88f0d85b1a9d4cca163758bb} 
+\index{main@{main}!longestVideoPlayer@{longestVideoPlayer}}
+\index{longestVideoPlayer@{longestVideoPlayer}!main@{main}}
+\doxysubsubsection{\texorpdfstring{longestVideoPlayer}{longestVideoPlayer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVideoPlayerComponent}{Video\+Player\+Component}} main\+::longest\+Video\+Player\hspace{0.3cm}{\ttfamily [read]}}
+
+Referencia al reproductor de video más largo \Hypertarget{classmain_a70a0baad5ecad032b3f7661e6320d740}\label{classmain_a70a0baad5ecad032b3f7661e6320d740} 
+\index{main@{main}!maxSegmentDuration@{maxSegmentDuration}}
+\index{maxSegmentDuration@{maxSegmentDuration}!main@{main}}
+\doxysubsubsection{\texorpdfstring{maxSegmentDuration}{maxSegmentDuration}}
+{\footnotesize\ttfamily int main\+::max\+Segment\+Duration\hspace{0.3cm}{\ttfamily [read]}}
+
+Duración máxima del segmento \Hypertarget{classmain_a973498c1b5eba19ca8208794348106c8}\label{classmain_a973498c1b5eba19ca8208794348106c8} 
+\index{main@{main}!numberOfPlayers@{numberOfPlayers}}
+\index{numberOfPlayers@{numberOfPlayers}!main@{main}}
+\doxysubsubsection{\texorpdfstring{numberOfPlayers}{numberOfPlayers}}
+{\footnotesize\ttfamily int main\+::number\+Of\+Players\hspace{0.3cm}{\ttfamily [read]}}
+
+Número de reproductores de video \Hypertarget{classmain_a426ca38244ce846ccae9b904f047b0ad}\label{classmain_a426ca38244ce846ccae9b904f047b0ad} 
+\index{main@{main}!segmentEditorVisible@{segmentEditorVisible}}
+\index{segmentEditorVisible@{segmentEditorVisible}!main@{main}}
+\doxysubsubsection{\texorpdfstring{segmentEditorVisible}{segmentEditorVisible}}
+{\footnotesize\ttfamily bool main\+::segment\+Editor\+Visible\hspace{0.3cm}{\ttfamily [read]}}
+
+Indica si el editor de segmentos está visible \Hypertarget{classmain_a94a8e0c5d97dca0c7f6f33c1ec1c1eef}\label{classmain_a94a8e0c5d97dca0c7f6f33c1ec1c1eef} 
+\index{main@{main}!segments@{segments}}
+\index{segments@{segments}!main@{main}}
+\doxysubsubsection{\texorpdfstring{segments}{segments}}
+{\footnotesize\ttfamily var main\+::segments\hspace{0.3cm}{\ttfamily [read]}}
+
+Lista de segmentos \Hypertarget{classmain_a6eced1132c00b67b6c0e74cdf1caf0ea}\label{classmain_a6eced1132c00b67b6c0e74cdf1caf0ea} 
+\index{main@{main}!segmentsReady@{segmentsReady}}
+\index{segmentsReady@{segmentsReady}!main@{main}}
+\doxysubsubsection{\texorpdfstring{segmentsReady}{segmentsReady}}
+{\footnotesize\ttfamily int main\+::segments\+Ready\hspace{0.3cm}{\ttfamily [read]}}
+
+Cantidad de segmentos listos \Hypertarget{classmain_a024ad6b047b7a729a2cb09db232e5002}\label{classmain_a024ad6b047b7a729a2cb09db232e5002} 
+\index{main@{main}!speed@{speed}}
+\index{speed@{speed}!main@{main}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily double main\+::speed\hspace{0.3cm}{\ttfamily [read]}}
+
+Velocidad de reproducción 
+
+La documentación de esta clase está generada de los siguientes archivos\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8qml}{main.\+qml}}\item 
+\mbox{\hyperlink{main_8py}{main.\+py}}\end{DoxyCompactItemize}

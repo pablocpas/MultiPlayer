@@ -1,5 +1,10 @@
 // segmentEditor.qml
 
+/** \addtogroup frontend
+ * @{
+ */
+
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -150,3 +155,5 @@ Window {
         mainWindow.hasSegments = true
     }
 }
+
+/** @} */

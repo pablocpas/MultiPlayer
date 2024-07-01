@@ -1,5 +1,9 @@
 // BottomBar.qml
 
+/** \addtogroup frontend
+ * @{
+ */
+
 import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -245,3 +249,5 @@ ToolBar {
         }
     }
 }
+
+/** @} */

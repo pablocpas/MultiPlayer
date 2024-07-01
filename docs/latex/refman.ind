@@ -1,0 +1,683 @@
+\begin{theindex}
+
+  \item {\_\_init\_\_}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{21}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{36}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{24}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{45}
+    \subitem {video\_handler.VideoPlayer}, \hyperpage{50}
+  \item {\_is\_running}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{22}
+  \item {\_video\_players}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{22}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48}
+
+  \indexspace
+
+  \item {app}
+    \subitem {main}, \hyperpage{32}
+
+  \indexspace
+
+  \item {background}
+    \subitem {Frontend}, \hyperpage{12}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {bars\_callback}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+  \item {BottomBar}, \hyperpage{19}
+  \item {bottomBar}
+    \subitem {main}, \hyperpage{32}
+  \item {BottomBar.qml}, \hyperpage{57}
+  \item {button}
+    \subitem {Frontend}, \hyperpage{12}
+  \item {buttonLayout}
+    \subitem {Frontend}, \hyperpage{13}
+
+  \indexspace
+
+  \item {callback}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+  \item {cancelButton}
+    \subitem {Export}, \hyperpage{26}
+  \item {color}
+    \subitem {main}, \hyperpage{32}
+  \item {combine\_videos}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{45}
+  \item {combine\_worker}, \hyperpage{17}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48}
+  \item {combine\_worker.CancellationException}, \hyperpage{20}
+  \item {combine\_worker.CombineWorker}, \hyperpage{20}
+    \subitem {\_\_init\_\_}, \hyperpage{21}
+    \subitem {\_is\_running}, \hyperpage{22}
+    \subitem {\_video\_players}, \hyperpage{22}
+    \subitem {finished}, \hyperpage{22}
+    \subitem {is\_running}, \hyperpage{21}
+    \subitem {progress}, \hyperpage{22}
+    \subitem {run}, \hyperpage{21}
+    \subitem {stop}, \hyperpage{21}
+  \item {combine\_worker.MyCombineLogger}, \hyperpage{36}
+    \subitem {\_\_init\_\_}, \hyperpage{36}
+    \subitem {bars\_callback}, \hyperpage{37}
+    \subitem {callback}, \hyperpage{37}
+    \subitem {combine\_worker}, \hyperpage{37}
+    \subitem {current\_segment}, \hyperpage{37}
+    \subitem {progress\_signal}, \hyperpage{37}
+    \subitem {total\_segments}, \hyperpage{38}
+    \subitem {update\_current\_segment}, \hyperpage{37}
+  \item {combine\_worker.py}, \hyperpage{57}
+  \item {confirmationDialog}
+    \subitem {Export}, \hyperpage{26}
+  \item {controlButtons}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {convert\_time\_to\_seconds}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{45}
+  \item {current\_segment}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+  \item {currentIndex}
+    \subitem {Frontend}, \hyperpage{15}
+  \item {currentSegment}
+    \subitem {Frontend}, \hyperpage{13}
+    \subitem {main}, \hyperpage{34}
+  \item {currentSegmentIndex}
+    \subitem {Frontend}, \hyperpage{15}
+  \item {currentSegmentName}
+    \subitem {Frontend}, \hyperpage{15}
+
+  \indexspace
+
+  \item {Download}, \hyperpage{22}
+    \subitem {height}, \hyperpage{23}
+    \subitem {onVisibleChanged}, \hyperpage{23}
+    \subitem {progressBar}, \hyperpage{23}
+    \subitem {text1}, \hyperpage{23}
+    \subitem {title}, \hyperpage{23}
+    \subitem {visible}, \hyperpage{23}
+    \subitem {width}, \hyperpage{23}
+  \item {Download.qml}, \hyperpage{57}
+  \item {download\_worker}, \hyperpage{17}
+  \item {download\_worker.DownloadWorker}, \hyperpage{23}
+    \subitem {\_\_init\_\_}, \hyperpage{24}
+    \subitem {filename}, \hyperpage{25}
+    \subitem {finished}, \hyperpage{25}
+    \subitem {output\_path}, \hyperpage{25}
+    \subitem {progress}, \hyperpage{25}
+    \subitem {progress\_hook}, \hyperpage{24}
+    \subitem {run}, \hyperpage{24}
+    \subitem {url}, \hyperpage{25}
+  \item {download\_worker.py}, \hyperpage{57}
+  \item {download\_youtube\_video}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{45}
+  \item {dragIcon}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {duration}
+    \subitem {Frontend}, \hyperpage{15}
+    \subitem {VideoPlayer}, \hyperpage{54}
+
+  \indexspace
+
+  \item {engine}
+    \subitem {main}, \hyperpage{32}
+  \item {Export}, \hyperpage{25}
+    \subitem {cancelButton}, \hyperpage{26}
+    \subitem {confirmationDialog}, \hyperpage{26}
+    \subitem {finishedText}, \hyperpage{26}
+    \subitem {flags}, \hyperpage{26}
+    \subitem {height}, \hyperpage{26}
+    \subitem {maximumHeight}, \hyperpage{26}
+    \subitem {maximumWidth}, \hyperpage{27}
+    \subitem {minimumHeight}, \hyperpage{27}
+    \subitem {minimumWidth}, \hyperpage{27}
+    \subitem {onVisibleChanged}, \hyperpage{27}
+    \subitem {progressBar}, \hyperpage{27}
+    \subitem {text1}, \hyperpage{27}
+    \subitem {title}, \hyperpage{27}
+    \subitem {visible}, \hyperpage{27}
+    \subitem {width}, \hyperpage{27}
+  \item {Export.qml}, \hyperpage{58}
+  \item {exportWindow}
+    \subitem {main}, \hyperpage{32}
+
+  \indexspace
+
+  \item {fileDialog}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {filename}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{25}
+  \item {fillWidth}
+    \subitem {Frontend}, \hyperpage{13}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {finalTime}
+    \subitem {VideoPlayer}, \hyperpage{54}
+  \item {finished}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{22}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{25}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48}
+  \item {finishedCombine}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48}
+  \item {finishedText}
+    \subitem {Export}, \hyperpage{26}
+  \item {flags}
+    \subitem {Export}, \hyperpage{26}
+  \item {formatTime}
+    \subitem {TimeStampEditor}, \hyperpage{39}
+  \item {Frontend}, \hyperpage{11}
+    \subitem {background}, \hyperpage{12}
+    \subitem {button}, \hyperpage{12}
+    \subitem {buttonLayout}, \hyperpage{13}
+    \subitem {controlButtons}, \hyperpage{13}
+    \subitem {currentIndex}, \hyperpage{15}
+    \subitem {currentSegment}, \hyperpage{13}
+    \subitem {currentSegmentIndex}, \hyperpage{15}
+    \subitem {currentSegmentName}, \hyperpage{15}
+    \subitem {dragIcon}, \hyperpage{13}
+    \subitem {duration}, \hyperpage{15}
+    \subitem {fileDialog}, \hyperpage{13}
+    \subitem {fillWidth}, \hyperpage{13}
+    \subitem {height}, \hyperpage{13}
+    \subitem {inputRow}, \hyperpage{13}
+    \subitem {muteButton}, \hyperpage{13}
+    \subitem {numberOfSegments}, \hyperpage{15}
+    \subitem {offset}, \hyperpage{15}
+    \subitem {playButton}, \hyperpage{13}
+    \subitem {playerIndex}, \hyperpage{15}
+    \subitem {position}, \hyperpage{15}
+    \subitem {progressSlider}, \hyperpage{14}
+    \subitem {segmentEndTime}, \hyperpage{16}
+    \subitem {segmentNames}, \hyperpage{16}
+    \subitem {segments}, \hyperpage{16}
+    \subitem {speedSelector}, \hyperpage{14}
+    \subitem {tag\_editable}, \hyperpage{16}
+    \subitem {tedit\_videoName}, \hyperpage{14}
+    \subitem {textURL}, \hyperpage{14}
+    \subitem {timeStampEditor}, \hyperpage{14}
+    \subitem {timestamps}, \hyperpage{16}
+    \subitem {videoLoaded}, \hyperpage{16}
+    \subitem {videoName}, \hyperpage{16}
+    \subitem {videoPlayer}, \hyperpage{14}
+    \subitem {videoSource}, \hyperpage{16}
+    \subitem {width}, \hyperpage{14}
+    \subitem {youtubeDialog}, \hyperpage{14}
+
+  \indexspace
+
+  \item {getDescription}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{45}
+  \item {grid}
+    \subitem {main}, \hyperpage{32}
+
+  \indexspace
+
+  \item {hasSegments}
+    \subitem {main}, \hyperpage{34}
+  \item {hasVideo}
+    \subitem {main}, \hyperpage{34}
+  \item {height}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{26}
+    \subitem {Frontend}, \hyperpage{13}
+    \subitem {main}, \hyperpage{32}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+    \subitem {TopBar}, \hyperpage{43}
+
+  \indexspace
+
+  \item {IMAGEMAGICK\_BINARY}
+    \subitem {main}, \hyperpage{32}
+  \item {incrustado}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+  \item {initialTime}
+    \subitem {VideoPlayer}, \hyperpage{54}
+  \item {inputRow}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {is\_running}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{21}
+  \item {isFullScreen}
+    \subitem {main}, \hyperpage{34}
+
+  \indexspace
+
+  \item {layout}
+    \subitem {main}, \hyperpage{32}
+  \item {load\_video}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{46}
+  \item {longest\_segments}
+    \subitem {main}, \hyperpage{34}
+  \item {longest\_timestamps}
+    \subitem {main}, \hyperpage{34}
+  \item {longest\_videoPlayerId}
+    \subitem {main}, \hyperpage{35}
+  \item {longestVideoPlayer}
+    \subitem {main}, \hyperpage{35}
+
+  \indexspace
+
+  \item {main}, \hyperpage{17}, \hyperpage{28}
+    \subitem {app}, \hyperpage{32}
+    \subitem {bottomBar}, \hyperpage{32}
+    \subitem {color}, \hyperpage{32}
+    \subitem {currentSegment}, \hyperpage{34}
+    \subitem {engine}, \hyperpage{32}
+    \subitem {exportWindow}, \hyperpage{32}
+    \subitem {grid}, \hyperpage{32}
+    \subitem {hasSegments}, \hyperpage{34}
+    \subitem {hasVideo}, \hyperpage{34}
+    \subitem {height}, \hyperpage{32}
+    \subitem {IMAGEMAGICK\_BINARY}, \hyperpage{32}
+    \subitem {isFullScreen}, \hyperpage{34}
+    \subitem {layout}, \hyperpage{32}
+    \subitem {longest\_segments}, \hyperpage{34}
+    \subitem {longest\_timestamps}, \hyperpage{34}
+    \subitem {longest\_videoPlayerId}, \hyperpage{35}
+    \subitem {longestVideoPlayer}, \hyperpage{35}
+    \subitem {maxSegmentDuration}, \hyperpage{35}
+    \subitem {myappid}, \hyperpage{33}
+    \subitem {nextFrame}, \hyperpage{29}
+    \subitem {nextSegment}, \hyperpage{29}
+    \subitem {numberOfPlayers}, \hyperpage{35}
+    \subitem {onSegmentsChanged}, \hyperpage{33}
+    \subitem {pausa}, \hyperpage{29}
+    \subitem {pauseAll}, \hyperpage{30}
+    \subitem {playAll}, \hyperpage{30}
+    \subitem {playing}, \hyperpage{30}
+    \subitem {playNextSegment}, \hyperpage{30}
+    \subitem {playPreviousSegment}, \hyperpage{30}
+    \subitem {previousFrame}, \hyperpage{30}
+    \subitem {previousSegment}, \hyperpage{30}
+    \subitem {progressWindow}, \hyperpage{33}
+    \subitem {seekAll}, \hyperpage{30}
+    \subitem {segmentEditor}, \hyperpage{33}
+    \subitem {segmentEditorVisible}, \hyperpage{35}
+    \subitem {segments}, \hyperpage{35}
+    \subitem {segmentsLoaded}, \hyperpage{31}
+    \subitem {segmentsReady}, \hyperpage{35}
+    \subitem {setSegmentEditorVisibility}, \hyperpage{31}
+    \subitem {setSegments}, \hyperpage{31}
+    \subitem {speed}, \hyperpage{35}
+    \subitem {speedChange}, \hyperpage{31}
+    \subitem {title}, \hyperpage{33}
+    \subitem {topBar}, \hyperpage{33}
+    \subitem {video\_handler}, \hyperpage{33}
+    \subitem {videoPlayersRepeater}, \hyperpage{33}
+    \subitem {visibility}, \hyperpage{33}
+    \subitem {visible}, \hyperpage{34}
+    \subitem {width}, \hyperpage{34}
+  \item {main.py}, \hyperpage{58}
+  \item {main.qml}, \hyperpage{58}
+  \item {maximumHeight}
+    \subitem {Export}, \hyperpage{26}
+  \item {maximumWidth}
+    \subitem {Export}, \hyperpage{27}
+  \item {maxSegmentDuration}
+    \subitem {main}, \hyperpage{35}
+  \item {mediaPlayer}
+    \subitem {VideoPlayer}, \hyperpage{53}
+  \item {minimumHeight}
+    \subitem {Export}, \hyperpage{27}
+  \item {minimumWidth}
+    \subitem {Export}, \hyperpage{27}
+  \item {muteButton}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {myappid}
+    \subitem {main}, \hyperpage{33}
+
+  \indexspace
+
+  \item {name}
+    \subitem {video\_handler.VideoPlayer}, \hyperpage{50}
+  \item {nextFrame}
+    \subitem {main}, \hyperpage{29}
+    \subitem {VideoPlayer}, \hyperpage{51}
+  \item {nextSegment}
+    \subitem {main}, \hyperpage{29}
+  \item {numberOfPlayers}
+    \subitem {main}, \hyperpage{35}
+  \item {numberOfSegments}
+    \subitem {Frontend}, \hyperpage{15}
+
+  \indexspace
+
+  \item {offset}
+    \subitem {Frontend}, \hyperpage{15}
+  \item {on\_download\_finished}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{46}
+  \item {onCompleted}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+  \item {onSegmentsChanged}
+    \subitem {main}, \hyperpage{33}
+  \item {onVisibleChanged}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+  \item {open\_file\_explorer}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{46}
+  \item {output\_path}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{25}
+
+  \indexspace
+
+  \item {parse\_segments}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{46}
+  \item {path}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+    \subitem {video\_handler.VideoPlayer}, \hyperpage{50}
+  \item {pausa}
+    \subitem {main}, \hyperpage{29}
+  \item {pause}
+    \subitem {VideoPlayer}, \hyperpage{51}
+  \item {pauseAll}
+    \subitem {main}, \hyperpage{30}
+  \item {play}
+    \subitem {VideoPlayer}, \hyperpage{51}
+  \item {playAll}
+    \subitem {main}, \hyperpage{30}
+  \item {playbackRate}
+    \subitem {VideoPlayer}, \hyperpage{54}
+  \item {playButton}
+    \subitem {Frontend}, \hyperpage{13}
+  \item {playDoubleSpeed}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {playerIndex}
+    \subitem {Frontend}, \hyperpage{15}
+  \item {playHalfSpeed}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {playing}
+    \subitem {main}, \hyperpage{30}
+  \item {playNextSegment}
+    \subitem {main}, \hyperpage{30}
+  \item {playNormalSpeed}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {playOneAndHalfSpeed}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {playPreviousSegment}
+    \subitem {main}, \hyperpage{30}
+  \item {playQuarterSpeed}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {position}
+    \subitem {Frontend}, \hyperpage{15}
+    \subitem {VideoPlayer}, \hyperpage{54}
+  \item {previousFrame}
+    \subitem {main}, \hyperpage{30}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {previousSegment}
+    \subitem {main}, \hyperpage{30}
+  \item {progress}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{22}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{25}
+  \item {progress\_hook}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{24}
+  \item {progress\_signal}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+  \item {progressBar}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+  \item {progressSlider}
+    \subitem {Frontend}, \hyperpage{14}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {progressUpdated}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{49}
+  \item {progressWindow}
+    \subitem {main}, \hyperpage{33}
+  \item {Python}, \hyperpage{11}
+
+  \indexspace
+
+  \item {registerVideoPlayer}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{47}
+  \item {run}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{21}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{24}
+  \item {ruta}
+    \subitem {VideoPlayer}, \hyperpage{54}
+
+  \indexspace
+
+  \item {save\_segments\_to\_file}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{47}
+  \item {saveTimestamps}
+    \subitem {TimeStampEditor}, \hyperpage{39}
+  \item {seek}
+    \subitem {VideoPlayer}, \hyperpage{52}
+  \item {seekAll}
+    \subitem {main}, \hyperpage{30}
+  \item {segmentEditor}
+    \subitem {main}, \hyperpage{33}
+  \item {segmentEditorVisible}
+    \subitem {main}, \hyperpage{35}
+  \item {segmentEndTime}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {segmentListView}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {segmentNames}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {segments}
+    \subitem {Frontend}, \hyperpage{16}
+    \subitem {main}, \hyperpage{35}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+    \subitem {video\_handler.VideoPlayer}, \hyperpage{50}
+  \item {segmentsLoaded}
+    \subitem {main}, \hyperpage{31}
+  \item {segmentsReady}
+    \subitem {main}, \hyperpage{35}
+  \item {setPath}
+    \subitem {VideoPlayer}, \hyperpage{53}
+  \item {setPlaybackRate}
+    \subitem {VideoPlayer}, \hyperpage{53}
+  \item {setSegmentEditorVisibility}
+    \subitem {main}, \hyperpage{31}
+  \item {setSegments}
+    \subitem {main}, \hyperpage{31}
+  \item {setVideoName}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{47}
+  \item {Shortcuts}, \hyperpage{38}
+  \item {Shortcuts.qml}, \hyperpage{58}
+  \item {speed}
+    \subitem {main}, \hyperpage{35}
+  \item {speedChange}
+    \subitem {main}, \hyperpage{31}
+  \item {speedSelector}
+    \subitem {Frontend}, \hyperpage{14}
+  \item {stop}
+    \subitem {combine\_worker.CombineWorker}, \hyperpage{21}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{47}
+    \subitem {VideoPlayer}, \hyperpage{53}
+
+  \indexspace
+
+  \item {tag\_editable}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {tedit\_videoName}
+    \subitem {Frontend}, \hyperpage{14}
+  \item {text1}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+  \item {texto}
+    \subitem {TimeStampEditor}, \hyperpage{42}
+  \item {textURL}
+    \subitem {Frontend}, \hyperpage{14}
+  \item {thread}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{49}
+  \item {timeIndicator}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {TimeStampEditor}, \hyperpage{38}
+    \subitem {formatTime}, \hyperpage{39}
+    \subitem {height}, \hyperpage{40}
+    \subitem {incrustado}, \hyperpage{40}
+    \subitem {onCompleted}, \hyperpage{40}
+    \subitem {onVisibleChanged}, \hyperpage{40}
+    \subitem {path}, \hyperpage{41}
+    \subitem {progressSlider}, \hyperpage{41}
+    \subitem {saveTimestamps}, \hyperpage{39}
+    \subitem {segmentListView}, \hyperpage{41}
+    \subitem {segments}, \hyperpage{41}
+    \subitem {texto}, \hyperpage{42}
+    \subitem {timeIndicator}, \hyperpage{41}
+    \subitem {timeToSeconds}, \hyperpage{39}
+    \subitem {title}, \hyperpage{41}
+    \subitem {updateDurations}, \hyperpage{40}
+    \subitem {updateSegments}, \hyperpage{40}
+    \subitem {videoPath}, \hyperpage{42}
+    \subitem {visible}, \hyperpage{41}
+    \subitem {width}, \hyperpage{41}
+  \item {timeStampEditor}
+    \subitem {Frontend}, \hyperpage{14}
+  \item {TimeStampEditor.qml}, \hyperpage{58}
+  \item {timestamps}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {timeToSeconds}
+    \subitem {TimeStampEditor}, \hyperpage{39}
+  \item {title}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+    \subitem {main}, \hyperpage{33}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {toolButton2}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {toolButton3}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {toolButton4}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {toolButtonGroup}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {TopBar}, \hyperpage{42}
+    \subitem {background}, \hyperpage{43}
+    \subitem {fillWidth}, \hyperpage{43}
+    \subitem {height}, \hyperpage{43}
+    \subitem {toolButton2}, \hyperpage{43}
+    \subitem {toolButton3}, \hyperpage{43}
+    \subitem {toolButton4}, \hyperpage{43}
+    \subitem {toolButtonGroup}, \hyperpage{43}
+    \subitem {x}, \hyperpage{43}
+    \subitem {y}, \hyperpage{43}
+  \item {topBar}
+    \subitem {main}, \hyperpage{33}
+  \item {TopBar.qml}, \hyperpage{58}
+  \item {total\_segments}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{38}
+
+  \indexspace
+
+  \item {update\_current\_segment}
+    \subitem {combine\_worker.MyCombineLogger}, \hyperpage{37}
+  \item {update\_progress}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48, 49}
+  \item {updateDurations}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+  \item {updateSegments}
+    \subitem {TimeStampEditor}, \hyperpage{40}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{48}
+  \item {url}
+    \subitem {download\_worker.DownloadWorker}, \hyperpage{25}
+
+  \indexspace
+
+  \item {video\_handler}, \hyperpage{17}
+    \subitem {main}, \hyperpage{33}
+  \item {video\_handler.py}, \hyperpage{59}
+  \item {video\_handler.VideoHandler}, \hyperpage{44}
+    \subitem {\_\_init\_\_}, \hyperpage{45}
+    \subitem {\_video\_players}, \hyperpage{48}
+    \subitem {combine\_videos}, \hyperpage{45}
+    \subitem {combine\_worker}, \hyperpage{48}
+    \subitem {convert\_time\_to\_seconds}, \hyperpage{45}
+    \subitem {download\_youtube\_video}, \hyperpage{45}
+    \subitem {finished}, \hyperpage{48}
+    \subitem {finishedCombine}, \hyperpage{48}
+    \subitem {getDescription}, \hyperpage{45}
+    \subitem {load\_video}, \hyperpage{46}
+    \subitem {on\_download\_finished}, \hyperpage{46}
+    \subitem {open\_file\_explorer}, \hyperpage{46}
+    \subitem {parse\_segments}, \hyperpage{46}
+    \subitem {progressUpdated}, \hyperpage{49}
+    \subitem {registerVideoPlayer}, \hyperpage{47}
+    \subitem {save\_segments\_to\_file}, \hyperpage{47}
+    \subitem {setVideoName}, \hyperpage{47}
+    \subitem {stop}, \hyperpage{47}
+    \subitem {thread}, \hyperpage{49}
+    \subitem {update\_progress}, \hyperpage{48, 49}
+    \subitem {updateSegments}, \hyperpage{48}
+    \subitem {worker}, \hyperpage{49}
+  \item {video\_handler.VideoPlayer}, \hyperpage{49}
+    \subitem {\_\_init\_\_}, \hyperpage{50}
+    \subitem {name}, \hyperpage{50}
+    \subitem {path}, \hyperpage{50}
+    \subitem {segments}, \hyperpage{50}
+    \subitem {video\_player}, \hyperpage{50}
+  \item {video\_player}
+    \subitem {video\_handler.VideoPlayer}, \hyperpage{50}
+  \item {videoLoaded}
+    \subitem {Frontend}, \hyperpage{16}
+    \subitem {VideoPlayer}, \hyperpage{54}
+  \item {videoName}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {videoOut}
+    \subitem {VideoPlayer}, \hyperpage{53}
+  \item {videoPath}
+    \subitem {TimeStampEditor}, \hyperpage{42}
+  \item {VideoPlayer}, \hyperpage{50}
+    \subitem {duration}, \hyperpage{54}
+    \subitem {finalTime}, \hyperpage{54}
+    \subitem {initialTime}, \hyperpage{54}
+    \subitem {mediaPlayer}, \hyperpage{53}
+    \subitem {nextFrame}, \hyperpage{51}
+    \subitem {pause}, \hyperpage{51}
+    \subitem {play}, \hyperpage{51}
+    \subitem {playbackRate}, \hyperpage{54}
+    \subitem {playDoubleSpeed}, \hyperpage{52}
+    \subitem {playHalfSpeed}, \hyperpage{52}
+    \subitem {playNormalSpeed}, \hyperpage{52}
+    \subitem {playOneAndHalfSpeed}, \hyperpage{52}
+    \subitem {playQuarterSpeed}, \hyperpage{52}
+    \subitem {position}, \hyperpage{54}
+    \subitem {previousFrame}, \hyperpage{52}
+    \subitem {ruta}, \hyperpage{54}
+    \subitem {seek}, \hyperpage{52}
+    \subitem {setPath}, \hyperpage{53}
+    \subitem {setPlaybackRate}, \hyperpage{53}
+    \subitem {stop}, \hyperpage{53}
+    \subitem {videoLoaded}, \hyperpage{54}
+    \subitem {videoOut}, \hyperpage{53}
+    \subitem {volumen}, \hyperpage{54}
+  \item {videoPlayer}
+    \subitem {Frontend}, \hyperpage{14}
+  \item {VideoPlayer.qml}, \hyperpage{59}
+  \item {VideoPlayerComponent}, \hyperpage{55}
+  \item {VideoPlayerComponent.qml}, \hyperpage{59}
+  \item {videoPlayersRepeater}
+    \subitem {main}, \hyperpage{33}
+  \item {videoSource}
+    \subitem {Frontend}, \hyperpage{16}
+  \item {visibility}
+    \subitem {main}, \hyperpage{33}
+  \item {visible}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+    \subitem {main}, \hyperpage{34}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {volumen}
+    \subitem {VideoPlayer}, \hyperpage{54}
+
+  \indexspace
+
+  \item {width}
+    \subitem {Download}, \hyperpage{23}
+    \subitem {Export}, \hyperpage{27}
+    \subitem {Frontend}, \hyperpage{14}
+    \subitem {main}, \hyperpage{34}
+    \subitem {TimeStampEditor}, \hyperpage{41}
+  \item {worker}
+    \subitem {video\_handler.VideoHandler}, \hyperpage{49}
+
+  \indexspace
+
+  \item {x}
+    \subitem {TopBar}, \hyperpage{43}
+
+  \indexspace
+
+  \item {y}
+    \subitem {TopBar}, \hyperpage{43}
+  \item {youtubeDialog}
+    \subitem {Frontend}, \hyperpage{14}
+
+\end{theindex}

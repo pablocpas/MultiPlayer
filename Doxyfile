@@ -12,7 +12,12 @@ INPUT                  = ./main.qml \
                          ./TimeStampEditor.qml \
                          ./Download.qml \
                          ./Export.qml \
-FILE_PATTERNS          = *.qml
+                         ./main.py \
+                         ./video_handler.py \
+                         ./combine_worker.py \
+                         ./download_worker.py
+FILE_PATTERNS          = *.qml \
+                         *.py
 RECURSIVE              = YES
 OUTPUT_LANGUAGE        = Spanish
 EXTRACT_ALL            = YES
@@ -25,4 +30,7 @@ GENERATE_MAN           = NO
 GENERATE_RTF           = NO
 GENERATE_XML           = NO
 USE_PDFLATEX = YES
+ENABLE_GROUPS = YES
+
+
 

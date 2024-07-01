@@ -9,11 +9,18 @@ from combine_worker import CombineWorker
 from datetime import datetime
 import os
 
-# Establecer la ruta al binario de ImageMagick
-# si es Windows
+
+## @defgroup python Python
+# @brief Módulo de Python
+# @details Backend de la aplicación de Video Player.
+# @{
+
+
+
 if os.name == 'nt':
     change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
 
+## @ingroup python
 class VideoPlayer:
     """
     Clase para manejar la información relacionada con el reproductor de video.
@@ -36,6 +43,7 @@ class VideoPlayer:
         self.segments = []
         self.name = "aaa"
 
+## @ingroup python
 class VideoHandler(QObject):
     """
     Clase para manejar operaciones de video, incluyendo descarga, actualización de segmentos y combinación de videos.
@@ -275,3 +283,5 @@ class VideoHandler(QObject):
             subprocess.run(["open", path])
         else:  # Linux y otros sistemas UNIX-like
             subprocess.run(["xdg-open", path])
+
+## @}
