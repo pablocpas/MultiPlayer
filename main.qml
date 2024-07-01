@@ -28,6 +28,8 @@ ApplicationWindow {
     property VideoPlayerComponent longestVideoPlayer: null
     property double speed: 1
 
+    property int longest_video: 0
+
     property var longest_segments: []
     property var longest_timestamps: []
     property var longest_videoPlayerId: []
@@ -180,7 +182,7 @@ ApplicationWindow {
     }
 
     function nextSegment() {
-        if(currentSegment < segments.length - 1){
+        if(currentSegment < segments.length - 2){
             currentSegment++
             bottomBar.updateCurrentSegment()
            

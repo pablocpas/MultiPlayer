@@ -11,6 +11,7 @@ ToolBar {
     height: 90
 
     property int currentIndex: mainWindow.currentSegment
+    property bool hasSegments: mainWindow.hasSegments
 
 
     background: Rectangle {
@@ -25,8 +26,11 @@ ToolBar {
 
         Slider {
             id: progressSlider
-            from: mainWindow.longest_timestamps[currentIndex] * 1000
-            to: mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
+            //from longest timestamps if there are segments, if not from 0
+            from: mainWindow.hasSegments ? mainWindow.longest_timestamps[currentIndex] * 1000 : 0
+            //to longest timestamps if there are segments, if not to longest video duration
+            to: mainWindow.hasSegments ? mainWindow.longest_timestamps[currentIndex + 1] * 1000 : mainWindow.maxSegmentDuration
+
             value: mainWindow.longestVideoPlayer.position
             Layout.fillWidth: true
             Layout.preferredHeight: 30

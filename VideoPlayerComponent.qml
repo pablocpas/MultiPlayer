@@ -70,7 +70,7 @@ Item {
                 mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
                     mainWindow.maxSegmentDuration = videoPlayer.duration
-                    //mainWindow.longestVideoPlayer = videoPlayerComponent
+                    mainWindow.longestVideoPlayer = videoPlayerComponent
                 }
             }
             onPositionChanged: {

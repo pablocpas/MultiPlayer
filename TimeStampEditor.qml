@@ -13,6 +13,7 @@ Window {
     property string videoPath: ""
     property string texto: ""
     property string path: ""
+    property double duration: incrustado.duration
 
     Shortcut {
         sequence: "."
@@ -196,6 +197,8 @@ Window {
         }
         timestampEditor.segments = segmentsArray
         timestampEditor.visible = false
+
+        segmentsArray.push({description: "Final del video", timestamp: formatTime(incrustado.duration), timestampInSeconds: incrustado.duration / 1000, duration: 0})
 
         videoPlayerComponent.setSegments(segmentsArray)
         mainWindow.setSegments(segmentsArray, videoPlayerComponent.playerIndex)
