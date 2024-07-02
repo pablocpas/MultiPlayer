@@ -216,10 +216,6 @@ ApplicationWindow {
 
         segmentsReady += 1
 
-        if (segmentsReady === numberOfPlayers) {
-            playNextSegment()
-        }
-
         // Initialize longest_segments if empty or update with new segments
         if (longest_segments.length === 0) {
             longest_segments = segments.map(segment => segment.duration)
@@ -240,6 +236,11 @@ ApplicationWindow {
                     longest_videoPlayerId.push(index)
                 }
             }
+        }
+
+        
+        if (segmentsReady === numberOfPlayers) {
+            playNextSegment()
         }
     }
 
