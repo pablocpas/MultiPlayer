@@ -100,7 +100,6 @@ Item {
             onPositionChanged: {
                 if (segmentEndTime > 0 && videoPlayer.position >= segmentEndTime) {
                     videoPlayer.pause()
-                    videoPlayer.seek(segmentEndTime)
                 }
             }
             volumen: 1.0  // Inicialmente el volumen está al máximo
