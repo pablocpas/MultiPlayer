@@ -94,6 +94,7 @@ Item {
                 mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
                     mainWindow.maxSegmentDuration = videoPlayer.duration
+                    //mainWindow.longestVideoPlayer = videoPlayerComponent
                 }
             }
             onPositionChanged: {
@@ -106,7 +107,7 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: 10
+            spacing: 20
 
             Image {
                 id: dragIcon
