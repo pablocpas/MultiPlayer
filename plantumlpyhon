@@ -1,0 +1,79 @@
+@startuml
+
+class CancellationException {
+}
+
+class MyCombineLogger {
+  - progress_signal
+  - total_segments
+  - current_segment
+  - combine_worker
+  __init__(signal, total_segments, combine_worker)
+  callback(**changes)
+  bars_callback(bar, attr, value, old_value=None)
+  update_current_segment()
+}
+
+class CombineWorker {
+  + progress : Signal(int)
+  + finished : Signal(str)
+  - _video_players
+  - _is_running
+  __init__(video_players)
+  is_running() : bool
+  run()
+  stop()
+}
+
+class DownloadWorker {
+  + finished : Signal(str)
+  + progress : Signal(int)
+  - url
+  - output_path
+  - filename
+  __init__(url, output_path, filename)
+  run()
+  progress_hook(d)
+}
+
+class VideoPlayer {
+  - video_player
+  - path
+  - segments
+  - name
+  __init__(video_player)
+}
+
+class VideoHandler {
+  + finished : Signal(str, int)
+  + progressUpdated : Signal(int)
+  + finishedCombine : Signal(str)
+  - thread
+  - worker
+  - _video_players
+  - temp_dir
+  __init__()
+  registerVideoPlayer(video_player, player_id)
+  download_youtube_video(url, video_id)
+  on_download_finished(video_id, path)
+  setVideoName(player_id, name)
+  load_video(video_id, path)
+  update_progress(value)
+  updateSegments(player_id, segments) : list
+  getDescription(player_id) : list
+  parse_segments(segments) : list
+  convert_time_to_seconds(time_str) : int
+  save_segments_to_file(player_id)
+  combine_videos()
+  stop()
+  open_file_explorer(path)
+  close_video_files()
+}
+
+CancellationException --> MyCombineLogger
+CombineWorker --> MyCombineLogger
+VideoHandler --> CombineWorker
+VideoHandler --> DownloadWorker
+VideoHandler --> VideoPlayer
+
+@enduml
