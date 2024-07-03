@@ -9,7 +9,6 @@ from combine_worker import CombineWorker
 from datetime import datetime
 import os
 
-
 ## @defgroup python Python
 # @brief Módulo de Python
 # @details Backend de la aplicación de Video Player.
@@ -65,6 +64,9 @@ class VideoHandler(QObject):
         self.thread = None
         self.worker = None
         self._video_players = {}
+        self.temp_dir = ".temp"
+        if not os.path.exists(self.temp_dir):
+            os.makedirs(self.temp_dir)
 
     @Slot(QObject, int)
     def registerVideoPlayer(self, video_player, player_id):
@@ -78,8 +80,8 @@ class VideoHandler(QObject):
         self._video_players[player_id] = VideoPlayer(video_player)
         print(f"Reproductor de video {player_id} registrado")
 
-    @Slot(str, str, int)
-    def download_youtube_video(self, url, output_path, video_id):
+    @Slot(str, int)
+    def download_youtube_video(self, url, video_id):
         """
         Descarga un video de YouTube.
 
@@ -90,6 +92,7 @@ class VideoHandler(QObject):
         """
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         filename = f"video_{video_id}_{timestamp}.mp4"
+        output_path = self.temp_dir
         self.thread = QThread()
         self.worker = DownloadWorker(url, output_path, filename)
         self.worker.moveToThread(self.thread)
@@ -283,5 +286,21 @@ class VideoHandler(QObject):
             subprocess.run(["open", path])
         else:  # Linux y otros sistemas UNIX-like
             subprocess.run(["xdg-open", path])
+
+
+    @Slot()
+    def close_video_files(self):
+        """
+        Cierra todos los archivos de video abiertos.
+        """
+        for video_player in self._video_players.values():
+            if video_player.path:
+                try:
+                    video_player.video_player.stop()
+                    video_player.video_player.setPath("")
+                    print(f"Archivo de video {video_player.path} cerrado.")
+                except Exception as e:
+                    print(f"Error cerrando el archivo de video {video_player.path}: {e}")
+        self._video_players.clear()
 
 ## @}

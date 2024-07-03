@@ -351,6 +351,10 @@ Item {
         videoPlayer.pause()
     }
 
+    function stop() {
+        videoPlayer.stop()
+    }
+
     /**
      * Busca una posición en el video.
      * @param type:int position Posición en milisegundos.
