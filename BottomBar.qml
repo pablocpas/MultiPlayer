@@ -46,6 +46,7 @@ ToolBar {
             onMoved: {
                 mainWindow.seekAll(progressSlider.value)
             }
+
         }
     }
 
@@ -230,6 +231,8 @@ ToolBar {
      */
     function updateCurrentSegment() {
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
+        progressSlider.from = mainWindow.longest_timestamps[currentIndex] * 1000
+        progressSlider.to = mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
     }
 
     Connections {

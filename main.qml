@@ -241,6 +241,9 @@ ApplicationWindow {
         
         if (segmentsReady === numberOfPlayers) {
             playNextSegment()
+            bottomBar.updateCurrentSegment()
+            
+            
         }
     }
 
@@ -250,7 +253,8 @@ ApplicationWindow {
     function nextSegment() {
         if(currentSegment < segments.length - 1){
             currentSegment++
-            bottomBar.updateCurrentSegment()
+            bottomBar.updateCurrentSegment()         
+
         }
     }
 
@@ -259,8 +263,10 @@ ApplicationWindow {
      */
     function previousSegment() {
         if(currentSegment > 0){
+
             currentSegment--
             bottomBar.updateCurrentSegment()
+
         }
     }
 
