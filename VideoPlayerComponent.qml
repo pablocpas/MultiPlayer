@@ -94,7 +94,6 @@ Item {
                 mainWindow.hasVideo = true
                 if (videoPlayer.duration > mainWindow.maxSegmentDuration) {
                     mainWindow.maxSegmentDuration = videoPlayer.duration
-                    //mainWindow.longestVideoPlayer = videoPlayerComponent
                 }
             }
             onPositionChanged: {
@@ -105,59 +104,55 @@ Item {
             volumen: 1.0  // Inicialmente el volumen está al máximo
         }
 
-        Image {
-            id: dragIcon
-            source: "./images/drag_drop_icon.png"
-            width: 128
-            height: 128
-            visible: !videoLoaded
-            anchors.centerIn: parent
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                bottom: buttonLayout.top
-                bottomMargin: 5
-            }
-        }
-
-        Text {
-            text: "Arrastre un vídeo aquí"
-            color: "#a3a3a3"
-            font.pixelSize: 12
-            visible: !videoLoaded
-            anchors {
-                bottom: dragIcon.top
-                horizontalCenter: dragIcon.horizontalCenter
-            }
-        }
-
         ColumnLayout {
-            id: buttonLayout
-            anchors.verticalCenterOffset: 120
             anchors.centerIn: parent
             spacing: 10
 
-            Button {
-                text: "Seleccionar Video " + (playerIndex + 1)
+            Image {
+                id: dragIcon
+                source: "./images/drag_drop_icon.png"
+                Layout.preferredHeight: 128
+                Layout.preferredWidth: 128
                 visible: !videoLoaded
                 Layout.alignment: Qt.AlignHCenter
-                onClicked: {
-                    fileDialog.open()
+            }
+
+            Text {
+                text: "Arrastre un vídeo aquí"
+                color: "#a3a3a3"
+                font.pixelSize: 16
+                visible: !videoLoaded
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            RowLayout {
+                id: buttonLayout
+                spacing: 10
+                Layout.alignment: Qt.AlignHCenter
+
+                Button {
+                    text: "Seleccionar Video " + (playerIndex + 1)
+                    visible: !videoLoaded
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        fileDialog.open()
+                    }
                 }
-            }
 
-            Button {
-                text: "Youtube URL"
-                Layout.alignment: Qt.AlignHCenter
-                visible: !videoLoaded
-                onClicked: youtubeDialog.open()
-            }
+                Button {
+                    text: "Youtube URL"
+                    Layout.alignment: Qt.AlignHCenter
+                    visible: !videoLoaded
+                    onClicked: youtubeDialog.open()
+                }
 
-            Button {
-                text: "Editar Segmentos"
-                Layout.alignment: Qt.AlignHCenter
-                visible: false
-                onClicked: {
+                Button {
+                    text: "Editar Segmentos"
+                    Layout.alignment: Qt.AlignHCenter
+                    visible: false
+                    onClicked: {
 
+                    }
                 }
             }
         }
@@ -299,6 +294,7 @@ Item {
      */
     function playNextSegment() {
         if (currentSegmentIndex < timestamps.length - 1) {
+
             currentSegmentIndex++
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
 
@@ -321,6 +317,7 @@ Item {
      */
     function playPreviousSegment() {
         if (currentSegmentIndex > 0) {
+
             currentSegmentIndex--
             offset = timestamps[currentSegmentIndex] - mainWindow.longest_timestamps[currentSegmentIndex]
             segmentEndTime = timestamps[currentSegmentIndex + 1] * 1000

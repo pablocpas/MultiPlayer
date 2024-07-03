@@ -227,7 +227,7 @@ ToolBar {
     }
 
     /**
-     * Actualiza el texto del segmento actual en la barra inferior.
+     * Actualiza el texto del segmento actual en la barra inferior y el slider de progreso.
      */
     function updateCurrentSegment() {
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
