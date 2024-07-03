@@ -1,0 +1,49 @@
+@startuml
+
+
+package "main.qml" {
+
+  package "VideoPlayerComponent.qml" {
+  
+      component TimeStampEditor
+      component Rectangle_Container
+      component DropArea_Video
+      component VideoPlayer
+      component Image_DragIcon
+      component Text_DragText
+      component ColumnLayout_Buttons
+      component Button_SelectVideo
+      component Button_YoutubeURL
+      component Button_Mute
+      component TextEdit_VideoName
+      component Dialog_Youtube
+      component TextField_URL
+      component FileDialog_Video
+  }
+  
+  
+  package "BottomBar.qml" {
+      component Slider_Progress
+      component Text_CurrentSegment
+      component FullscreenButton
+      component ControlButtons
+      component Button_PreviousSegment
+      component Button_PlayPause
+      component Button_NextSegment
+      component ComboBox_Speed
+      component Button_ManageSegments
+  }
+  
+  
+  package "TopBar.qml" {
+    component RowLayout_TopBar {
+      component ButtonGroup_TopBar
+      component ToolButton_2Players
+      component ToolButton_3Players
+      component ToolButton_4Players
+    }
+
+  }
+  
+}
+@enduml
