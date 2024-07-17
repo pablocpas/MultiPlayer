@@ -78,7 +78,6 @@ class VideoHandler(QObject):
             player_id: El ID del reproductor de video.
         """
         self._video_players[player_id] = VideoPlayer(video_player)
-        print(f"Reproductor de video {player_id} registrado")
 
     @Slot(str, int)
     def download_youtube_video(self, url, video_id):
@@ -169,8 +168,6 @@ class VideoHandler(QObject):
         """
         video_player_obj = self._video_players[player_id]
         video_player_obj.segments = self.parse_segments(segments)
-        print(f"Segmentos actualizados para el reproductor {player_id}: {video_player_obj.segments}")
-        self.save_segments_to_file(player_id)
 
         # Extraer los tiempos de inicio y devolverlos como una lista
         start_times = [segment[0] for segment in video_player_obj.segments]
@@ -209,7 +206,6 @@ class VideoHandler(QObject):
             if isinstance(segment, QObject) and hasattr(segment, 'property'):
                 time_str = segment.property('timestampInSeconds')
                 description = segment.property('description')
-                print(f"Segmento: {time_str} - {description}")
                 if time_str and description:
                     parsed_segments.append((time_str, description))
                 else:
@@ -231,29 +227,12 @@ class VideoHandler(QObject):
         minutes, seconds = map(int, time_str.split(':'))
         return minutes * 60 + seconds
 
-    def save_segments_to_file(self, player_id):
-        """
-        Guarda los segmentos en un archivo para un ID de reproductor específico.
-
-        Args:
-            player_id: El ID del reproductor de video.
-        """
-        video_player_obj = self._video_players.get(player_id)
-        segments = video_player_obj.segments if video_player_obj else []
-        with open(f'segments_{player_id}.txt', 'w') as f:
-            for start, description in segments:
-                minutes, seconds = divmod(start, 60)
-                time_str = f"{minutes:02}:{seconds:02}"
-                f.write(f"{time_str} - {description}\n")
-        print(f"Segmentos guardados en segments_{player_id}.txt")
-
     @Slot()
     def combine_videos(self):
         """
         Combina múltiples videos en uno solo.
         """
         self.thread = QThread()
-        print("Combinando videos... 111")
         self.combine_worker = CombineWorker(self._video_players)
         self.combine_worker.moveToThread(self.thread)
         self.combine_worker.progress.connect(self.update_progress)

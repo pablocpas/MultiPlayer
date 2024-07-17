@@ -176,7 +176,6 @@ Item {
 
             onCheckedChanged: {
                 videoPlayer.volumen = checked ? 0 : 1  // Silencia o activa el sonido
-                console.log("video player volume: ", videoPlayer.volumen)
                 icon.source = checked ? "./images/unmute.svg" : "./images/mute.svg" // Cambia el ícono según el estado
             }
         }
@@ -283,8 +282,6 @@ Item {
     function setSegments(segments) {
         timestamps = videoHandler.updateSegments(videoPlayerComponent.playerIndex, segments)
 
-        console.log("Timestamps: ", timestamps)
-
         segmentNames = videoHandler.getDescription(videoPlayerComponent.playerIndex)
 
         this.segments = segments
@@ -338,9 +335,7 @@ Item {
      * Reproduce el video.
      */
     function play() {
-        console.log("Playing video")
         // Position
-        console.log("Position: ", position)
         videoPlayer.play()
     }
 

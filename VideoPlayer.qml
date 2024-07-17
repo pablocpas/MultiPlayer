@@ -48,7 +48,6 @@ Item {
 
         onDurationChanged: {
             finalTime = mediaPlayer.duration - 1000;
-            console.log(finalTime)
             duration = finalTime
         }
     }
@@ -63,7 +62,6 @@ Item {
      * @param type:string path Ruta del vídeo.
      */
     function setPath(path) {
-        console.log("Cambiando la ruta del vídeo a: " + path);
         mediaPlayer.source = path;
         mediaPlayer.play();
     }
@@ -88,7 +86,6 @@ Item {
      */
     function pause() {
         mediaPlayer.pause();
-        console.log("pausado")
         mainWindow.pausa()
     }
 

@@ -22,6 +22,8 @@ ToolBar {
     /** type:int Número de segmentos */
     property int numberOfSegments: mainWindow.segments.length
 
+    property bool segmentsLoaded : mainWindow.hasSegments
+
     background: Rectangle {
         implicitHeight: 90
         color: "#161616"
@@ -35,8 +37,8 @@ ToolBar {
         Slider {
             id: progressSlider
             from: mainWindow.longest_timestamps[currentIndex] * 1000
-            to: mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
-            value: mainWindow.longestVideoPlayer.position
+            to: mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000 || 0
+            value: mainWindow.longestVideoPlayer ? mainWindow.longestVideoPlayer.position : 0
             Layout.fillWidth: true
             Layout.preferredHeight: 30
             enabled: mainWindow.hasVideo // Inactivo hasta que se añada un vídeo
@@ -230,6 +232,10 @@ ToolBar {
      * Actualiza el texto del segmento actual en la barra inferior y el slider de progreso.
      */
     function updateCurrentSegment() {
+        if (segmentsLoaded == false) {
+            return
+        }
+
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
         progressSlider.from = mainWindow.longest_timestamps[currentIndex] * 1000
         progressSlider.to = mainWindow.longest_timestamps[currentIndex] * 1000 + mainWindow.longest_segments[currentIndex] * 1000
