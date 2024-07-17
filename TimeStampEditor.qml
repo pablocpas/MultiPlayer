@@ -58,19 +58,20 @@ Window {
 
         // Primera columna: ListView
         ColumnLayout {
-            width: parent.width / 2
+            anchors.fill: parent
+            spacing: 10
 
             Text {
-                id: title
-                text: "Selecciona el tiempo de inicio de cada segmento \n"
-                font.pixelSize: 12
+                text: "Selecciona el tiempo de inicio de cada segmento"
+                font.pixelSize: 16
+                Layout.alignment: Qt.AlignHCenter
             }
 
             ListView {
                 id: segmentListView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumWidth: 300
+
                 model: ListModel {
                     id: segmentListModel
                 }
@@ -126,7 +127,6 @@ Window {
                                                     (milliseconds < 100 ? (milliseconds < 10 ? "00" + milliseconds : "0" + milliseconds) : milliseconds);
                                 segmentListModel.setProperty(index, "timestamp", formattedTime);
                                 segmentListModel.setProperty(index, "timestampInSeconds", timestampInSeconds);
-                                console.log("Copied time: " + timestampInSeconds);
                                 updateDurations();
                             }
                         }
@@ -137,84 +137,85 @@ Window {
 
         // Segunda columna: Rectángulo y Slider
         ColumnLayout {
-            width: parent.width / 2
-            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-            Layout.fillWidth: true
-
-            VideoPlayer {
-                id: incrustado
-                height: 380
-                width: 200
-                ruta: videoPath
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-
-            RowLayout {
+                width: parent.width / 2
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-                spacing: 10
+                Layout.fillWidth: true
 
-                Slider {
-                    id: progressSlider
-                    width: 400
+                VideoPlayer {
+                    id: incrustado
+                    height: 380
+                    width: 200
+                    ruta: videoPath
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.preferredWidth: 380
-                    from: 0
-                    to: incrustado.duration
-                    value: incrustado.position
-                    /**
-                     * Actualiza la posición del video y el indicador de tiempo al cambiar el valor del slider.
-                     */
-                    onValueChanged: {
-                        incrustado.seek(progressSlider.value)
-                        timeIndicator.text = formatTime(progressSlider.value)
+                }
+
+                RowLayout {
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                    spacing: 10
+
+                    Slider {
+                        id: progressSlider
+                        width: 400
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: 380
+                        from: 0
+                        to: incrustado.duration
+                        value: incrustado.position
+                        /**
+                        * Actualiza la posición del video y el indicador de tiempo al cambiar el valor del slider.
+                        */
+                        onValueChanged: {
+                            incrustado.seek(progressSlider.value)
+                            timeIndicator.text = formatTime(progressSlider.value)
+                        }
+                    }
+
+                    Text {
+                        id: timeIndicator
+                        text: formatTime(progressSlider.value)
+                        Layout.alignment: Qt.AlignVCenter
                     }
                 }
 
-                Text {
-                    id: timeIndicator
-                    text: formatTime(progressSlider.value)
-                    Layout.alignment: Qt.AlignVCenter
+                // Botón de guardar
+                RowLayout {
+                    anchors.leftMargin: 30
+                    anchors.rightMargin: 30
+                    Layout.fillWidth: true
+                    spacing: 10
+
+                    Button {
+                        text: "Anterior fotograma"
+                        Layout.alignment: Qt.AlignHCenter
+                        onClicked: {
+                            incrustado.previousFrame()
+                        }
+                    }
+
+                    Button {
+                        text: "Siguiente fotograma"
+                        Layout.alignment: Qt.AlignHCenter
+                        onClicked: {
+                            incrustado.nextFrame()
+                        }
+                    }
+
+                    Button {
+                        text: "Guardar"
+                        Layout.alignment: Qt.AlignHCenter
+                        /**
+                        * Guarda los timestamps y cierra el editor.
+                        */
+                        onClicked: {
+                            saveTimestamps()
+                            timestampEditor.visible = false
+                        }
+                    }
                 }
             }
 
-            // Botón de guardar
-            RowLayout {
-                anchors.leftMargin: 30
-                anchors.rightMargin: 30
-                Layout.fillWidth: true
-                spacing: 10
-
-                Button {
-                    text: "Anterior fotograma"
-                    Layout.alignment: Qt.AlignHCenter
-                    onClicked: {
-                        incrustado.previousFrame()
-                    }
-                }
-
-                Button {
-                    text: "Siguiente fotograma"
-                    Layout.alignment: Qt.AlignHCenter
-                    onClicked: {
-                        incrustado.nextFrame()
-                    }
-                }
-
-                Button {
-                    text: "Guardar"
-                    Layout.alignment: Qt.AlignHCenter
-                    /**
-                     * Guarda los timestamps y cierra el editor.
-                     */
-                    onClicked: {
-                        saveTimestamps()
-                        timestampEditor.visible = false
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -230,9 +231,6 @@ Window {
 
         videoPlayerComponent.setSegments(segmentsArray)
         mainWindow.setSegments(segmentsArray, videoPlayerComponent.playerIndex)
-
-        //show video name
-        console.log("video name: " + videoPlayerComponent.videoName)
     }
 
     /**
@@ -242,11 +240,10 @@ Window {
     function updateSegments(newSegments) {
         segments = newSegments
         segmentListModel.clear()
-        console.log("segments numero: " + segments.length)
         for (var i = 0; i < segments.length; i++) {
             segmentListModel.append(segments[i])
             segmentListModel.setProperty(i, "timestamp", "00:00:000")
-            segmentListModel.setProperty(i, "timestampInSeconds", 0) // Inicializar con 0
+            segmentListModel.setProperty(i, "timestampInSeconds", 0)
         }
     }
 
@@ -288,9 +285,7 @@ Window {
 
             if (nextTimestamp) {
                 duration = nextTimestamp - currentTimestamp;
-                console.log("duraciones: " + duration + " " + currentTimestamp + " " + nextTimestamp)
             } else {
-                // Calculate duration for the last segment relative to the video end
                 duration = videoDurationInSeconds - currentTimestamp;
             }
             segmentListModel.setProperty(i, "duration", duration);
@@ -300,7 +295,7 @@ Window {
     /**
      * Resetea el video al inicio y lo pausa al cambiar la visibilidad de la ventana.
      */
-    onVisibleChanged: {
+        onVisibleChanged: {
         if (visible) {
             incrustado.seek(0)
             incrustado.pause()
@@ -314,5 +309,6 @@ Window {
         mainWindow.segmentsReady = 0
     }
 }
+
 
 /** @} */
