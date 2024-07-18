@@ -185,7 +185,7 @@ ToolBar {
 
         ComboBox {
             id: speedSelector
-            implicitWidth: 65
+            implicitWidth: 80
             model: ["0.25x", "0.5x", "0.75x", "1x", "1.25x", "1.5x", "1.75x", "2x"]
             Layout.alignment: Qt.AlignCenter
             currentIndex: 3
@@ -223,6 +223,7 @@ ToolBar {
              * Abre el editor de segmentos.
              */
             onClicked: {
+                mainWindow.clearlongestSegments()
                 mainWindow.setSegmentEditorVisibility(true)
             }
         }
@@ -235,6 +236,8 @@ ToolBar {
         if (segmentsLoaded == false) {
             return
         }
+
+        console.log("Updating current segment")
 
         currentSegment.text = "Segmento actual: " + mainWindow.segments[currentIndex].description + " (" + (currentIndex + 1) + "/" + numberOfSegments + ")"
         progressSlider.from = mainWindow.longest_timestamps[currentIndex] * 1000

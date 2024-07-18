@@ -4,12 +4,12 @@
  * @{
  */
 
-import QtQuick 6.5
+import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Layouts
-import QtQuick.Controls 6.5
+import QtQuick.Controls
 
 ApplicationWindow {
     id: mainWindow
@@ -17,7 +17,7 @@ ApplicationWindow {
     color: "#1f1f1f"
     width: 1024
     height: 720
-    title: qsTr("Reproductor de Video")
+    title: qsTr("MultiVideoPlayer - Reproductor de Video")
 
     visibility: mainWindow.isFullScreen ? Window.FullScreen : Window.Windowed
 
@@ -215,7 +215,8 @@ ApplicationWindow {
         this.segments = segments
 
         segmentsReady += 1
-
+        console.log("Segments ready: " + segmentsReady)
+        console.log("segments", segments)
         // Initialize longest_segments if empty or update with new segments
         if (longest_segments.length === 0) {
             longest_segments = segments.map(segment => segment.duration)
@@ -241,10 +242,17 @@ ApplicationWindow {
         
         if (segmentsReady === numberOfPlayers) {
             playNextSegment()
+            playPreviousSegment()
             bottomBar.updateCurrentSegment()
-            
-            
         }
+    }
+
+    function clearlongestSegments() {
+        longest_segments = []
+        longest_timestamps = []
+        longest_videoPlayerId = []
+        currentSegment = 0
+        segmentsReady = 0
     }
 
     /**
@@ -275,12 +283,7 @@ ApplicationWindow {
         function onSegmentsUpdated(s) {
             segments = s
             segmentsLoaded(segments)
-            console.log(segments)
         }
-    }
-
-    onSegmentsChanged: {
-        bottomBar.updateCurrentSegment()
     }
 }
 

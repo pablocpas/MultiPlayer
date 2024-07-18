@@ -1,6 +1,7 @@
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip, clips_array
 from PySide6.QtCore import QObject, Signal, Slot
 import os
+import glob
 from proglog import ProgressBarLogger
 import multiprocessing
 
@@ -86,6 +87,8 @@ class CombineWorker(QObject):
         super().__init__()
         self._video_players = video_players
         self._is_running = True  # Variable de control para cancelar
+        self._output_files = []  # Lista para rastrear archivos de salida
+
 
     def is_running(self):
         """
@@ -145,8 +148,8 @@ class CombineWorker(QObject):
                         end_time = segments[i][segment_index + 1][0]
                     subclip = clip.subclip(start_time, end_time)
 
-                    txt_clip_video_name = TextClip(video_names[i], fontsize=24, color='white').set_position(('center', 'top')).set_duration(subclip.duration)
-                    txt_clip_segment_name = TextClip(segments[i][segment_index][1], fontsize=24, color='white').set_position(('center', 'bottom')).set_duration(subclip.duration)
+                    txt_clip_video_name = TextClip(video_names[i], fontsize=64, color='white').set_position(('center', 'top')).set_duration(subclip.duration)
+                    txt_clip_segment_name = TextClip(segments[i][segment_index][1], fontsize=64, color='white').set_position(('center', 'bottom')).set_duration(subclip.duration)
 
                     labeled_clip = CompositeVideoClip([subclip, txt_clip_video_name, txt_clip_segment_name])
                     segment_clips.append(labeled_clip)
@@ -165,6 +168,7 @@ class CombineWorker(QObject):
 
                 video_name_str = ','.join(video_names)
                 output_path = f"{video_name_str}_segment_{segment_index + 1}.mp4"
+                self._output_files.append(output_path)
                 
                 combined.write_videofile(output_path, codec="libx264", threads=num_threads, logger=logger, fps=24, bitrate="5000k")
 
@@ -176,10 +180,38 @@ class CombineWorker(QObject):
 
         except CancellationException as ce:
             print(ce)
-            self.finished.emit("Combining was cancelled.")
+            self.cleanup_files()
+            self.finished.emit(None)
+
         except Exception as e:
             print(f"Error al combinar videos: {e}")
+            self.cleanup_files()
             self.finished.emit(None)
+
+
+    def cleanup_files(self):
+            """
+            Borra los archivos de salida generados, incluyendo los temporales.
+            """
+            # Eliminar archivos rastreados
+            for file_path in self._output_files:
+                try:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
+                        print(f"Archivo {file_path} eliminado.")
+                except Exception as e:
+                    print(f"Error al eliminar el archivo {file_path}: {e}")
+
+            # Eliminar archivos temporales generados por MoviePy
+            temp_files = glob.glob("*TEMP_MPY*")
+            for temp_file in temp_files:
+                try:
+                    if os.path.exists(temp_file):
+                        os.remove(temp_file)
+                        print(f"Archivo temporal {temp_file} eliminado.")
+                except Exception as e:
+                    print(f"Error al eliminar el archivo temporal {temp_file}: {e}")
+
 
     def stop(self):
         """

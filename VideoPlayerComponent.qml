@@ -26,7 +26,7 @@ Item {
     property var segments: []
 
     /** type:int Índice del segmento actual */
-    property int currentSegmentIndex: -1
+    property int currentSegmentIndex: mainWindow.currentSegment
     /** type:string Nombre del segmento actual */
     property string currentSegmentName: ""
 

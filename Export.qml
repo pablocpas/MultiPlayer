@@ -122,6 +122,7 @@ Window {
      */
     onVisibleChanged: {
         if (visible) {
+            progressBar.updateProgress(0)
             videoHandler.combine_videos()
         }
     }

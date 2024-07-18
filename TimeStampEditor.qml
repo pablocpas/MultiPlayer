@@ -58,7 +58,6 @@ Window {
 
         // Primera columna: ListView
         ColumnLayout {
-            anchors.fill: parent
             spacing: 10
 
             Text {
